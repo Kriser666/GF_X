@@ -9,7 +9,8 @@ public static partial class Const
 		Item,
 		Level,
 		Bullet,
-		Unrecycle
+		Unrecycle,
+		Vehicle
 	}
 	public enum UIGroup
 	{

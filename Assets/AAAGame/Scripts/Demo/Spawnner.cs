@@ -14,7 +14,7 @@ public class Spawnner : MonoBehaviour
     /// 玩家进入区域内开始刷兵
     /// </summary>
     [SerializeField] Vector2 m_TriggerBounds = Vector2.one;
-    [SerializeField] int m_MaxSpawnCountPerFrame = 10;
+    // [SerializeField] int m_MaxSpawnCountPerFrame = 10;
     int m_SpawnCount;
     Bounds m_SpawnBounds;
 

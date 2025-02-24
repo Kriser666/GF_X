@@ -49,7 +49,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 2
   m_TriggerBounds: {x: 140, y: 60}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &270659398688661945
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +98,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &819643655886774226
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +157,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -264,6 +265,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -359,7 +363,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 2
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &1402501503050586418
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +412,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &1534512641548228504
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +461,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 100, y: 80}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &1910033315513442896
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +510,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 2
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &2292558384552475359
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +569,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -674,6 +677,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -779,6 +785,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -825,6 +834,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2868241314569545403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6470461257279034094}
+  m_Layer: 0
+  m_Name: CarSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6470461257279034094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868241314569545403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6, y: 0, z: -222.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5915553705682729707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3025381468404041876
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +914,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 130, y: 50}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &3217991909147436313
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,7 +963,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 2
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &3468253505960790636
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +1012,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 3
   m_TriggerBounds: {x: 140, y: 60}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &4100750410449046776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1061,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 140, y: 50}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &4803352758973103483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1091,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3786969401776574267}
+  - {fileID: 6470461257279034094}
   - {fileID: 6686840058298636605}
   - {fileID: 6569513206341443633}
   m_Father: {fileID: 0}
@@ -1108,7 +1145,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &4860708661965499049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1194,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 130, y: 60}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &4861668882901698657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,6 +1253,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1313,7 +1351,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &5810167848267579776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,6 +1410,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1478,6 +1518,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1583,6 +1626,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1678,7 +1724,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 2
   m_TriggerBounds: {x: 130, y: 60}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &6910638618067023240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1815,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 150, y: 50}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &7838821986049592780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1905,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1956,7 +2003,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 1
   m_TriggerBounds: {x: 100, y: 80}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &8531661542244856951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,7 +2052,6 @@ MonoBehaviour:
   m_PosPadding: {x: 1.5, y: 1.5}
   m_CombatUnitId: 2
   m_TriggerBounds: {x: 55, y: 55}
-  m_MaxSpawnCountPerFrame: 10
 --- !u!1 &8832115770975608542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,6 +2159,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

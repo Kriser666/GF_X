@@ -1,4 +1,3 @@
-using GameFramework;
 using GameFramework.Event;
 using System;
 using System.Collections.Generic;
@@ -10,9 +9,12 @@ public class LevelEntity : EntityBase
     public const string P_LevelData = "LevelData";
     public const string P_LevelReadyCallback = "OnLevelReady";
     public bool IsAllReady { get; private set; }
+    [SerializeField]
     private Transform playerSpawnPoint;
     PlayerEntity m_PlayerEntity;
-
+    [SerializeField]
+    private Transform carSpawnPoint;
+    CarEntity m_CarEntity;
     List<Spawnner> m_Spawnners;
 
     HashSet<int> m_EntityLoadingList;
@@ -21,7 +23,10 @@ public class LevelEntity : EntityBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        playerSpawnPoint = transform.Find("PlayerSpawnPoint");
+        if (playerSpawnPoint == null)
+            playerSpawnPoint = transform.Find("PlayerSpawnPoint");
+        if (carSpawnPoint == null)
+            carSpawnPoint = transform.Find("CarSpawnPoint");
         m_Spawnners = new List<Spawnner>();
         m_EntityLoadingList = new HashSet<int>();
         m_Enemies = new Dictionary<int, CombatUnitEntity>();
@@ -32,6 +37,7 @@ public class LevelEntity : EntityBase
         GF.Event.Subscribe(ShowEntitySuccessEventArgs.EventId, OnShowEntitySuccess);
         GF.Event.Subscribe(HideEntityCompleteEventArgs.EventId, OnHideEntityComplete);
         m_PlayerEntity = null;
+        m_CarEntity = null;
         m_IsGameOver = false;
         IsAllReady = false;
         m_Spawnners.Clear();
@@ -47,6 +53,8 @@ public class LevelEntity : EntityBase
         playerParams.Set<VarAction>(PlayerEntity.P_OnBeKilled, (Action)OnPlayerBeKilled);
         m_PlayerEntity = await GF.Entity.ShowEntityAwait<PlayerEntity>(playerRow.PrefabName, Const.EntityGroup.Player, playerParams) as PlayerEntity;
         CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);
+        var carParams = EntityParams.Create(carSpawnPoint.position, carSpawnPoint.eulerAngles);
+        m_CarEntity = await GF.Entity.ShowEntityAwait<CarEntity>("Car", Const.EntityGroup.Vehicle, carParams) as CarEntity;
         IsAllReady = true;
     }
 
