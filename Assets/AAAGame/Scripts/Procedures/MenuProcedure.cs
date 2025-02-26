@@ -1,13 +1,12 @@
-﻿using GameFramework;
-using GameFramework.Event;
-using GameFramework.Fsm;
+﻿using GameFramework.Fsm;
 using GameFramework.Procedure;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 public class MenuProcedure : ProcedureBase
 {
     int menuUIFormId;
-    LevelEntity lvEntity;
+    private LevelEntity lvEntity;
+    public LevelEntity LevelEntity { get { return lvEntity; } }
 
     IFsm<IProcedureManager> procedure;
     protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
@@ -30,11 +29,7 @@ public class MenuProcedure : ProcedureBase
         {
             return;
         }
-        //点击屏幕开始游戏
-        if (Input.GetMouseButtonDown(0) && !GF.UI.IsPointerOverUIObject(Input.mousePosition) && GF.UI.GetTopUIFormId() == menuUIFormId)
-        {
-            EnterGame();
-        }
+
     }
     protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)
     {
@@ -62,7 +57,7 @@ public class MenuProcedure : ProcedureBase
         GF.Entity.HideAllLoadedEntities();
 
         //异步打开主菜单UI
-        menuUIFormId = GF.UI.OpenUIForm(UIViews.MenuUIForm);
+        menuUIFormId = GF.UI.OpenUIForm(UIViews.MainMenu);
 
         //动态创建关卡
         var lvTb = GF.DataTable.GetDataTable<LevelTable>();

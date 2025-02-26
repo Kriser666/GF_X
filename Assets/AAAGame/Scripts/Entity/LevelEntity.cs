@@ -43,7 +43,7 @@ public class LevelEntity : EntityBase
         m_Spawnners.Clear();
         m_EntityLoadingList.Clear();
         m_Enemies.Clear();
-        CachedTransform.Find("EnemySpawnPoints").GetComponentsInChildren<Spawnner>(m_Spawnners);
+        /*CachedTransform.Find("EnemySpawnPoints").GetComponentsInChildren<Spawnner>(m_Spawnners);
 
         var combatUnitTb = GF.DataTable.GetDataTable<CombatUnitTable>();
         var playerRow = combatUnitTb.GetDataRow(0);
@@ -52,9 +52,12 @@ public class LevelEntity : EntityBase
         playerParams.Set<VarInt32>(PlayerEntity.P_CombatFlag, (int)CombatUnitEntity.CombatFlag.Player);
         playerParams.Set<VarAction>(PlayerEntity.P_OnBeKilled, (Action)OnPlayerBeKilled);
         m_PlayerEntity = await GF.Entity.ShowEntityAwait<PlayerEntity>(playerRow.PrefabName, Const.EntityGroup.Player, playerParams) as PlayerEntity;
-        CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);
+        CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);*/
+        
         var carParams = EntityParams.Create(carSpawnPoint.position, carSpawnPoint.eulerAngles);
         m_CarEntity = await GF.Entity.ShowEntityAwait<CarEntity>("Car", Const.EntityGroup.Vehicle, carParams) as CarEntity;
+        CameraController.Instance.SetFollowTarget(m_CarEntity.CachedTransform);
+        CameraController.Instance.SetViewZoom(3);
         IsAllReady = true;
     }
 
@@ -63,7 +66,7 @@ public class LevelEntity : EntityBase
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         if (m_IsGameOver || !IsAllReady) return;
-        SpawnEnemiesUpdate();
+        // SpawnEnemiesUpdate();
     }
     protected override void OnHide(bool isShutdown, object userData)
     {
@@ -75,7 +78,7 @@ public class LevelEntity : EntityBase
 
     public void StartGame()
     {
-        m_PlayerEntity.Ctrlable = true;
+        // m_PlayerEntity.Ctrlable = true;
     }
     private void SpawnEnemiesUpdate()
     {
