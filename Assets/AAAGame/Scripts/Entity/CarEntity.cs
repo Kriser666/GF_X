@@ -1,7 +1,6 @@
 ﻿using GameFramework.Resource;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityGameFramework.Runtime;
 
 public class CarEntity : EntityBase
@@ -22,6 +21,9 @@ public class CarEntity : EntityBase
     private Quaternion m_TargetRotation;
 
     private LoadAssetCallbacks assetCallbacks;
+    private Camera modelViewCamera; // 指向渲染RenderTexture的专用摄像机
+    public GameObject rawImage;
+
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
@@ -90,24 +92,51 @@ public class CarEntity : EntityBase
                 CarComponents.Add(carModel.transform.GetChild(i).gameObject);
             }
         }
-        
+        modelViewCamera = CameraController.Instance.ModelRendererCamera;
+        if (Params.TryGet<VarGameObject>(Const.RAW_IMAGE, out var rawImageObj))
+        {
+            rawImage = rawImageObj;
+        }
+
+        // 旋转车辆
+        Quaternion rotation = Quaternion.Euler(5f, -120f, 0f);
+        transform.SetLocalPositionAndRotation(transform.position, rotation);
     }
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
-        if (EventSystem.current.IsPointerOverGameObject()) return;
-
+        // 仅在有效区域且未遮挡时响应
+        if (!RawImageZoneChecker.IsPointerInZone) return;
         if (Input.GetMouseButton(0))
         {
+            /*RectTransform modelZoneRect = rawImage.GetComponent<RectTransform>();
+            // 将鼠标坐标转换为模型区域局部坐标
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                modelZoneRect,
+                Input.mousePosition,
+                modelViewCamera, // 使用模型摄像机而非主摄像机
+                out Vector2 localPos
+            );
+
+            // 计算标准化偏移量（-0.5~0.5）
+            Vector2 normalizedOffset = new (
+                localPos.x / modelZoneRect.rect.width,
+                localPos.y / modelZoneRect.rect.height
+            );
+
+            // 基于区域比例的灵敏度补偿
+            float aspectRatio = modelZoneRect.rect.width / modelZoneRect.rect.height;
+            float mouseX = normalizedOffset.x * m_RotationSpeed * aspectRatio;
+            float mouseY = normalizedOffset.y * m_RotationSpeed;*/
             float mouseX = Input.GetAxis("Mouse X") * m_RotationSpeed;
             float mouseY = Input.GetAxis("Mouse Y") * m_RotationSpeed;
+            // 使用模型摄像机的坐标系进行旋转
+            Vector3 worldUp = modelViewCamera.transform.up;
+            Vector3 worldRight = modelViewCamera.transform.right;
 
-            // 绕全局Y轴旋转（左右拖拽）
-            Quaternion yRot = Quaternion.AngleAxis(-mouseX, Vector3.up);
-            // 绕全局X轴旋转（上下拖拽）
-            Quaternion xRot = Quaternion.AngleAxis(mouseY, Vector3.right);
+            Quaternion yRot = Quaternion.AngleAxis(-mouseX, worldUp);
+            Quaternion xRot = Quaternion.AngleAxis(mouseY, worldRight);
 
-            // 合并旋转（顺序：先Y轴，后X轴）
             m_TargetRotation = yRot * xRot * m_TargetRotation;
         }
 
@@ -168,3 +197,4 @@ public class CarEntity : EntityBase
     }
 
 }
+

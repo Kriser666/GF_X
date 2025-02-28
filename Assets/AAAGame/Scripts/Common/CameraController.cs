@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
 
     Transform target;
     [SerializeField] CinemachineVirtualCamera followerVCamera;
+    [SerializeField] Camera modelRendererCamera;
+    public Camera ModelRendererCamera { get { return modelRendererCamera; } }
     Vector3 initOffset = Vector3.zero;
     public Camera mainCam { get; private set; }
 

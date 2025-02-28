@@ -6,6 +6,8 @@ public enum UIViews : int
 	GameOverUIForm = 3,
 	Topbar = 4,
 	MainMenu = 11,
+	ChooseVehicle = 12,
+	ModHistory = 13,
 	SettingDialog = 5,
 	RatingDialog = 6,
 	TermsOfServiceDialog = 7,

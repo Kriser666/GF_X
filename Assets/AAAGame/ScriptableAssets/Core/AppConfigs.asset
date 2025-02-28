@@ -19,6 +19,7 @@ MonoBehaviour:
   - CombatUnitTable
   - LevelTable
   - TestTable
+  - VehicleInfoTable
   - Core/EntityGroupTable
   - Core/LanguagesTable
   - Core/SoundGroupTable

@@ -57,8 +57,10 @@ public class LevelEntity : EntityBase
         var carParams = EntityParams.Create(carSpawnPoint.position, carSpawnPoint.eulerAngles);
         m_CarEntity = await GF.Entity.ShowEntityAwait<CarEntity>("Car", Const.EntityGroup.Vehicle, carParams) as CarEntity;
         CameraController.Instance.SetFollowTarget(m_CarEntity.CachedTransform);
-        CameraController.Instance.SetViewZoom(3);
+        CameraController.Instance.SetCameraView(10);
         IsAllReady = true;
+
+        GF.BuiltinView.HideLoadingProgress();
     }
 
 

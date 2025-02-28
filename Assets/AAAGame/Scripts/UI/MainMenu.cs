@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using GameFramework;
+using GameFramework.DataTable;
+using GameFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
@@ -6,53 +8,54 @@ using UnityGameFramework.Runtime;
 public partial class MainMenu : UIFormBase
 {
     MenuProcedure procedure;
-    bool lvReady;
-
-    public TMP_Dropdown.DropdownEvent DropdownChangedEvent { get; private set; }
+    int toShowVehicleId;
+    int currentVehicleId;
+    IDataTable<VehicleInfoTable> vehicleInfoTable;
+    public GameObject RawImageGo { get { return varCarModel; } }
+    
 
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        DropdownChangedEvent = new();
+        vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
+        
     }
 
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        ChangeScreenOrientation(false);
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
-        lvReady = false;
-        varGameStart.enabled = false;
-        varGameStart.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GF.Localization.GetString("MAIN_MENU.LOADING");
-        DropdownChangedEvent.AddListener(DropDownChanged);
-        varDropdown.onValueChanged = DropdownChangedEvent;
+        currentVehicleId = 0;
+        
+        GF.Event.Subscribe(UIItemSelectedEventArgs.EventId, ItemSelectedHandler);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
-        DropdownChangedEvent.RemoveListener(DropDownChanged);
-        ChangeScreenOrientation(true);
+        GF.Event.Unsubscribe(UIItemSelectedEventArgs.EventId, ItemSelectedHandler);
         base.OnClose(isShutdown, userData);
     }
 
-    private void DropDownChanged(int arg0)
+    private void ItemSelectedHandler(object sender, GameEventArgs e)
     {
-        Log.Debug($"{GetType()} /DropDownChanged=> {arg0}");
-    }
-
-    protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
-    {
-        base.OnUpdate(elapseSeconds, realElapseSeconds);
-        if (!lvReady)
+        var eventArgs = e as UIItemSelectedEventArgs;
+        if (eventArgs.DataType == UIItemSelectedDataType.Choosed)
         {
-            if (procedure.LevelEntity != null && procedure.LevelEntity.IsAllReady)
+            if (eventArgs.IdValue != -1 && eventArgs.IdValue != currentVehicleId)
             {
-                varGameStart.enabled = true;
-                lvReady = true;
-                varGameStart.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GF.Localization.GetString("MAIN_MENU.GAME_START");
+                toShowVehicleId = eventArgs.IdValue;
+                foreach (var vehicle in vehicleInfoTable)
+                {
+                    if (vehicle.Id == toShowVehicleId)
+                    {
+                        procedure.ChangeVehiclePrefeb(toShowVehicleId);
+                        break;
+                    }
+                }
             }
         }
     }
+
 
     protected override void OnButtonClick(object sender, string btId)
     {
@@ -72,28 +75,23 @@ public partial class MainMenu : UIFormBase
         {
             procedure.EnterGame();
         }
+        if (btSelf == varDropdownButtonObj.GetComponent<Button>())
+        {
+            UIParams chooseVehicleParams = UIParams.Create(true, 1);
+            chooseVehicleParams.Set<VarGameObject>(Const.RAW_IMAGE, varCarModel);
+            GameFrameworkAction<GameObject> gameFrameworkAction = SetRawImage;
+            chooseVehicleParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);
+            OpenSubUIForm(UIViews.ChooseVehicle, 1, chooseVehicleParams);
+        }
     }
 
-    public void ChangeScreenOrientation(bool isLandscape)
+    private void SetRawImage(GameObject RowIamge)
     {
-        if (isLandscape)
+        if (RowIamge)
         {
-            // 切换到横屏
-            Screen.orientation = ScreenOrientation.LandscapeLeft;
-            Screen.orientation = ScreenOrientation.AutoRotation;
-            Screen.autorotateToLandscapeLeft = true;
-            Screen.autorotateToLandscapeRight = true;
-            Screen.autorotateToPortrait = false;
-            Screen.autorotateToPortraitUpsideDown = false;
-        }
-        else
-        {
-            // 切换到竖屏
-            Screen.orientation = ScreenOrientation.Portrait;
-            Screen.autorotateToPortrait = true;
-            Screen.autorotateToPortraitUpsideDown = true;
-            Screen.autorotateToLandscapeLeft = false;
-            Screen.autorotateToLandscapeRight = false;
+            varCarModel = RowIamge;
+            varCarModel.transform.SetParent(varMiddle.transform);
+            varCarModel.transform.position = Vector3.zero;
         }
     }
 }

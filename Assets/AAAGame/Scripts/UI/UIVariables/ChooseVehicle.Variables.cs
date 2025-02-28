@@ -3,13 +3,12 @@
 //更新自:BF-202404081501
 //---------------------------------
 using UnityEngine;
-using UnityEngine.UI;
-public partial class MainMenu
+using TMPro;
+public partial class ChooseVehicle
 {
 	[Space(10)]
 	[Header("UI Variables:")]
-	[SerializeField] private Button varGameStart = null;
-	[SerializeField] private GameObject varDropdownButtonObj = null;
-	[SerializeField] private GameObject varCarModel = null;
+	[SerializeField] private TMP_InputField varInputText = null;
+	[SerializeField] private GameObject varContent = null;
 	[SerializeField] private GameObject varMiddle = null;
 }
