@@ -8,6 +8,7 @@ public enum UIViews : int
 	MainMenu = 11,
 	ChooseVehicle = 12,
 	ModHistory = 13,
+	ModifyGame = 14,
 	SettingDialog = 5,
 	RatingDialog = 6,
 	TermsOfServiceDialog = 7,

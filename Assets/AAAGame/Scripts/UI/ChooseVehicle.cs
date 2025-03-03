@@ -14,6 +14,7 @@ public partial class ChooseVehicle : UIFormBase
     private int selectedVehicleId;
     GameObject rawImage;
     private GameFrameworkAction<GameObject> frameworkAction;
+    private MenuProcedure procedure;
 
     public TMP_InputField.SubmitEvent InputTextChangedEvent { get; private set; }
 
@@ -30,11 +31,12 @@ public partial class ChooseVehicle : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
+        procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
         if (Params.TryGet<VarGameObject>(Const.RAW_IMAGE, out var rawImageObj))
         {
             rawImage = rawImageObj;
             rawImage.transform.SetParent(varMiddle.transform);
-            rawImage.transform.position = Vector3.zero;
+            rawImage.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
         if (Params.TryGet<VarObject>(Const.SET_RAW_IMAGE_CALLBACK, out var callback))
         {
@@ -47,7 +49,7 @@ public partial class ChooseVehicle : UIFormBase
             var clonedItem = SpawnItem<UIItemObject>(vehicleTagTemplate, varContent.transform);
             var vehicleTag = clonedItem.itemLogic as VehicleTagItem;
             vehicleTag.VehicleId = vehicle.Id;
-            vehicleTag.VarText_VehicleName.text = vehicle.CarName;
+            vehicleTag.VarCarImage.sprite = procedure.CarSprites[vehicle.Id];
             vehicleTag.ChooseVehicle = this;
             vehicleTag.name = namePrefix + i;
             VehicleTagItems.Add(vehicleTag);
@@ -59,23 +61,32 @@ public partial class ChooseVehicle : UIFormBase
 
         // -1代表没有选中物体
         selectedVehicleId = -1;
-        GF.Event.Subscribe(UIItemSelectedEventArgs.EventId, ItemSelectedHandler);
+        GF.Event.Subscribe(CarItemSelectedEventArgs.EventId, ItemSelectedHandler);
         InputTextChangedEvent.AddListener(InputTextChanged);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
-        GF.Event.Unsubscribe(UIItemSelectedEventArgs.EventId, ItemSelectedHandler);
+        GF.Event.Unsubscribe(CarItemSelectedEventArgs.EventId, ItemSelectedHandler);
         frameworkAction?.Invoke(rawImage);
         base.OnClose(isShutdown, userData);
     }
 
     private void ItemSelectedHandler(object sender, GameEventArgs e)
     {
-        var eventArgs = e as UIItemSelectedEventArgs;
-        if (eventArgs.DataType == UIItemSelectedDataType.Changed)
+        var eventArgs = e as CarItemSelectedEventArgs;
+        if (eventArgs.DataType == CarUIItemSelectedDataType.Changed)
         {
             selectedVehicleId = eventArgs.IdValue;
+            // 如果选中其他车，就更新车辆文本、Logo和模型
+            if (eventArgs.IdValue != -1)
+            {
+                var dataRow = vehicleInfoTable.GetDataRow(selectedVehicleId);
+                varCarNameText.text = GF.Localization.GetString(dataRow.CarName);
+                varCarDesc.text = GF.Localization.GetString(dataRow.CarDesc);
+                varCarLogo.sprite = procedure.CarLogoSprites[dataRow.Id];
+                procedure.ChangeVehiclePrefeb(selectedVehicleId);
+            }
         }
     }
 
@@ -103,7 +114,7 @@ public partial class ChooseVehicle : UIFormBase
             case "SelectButton":
                 if (selectedVehicleId > -1)
                 {
-                    GF.Event.Fire(this, UIItemSelectedEventArgs.Create(UIItemSelectedDataType.Choosed, selectedVehicleId));
+                    GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Choosed, selectedVehicleId));
                     frameworkAction?.Invoke(rawImage);
                     GF.UI.Close(this.Id);
                 }

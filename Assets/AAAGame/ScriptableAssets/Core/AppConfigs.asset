@@ -20,6 +20,7 @@ MonoBehaviour:
   - LevelTable
   - TestTable
   - VehicleInfoTable
+  - VehiclePartTable
   - Core/EntityGroupTable
   - Core/LanguagesTable
   - Core/SoundGroupTable

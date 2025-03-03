@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1858689332118566046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9034696787984938051}
+  m_Layer: 8
+  m_Name: OriginalPartList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9034696787984938051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858689332118566046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 293555179964105881}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6384992876694254550
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +62,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 511807333433476834}
+  - {fileID: 9034696787984938051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1303602826507152057
@@ -48,8 +80,7 @@ MonoBehaviour:
   m_RotationSpeed: 10
   smoothRotation: 1
   smoothFactor: 10
-  CarComponents:
-  - {fileID: 0}
+  originalPartList: {fileID: 1858689332118566046}
 --- !u!1001 &40804472624210185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +168,10 @@ PrefabInstance:
     - target: {fileID: -8315502044546089582, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8315502044546089582, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_TagString
+      value: LunGu
       objectReference: {fileID: 0}
     - target: {fileID: -7888767128413580366, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
@@ -290,6 +325,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -3477271395377431157, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_TagString
+      value: LunGu
+      objectReference: {fileID: 0}
     - target: {fileID: -2877101951150064357, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
       value: YouYinQingGaiJinQi
@@ -337,6 +376,10 @@ PrefabInstance:
     - target: {fileID: -1316072873277095165, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1316072873277095165, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: -1306053630595845998, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
@@ -490,6 +533,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2671102026305633813, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_TagString
+      value: LunGu
+      objectReference: {fileID: 0}
     - target: {fileID: 2774774092188466426, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
       value: YouHouMenMaoJieShang
@@ -545,6 +592,10 @@ PrefabInstance:
     - target: {fileID: 4291872878583531985, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291872878583531985, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_TagString
+      value: LunGu
       objectReference: {fileID: 0}
     - target: {fileID: 4393677925193665317, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name

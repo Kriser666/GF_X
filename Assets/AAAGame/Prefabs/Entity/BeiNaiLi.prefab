@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1643755602410274251}
   - component: {fileID: 8656872936181989476}
   m_Layer: 0
-  m_Name: YouHouLunGu
+  m_Name: BeiNaiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

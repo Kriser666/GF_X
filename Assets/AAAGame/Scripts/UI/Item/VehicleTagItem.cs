@@ -13,6 +13,7 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
     
     public int VehicleId { get { return vehicleId; } set { vehicleId = value; } }
     public TextMeshProUGUI VarText_VehicleName { get { return varVehicleName; } set { varVehicleName = value; } }
+    public Image VarCarImage { get { return varCarImage; } set { varCarImage = value; } }
 
     protected override void OnInit()
     {
@@ -32,12 +33,12 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
                     item.SetOriginalColor();
                 }
             }
-            GF.Event.Fire(this, UIItemSelectedEventArgs.Create(UIItemSelectedDataType.Changed, vehicleId));
+            GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Changed, vehicleId));
         }
         else
         {
             image.color = originalColor;
-            GF.Event.Fire(this, UIItemSelectedEventArgs.Create(UIItemSelectedDataType.Changed, -1));
+            GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Changed, -1));
         }
     }
 

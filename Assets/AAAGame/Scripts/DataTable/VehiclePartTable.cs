@@ -14,9 +14,9 @@ using UnityGameFramework.Runtime;
 
 [System.Reflection.Obfuscation(Feature = "renaming", ApplyToMembers = false)]
 /// <summary>
-/// VehicleInfoTable
+/// VehiclePartTable
 /// </summary>
-public class VehicleInfoTable : DataRowBase
+public class VehiclePartTable : DataRowBase
 {
 	private int m_Id = 0;
 	/// <summary>
@@ -28,45 +28,63 @@ public class VehicleInfoTable : DataRowBase
     }
 
         /// <summary>
-        /// 预制体资源名称
+        /// 部件名称
         /// </summary>
-        public string PrefabName
+        public string PartName
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 车辆名称KEY
+        /// 部件类型
         /// </summary>
-        public string CarName
+        public VehiclePartTypeEnum PartType
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 车辆缩略图资产名称
+        /// 对应的汽车ID
         /// </summary>
-        public string CarImageAssetName
+        public int VehicleId
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 车辆描述
+        /// 价格
         /// </summary>
-        public string CarDesc
+        public int Cost
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// 车辆LOGO资产名称
+        /// 性能
         /// </summary>
-        public string CarLogo
+        public int Performance
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 预制体名称
+        /// </summary>
+        public string PrefebName
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 缩略图名称
+        /// </summary>
+        public string PartImage
         {
             get;
             private set;
@@ -84,12 +102,13 @@ public class VehicleInfoTable : DataRowBase
             index++;
             m_Id = int.Parse(columnStrings[index++]);
             index++;
-            PrefabName = columnStrings[index++];
-            CarName = columnStrings[index++];
-            CarImageAssetName = columnStrings[index++];
-            CarDesc = columnStrings[index++];
-            CarLogo = columnStrings[index++];
-            index++;
+            PartName = columnStrings[index++];
+            PartType = DataTableExtension.ParseEnum<VehiclePartTypeEnum>(columnStrings[index++]);
+            VehicleId = int.Parse(columnStrings[index++]);
+            Cost = int.Parse(columnStrings[index++]);
+            Performance = int.Parse(columnStrings[index++]);
+            PrefebName = columnStrings[index++];
+            PartImage = columnStrings[index++];
 
             return true;
         }
@@ -101,11 +120,13 @@ public class VehicleInfoTable : DataRowBase
                 using (BinaryReader binaryReader = new BinaryReader(memoryStream, Encoding.UTF8))
                 {
                     m_Id = binaryReader.Read7BitEncodedInt32();
-                    PrefabName = binaryReader.ReadString();
-                    CarName = binaryReader.ReadString();
-                    CarImageAssetName = binaryReader.ReadString();
-                    CarDesc = binaryReader.ReadString();
-                    CarLogo = binaryReader.ReadString();
+                    PartName = binaryReader.ReadString();
+                    PartType = binaryReader.ReadEnum<VehiclePartTypeEnum>();
+                    VehicleId = binaryReader.Read7BitEncodedInt32();
+                    Cost = binaryReader.Read7BitEncodedInt32();
+                    Performance = binaryReader.Read7BitEncodedInt32();
+                    PrefebName = binaryReader.ReadString();
+                    PartImage = binaryReader.ReadString();
                 }
             }
 

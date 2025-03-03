@@ -3,6 +3,7 @@ using GameFramework.Event;
 using GameFramework.Fsm;
 using GameFramework.Procedure;
 using GameFramework.Resource;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 public class MenuProcedure : ProcedureBase
@@ -12,9 +13,16 @@ public class MenuProcedure : ProcedureBase
     private CarEntity carEntity;
     LoadAssetCallbacks assetCallbacks;
     IDataTable<VehicleInfoTable> vehicleInfoTable;
+    List<Sprite> carSprites;
+    List<Sprite> carLogoSprites;
+    IDataTable<VehiclePartTable> partInfoTable;
+    List<Sprite> partSprites;
     IFsm<IProcedureManager> procedure;
     int loadingObjCount;
     float progress;
+    public List<Sprite> CarSprites { get { return carSprites; } }
+    public List<Sprite> CarLogoSprites { get { return carLogoSprites; } }
+    public List<Sprite> PartSprites { get { return partSprites; } }
     protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
     {
         base.OnInit(procedureOwner);
@@ -26,9 +34,28 @@ public class MenuProcedure : ProcedureBase
         progress = 0f;
         loadingObjCount = 0;
         GF.BuiltinView.ShowLoadingProgress(progress);
+        vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
+        carSprites = new(vehicleInfoTable.Count);
+        carLogoSprites = new(vehicleInfoTable.Count);
+        for (int i = 0; i < vehicleInfoTable.Count; ++i)
+        {
+            carSprites.Add(null);
+            carLogoSprites.Add(null);
+        }
+
+        partInfoTable = GF.DataTable.GetDataTable<VehiclePartTable>();
+        partSprites = new(partInfoTable.Count);
+        for (int i = 0; i < partInfoTable.Count; ++i)
+        {
+            partSprites.Add(null);
+        }
         ShowMenu();// 加载菜单
         assetCallbacks = new(LoadAssetSucceed, LoadAssetFailed);
         ++loadingObjCount;
+
+        LoadCarImages();
+        LoadPartImages();
+
         //var res = await GF.WebRequest.AddWebRequestAsync("https://blog.csdn.net/final5788");
         //Log.Info(Utility.Converter.GetString(res.Bytes));
         GF.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, UIFormOpenedSuccess);
@@ -46,10 +73,9 @@ public class MenuProcedure : ProcedureBase
     private void LoadAssetSucceed(string assetName, object asset, float duration, object userData)
     {
         Log.Debug($"{GetType()}: 加载资源{assetName}成功");
-        if (asset is RenderTexture)
+        if (asset is RenderTexture rt)
         {
             // 验证RenderTexture参数
-            var rt = asset as RenderTexture;
             Debug.Log($"RenderTexture Dimension: {rt.dimension}");
 
             var ModelRendererCam = CameraController.Instance.ModelRendererCamera;
@@ -69,7 +95,33 @@ public class MenuProcedure : ProcedureBase
             GF.BuiltinView.SetLoadingProgress(progress);
             --loadingObjCount;
         }
+        else if (asset is Texture2D texture)
+        {
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            if (sprite != null)
+            {
+                // ID对应的图的类型
+                (int, string) spriteType = ((int, string))userData;
 
+                // 汽车缩略图
+                if (spriteType.Item2 == "Car")
+                {
+                    carSprites[spriteType.Item1] = sprite;
+                }
+                else if (spriteType.Item2 == "CarLogo")
+                {
+                    carLogoSprites[spriteType.Item1] = sprite;
+                }
+                // 部件缩略图
+                else if (spriteType.Item2 == "Part")
+                {
+                    partSprites[spriteType.Item1] = sprite;
+                }
+                --loadingObjCount;
+            }
+            
+        }
+            
         if (loadingObjCount == 0)
         {
             GF.BuiltinView.HideLoadingProgress();
@@ -132,24 +184,18 @@ public class MenuProcedure : ProcedureBase
         GF.Event.Unsubscribe(OpenUIFormFailureEventArgs.EventId, UIFormOpenedFailed);
         GF.Event.Unsubscribe(ShowEntitySuccessEventArgs.EventId, EntityOpenedSuccess);
         GF.Event.Unsubscribe(ShowEntityFailureEventArgs.EventId, EntityOpenedFailed);
+        carSprites = null;
         base.OnLeave(procedureOwner, isShutdown);
     }
 
     private void ShowCar(GameObject rawImageGo, int i = 0)
     {
-        //动态创建关卡，默认读取第0个车
-        vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
+        //动态创建关卡，默认读取ID为0的车
         var lvRow = vehicleInfoTable.GetDataRow(i);
         var carParams = EntityParams.Create(Vector3.zero, Vector3.zero, Vector3.one);
         carParams.Set<VarGameObject>(Const.RAW_IMAGE, rawImageGo);
         carEntityId = GF.Entity.ShowEntity<CarEntity>(lvRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
         ++loadingObjCount;
-    }
-    public void EnterGame()
-    {
-        procedure.SetData<VarUnityObject>("CarEntity", carEntity);
-
-        ChangeState<GameProcedure>(procedure);
     }
 
     public void ShowMenu()
@@ -168,12 +214,49 @@ public class MenuProcedure : ProcedureBase
         menuUIFormId = GF.UI.OpenUIForm(UIViews.MainMenu);
         ++loadingObjCount;
     }
-
+    private void LoadCarImages()
+    {
+        for (int i = 0; i < vehicleInfoTable.Count; ++i)
+        {
+            var userData = (i, "Car");
+            GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(vehicleInfoTable[i].CarImageAssetName), assetCallbacks, userData);
+            ++loadingObjCount;
+            var userData2 = (i, "CarLogo");
+            GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(vehicleInfoTable[i].CarLogo), assetCallbacks, userData2);
+            ++loadingObjCount;
+        }
+    }
+    private void LoadPartImages()
+    {
+        for (int i = 0; i < partInfoTable.Count; ++i)
+        {
+            var userData = (i, "Part");
+            GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(partInfoTable[i].PartImage), assetCallbacks, userData);
+            ++loadingObjCount;
+        }
+    }
     public void ChangeVehiclePrefeb(int i)
     {
         var ui = GF.UI.GetUIForm(menuUIFormId).Logic as MainMenu;
         GF.Entity.HideEntity(carEntityId);
         carEntity = null;
         ShowCar(ui.RawImageGo, i);
+    }
+    /// <summary>
+    /// 替换部件
+    /// </summary>
+    /// <param name="vehiclePartTypeEnum">要替换的部件种类</param>
+    /// <param name="newPrefabName">部件预制体名</param>
+    /// <param name="partIdx">要替换的当前种类部件的索引，不传代表全部替换</param>
+    public void ChangeCarPart(VehiclePartTypeEnum vehiclePartTypeEnum, string newPrefabName, int partIdx = -1)
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        car.ReplaceCom(vehiclePartTypeEnum, newPrefabName, partIdx);
+    }
+
+    public void ResetPart(VehiclePartTypeEnum vehiclePartTypeEnum, int partIdx = -1)
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        car.ResetPart(vehiclePartTypeEnum, partIdx);
     }
 }

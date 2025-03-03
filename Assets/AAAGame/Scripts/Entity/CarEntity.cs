@@ -1,7 +1,14 @@
 ﻿using GameFramework.Resource;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityGameFramework.Runtime;
+
+public class ModifyParams
+{
+    public VehiclePartTypeEnum whichType; // 改装的部件类型
+    public List<GameObject> parts; // 该类型下的部件们
+}
 
 public class CarEntity : EntityBase
 {
@@ -16,19 +23,26 @@ public class CarEntity : EntityBase
     private float smoothFactor = 10f;   // 平滑系数
 
     private GameObject carModel;
-    public List<GameObject> CarComponents; // 车体组件数组
+    [SerializeField]
+    private List<ModifyParams> originalTypeWithParts; // 默认的哪种类型的部件的索引
+    public List<ModifyParams> CurTypeWithParts; // 当前的哪种类型车体组件
 
     private Quaternion m_TargetRotation;
 
     private LoadAssetCallbacks assetCallbacks;
     private Camera modelViewCamera; // 指向渲染RenderTexture的专用摄像机
-    public GameObject rawImage;
-
+    private GameObject rawImage;
+    public GameObject RawImage { get { return rawImage; } }
+    [SerializeField]
+    private GameObject originalPartList; // 替换掉原始部件后暂存的父节点
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
         m_TargetRotation = transform.rotation;
-        carModel = transform.GetChild(0).gameObject;
+        if (carModel == null)
+            carModel = transform.GetChild(0).gameObject;
+        if (originalPartList == null)
+            originalPartList = transform.GetChild(1).gameObject;
         assetCallbacks = new(LoadAssetSucceedCallBack, LoadAssetFailedCallback);
     }
 
@@ -40,12 +54,12 @@ public class CarEntity : EntityBase
     private void LoadAssetSucceedCallBack(string assetName, object asset, float duration, object userData)
     {
         Log.Debug("资源加载成功回调：" + assetName);
-        int i = (int)userData;
-        if (CarComponents != null && CarComponents.Count > 0)
+        ModifyParams modifyParams = (ModifyParams)userData;
+        if (CurTypeWithParts != null && CurTypeWithParts.Count > 0)
         {
-            GameObject oldGO = CarComponents[i];
+            
+            var oldTypeWithPart = CurTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == modifyParams.whichType; });
             GameObject newGO = asset as GameObject;
-            newGO = Instantiate(newGO);
             // 需要复制的组件
             /*MeshFilter oldMeshFilter = oldGO.GetComponent<MeshFilter>();
             MeshRenderer oldMeshRenderer = oldGO.GetComponent<MeshRenderer>();
@@ -69,13 +83,26 @@ public class CarEntity : EntityBase
                 MeshCollider newMeshCollider = newGO.GetComponent<MeshCollider>();
                 ComponentTool.CloneComponentByReflection(newMeshCollider, oldGO, true);
             }*/
-            oldGO.SetActive(false);
-            newGO.transform.SetParent(carModel.transform);
-            newGO.transform.SetPositionAndRotation(oldGO.transform.position, oldGO.transform.rotation);
-            newGO.name = oldGO.name;
-            newGO.transform.SetSiblingIndex(i);
-            CarComponents[i] = newGO;
-            Destroy(oldGO);
+
+            var oldParts = oldTypeWithPart.parts;
+            for (int i = 0; i < oldParts.Count; ++i)
+            {
+                if (modifyParams.parts[i] != null)
+                {
+                    var oldPart = oldParts[i];
+                    oldPart.SetActive(false);
+                    GameObject ChangeObj = Instantiate(newGO);
+                    ChangeObj.transform.SetParent(carModel.transform);
+                    ChangeObj.transform.SetPositionAndRotation(oldPart.transform.position, oldPart.transform.rotation);
+                    ChangeObj.name = oldPart.name;
+                    ChangeObj.tag = oldPart.tag;
+                    ChangeObj.transform.SetSiblingIndex(oldPart.transform.GetSiblingIndex());
+                    oldParts[i] = ChangeObj;
+                    oldPart.transform.SetParent(originalPartList.transform);
+                }
+            }
+            
+            
         }
         
     }
@@ -83,13 +110,31 @@ public class CarEntity : EntityBase
     protected override void OnShow(object userData)
     {
         base.OnShow(userData);
-        CarComponents ??= new(71);
-        if (CarComponents.Count == 0)
+        CurTypeWithParts ??= new(1);
+        originalTypeWithParts ??= new(1);
+        if (originalTypeWithParts.Count == 0)
         {
-            int count = carModel.transform.childCount;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < (int)VehiclePartTypeEnum.Count; ++i)
             {
-                CarComponents.Add(carModel.transform.GetChild(i).gameObject);
+                // 构造一份默认的配件
+                ModifyParams originalModifyParams = new()
+                {
+                    whichType = (VehiclePartTypeEnum)i,
+                    parts = new(GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(VehiclePartTypeEnum), i)))
+                };
+                originalTypeWithParts.Add(originalModifyParams);
+            }
+        }
+        if (CurTypeWithParts.Count == 0)
+        {
+            for (int i = 0; i < (int)VehiclePartTypeEnum.Count; ++i)
+            {
+                ModifyParams modifyParams = new()
+                {
+                    whichType = (VehiclePartTypeEnum)i,
+                    parts = new (GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(VehiclePartTypeEnum), i)))
+                };
+                CurTypeWithParts.Add(modifyParams);
             }
         }
         modelViewCamera = CameraController.Instance.ModelRendererCamera;
@@ -99,6 +144,7 @@ public class CarEntity : EntityBase
         }
 
         // 旋转车辆
+        transform.SetLocalPositionAndRotation(transform.position, Quaternion.identity);
         Quaternion rotation = Quaternion.Euler(5f, -120f, 0f);
         transform.SetLocalPositionAndRotation(transform.position, rotation);
     }
@@ -154,12 +200,6 @@ public class CarEntity : EntityBase
             transform.rotation = m_TargetRotation;
         }
 
-        // 按下v进行替换
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Log.Debug("按下了V");
-            ReplaceCom("YouHouLunGu");
-        }
     }
     protected override void OnHide(bool isShutdown, object userData)
     {
@@ -169,30 +209,86 @@ public class CarEntity : EntityBase
     /// <summary>
     /// 替换部件
     /// </summary>
-    /// <param name="prefabName">部件名，预制体部件命名为游戏对象名+后缀</param>
-    public void ReplaceCom(string prefabName)
+    /// <param name="vehiclePartTypeEnum">要替换的部件种类</param>
+    /// <param name="newPrefabName">部件预制体名</param>
+    /// <param name="partIdx">要替换的当前种类部件的索引，不传代表全部替换</param>
+    public void ReplaceCom(VehiclePartTypeEnum vehiclePartTypeEnum, string newPrefabName, int partIdx = -1)
     {
-        GameObject oldCom = null;
-        // 记录旧的部件的索引
-        int i = 0;
-        foreach (var com in CarComponents)
-        {
-            if (com.name.Contains(prefabName))
-            {
-                oldCom = com;
-                break;
-            }
-            ++i;
-        }
-        if (oldCom != null)
+        // 旧的部件的信息
+        var filteredTypeWithParts = CurTypeWithParts.Find((typeWithParts) => { return vehiclePartTypeEnum == typeWithParts.whichType; });
+        if (filteredTypeWithParts != null)
         {
             // 加载新部件
-            string prefebFullPath = UtilityBuiltin.AssetsPath.GetPrefab("Entity/" + prefabName);
-            GF.Resource.LoadAsset(prefebFullPath, assetCallbacks, i);
+            string prefebFullPath = UtilityBuiltin.AssetsPath.GetPrefab(newPrefabName);
+            ModifyParams modifyParams = new()
+            {
+                whichType = vehiclePartTypeEnum
+            };
+            List<GameObject> wantReplacedParts;
+            wantReplacedParts = new(filteredTypeWithParts.parts);
+            if (partIdx != -1)
+            {
+                for (int i = 0; i < filteredTypeWithParts.parts.Count; ++i)
+                {
+                    if (i != partIdx)
+                    {
+                        wantReplacedParts[i] = null;
+                    }
+                }
+            }
+            modifyParams.parts = wantReplacedParts;
+            GF.Resource.LoadAsset(prefebFullPath, assetCallbacks, modifyParams);
         }
         else
         {
             Log.Debug($"{GetType()}: /ReplaceCom=> 未找到相关的部件！");
+        }
+    }
+    /// <summary>
+    /// 重置部件
+    /// </summary>
+    /// <param name="vehiclePartTypeEnum">车辆哪个类型的部件</param>
+    /// <param name="partIdx">该类型部件下的部件索引</param>
+    public void ResetPart(VehiclePartTypeEnum vehiclePartTypeEnum, int partIdx = -1)
+    {
+        var curParts = CurTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
+        var originalParts = originalTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
+        if (partIdx == -1)
+        {
+            for (int i = 0; i < curParts.Count; i++)
+            {
+                var curPart = curParts[i];
+                curPart.SetActive(false);
+                GameObject originalObj;
+                if (originalParts[i] == null)
+                {
+                    originalObj = Instantiate(originalParts[i]);
+                }
+                else
+                {
+                    originalObj = originalParts[i];
+                }
+                originalObj.transform.SetParent(carModel.transform);
+                originalObj.transform.SetPositionAndRotation(curPart.transform.position, curPart.transform.rotation);
+                originalObj.name = curPart.name;
+                originalObj.transform.SetSiblingIndex(curPart.transform.GetSiblingIndex());
+                originalObj.SetActive(true);
+                curParts[i] = originalObj;
+                Destroy(curPart);
+            }
+        }
+        else
+        {
+            var curPart = curParts[partIdx];
+            curPart.SetActive(false);
+            GameObject originalObj = Instantiate(originalParts[partIdx]);
+            originalObj.transform.SetParent(carModel.transform);
+            originalObj.transform.SetPositionAndRotation(curPart.transform.position, curPart.transform.rotation);
+            originalObj.name = curPart.name;
+            originalObj.tag = curPart.tag;
+            originalObj.transform.SetSiblingIndex(curPart.transform.GetSiblingIndex());
+            curParts[partIdx] = originalObj;
+            Destroy(curPart);
         }
     }
 

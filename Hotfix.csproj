@@ -86,6 +86,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Procedures\ChangeSceneProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\AIEnemyEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\DataTable\VehiclePartTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\GameOverUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIFormBase.cs" />
@@ -117,10 +118,13 @@
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\TypeIdPair.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataNodeExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\RatingDialog.Variables.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\EventArgs\PartItemSelectedEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UITopbar.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\Item\VehiclePartTagItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\MenuUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UIGroupTable.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehiclePartTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\GameProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\GameplayEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SoundExtension.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\LanguagesDialog.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\RawImageZoneChecker.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyGame.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIItemBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\MenuProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\BillboardMonoBehaviour.cs" />
@@ -143,12 +148,13 @@
     <Compile Include="Assets\AAAGame\Scripts\Common\Const.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\ResourceExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\BillboardEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\EventArgs\CarItemSelectedEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UITable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehicleTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SettingExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\LevelEntity.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\EventArgs\UIItemSelectedEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarFloat.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\ModifyGame.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\SoundGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\PlayerDataModel.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\UIExtension.cs" />
@@ -164,6 +170,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Demo\JobsPhysics.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\SampleEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ChooseVehicle.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\VehiclePart.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\StaticUIComponent.cs" />
   </ItemGroup>
   <ItemGroup>

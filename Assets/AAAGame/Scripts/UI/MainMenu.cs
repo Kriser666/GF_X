@@ -1,6 +1,7 @@
 ﻿using GameFramework;
 using GameFramework.DataTable;
 using GameFramework.Event;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
@@ -26,20 +27,19 @@ public partial class MainMenu : UIFormBase
         base.OnOpen(userData);
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
         currentVehicleId = 0;
-        
-        GF.Event.Subscribe(UIItemSelectedEventArgs.EventId, ItemSelectedHandler);
+        GF.Event.Subscribe(CarItemSelectedEventArgs.EventId, ItemSelectedHandler);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
-        GF.Event.Unsubscribe(UIItemSelectedEventArgs.EventId, ItemSelectedHandler);
+        GF.Event.Unsubscribe(CarItemSelectedEventArgs.EventId, ItemSelectedHandler);
         base.OnClose(isShutdown, userData);
     }
 
     private void ItemSelectedHandler(object sender, GameEventArgs e)
     {
-        var eventArgs = e as UIItemSelectedEventArgs;
-        if (eventArgs.DataType == UIItemSelectedDataType.Choosed)
+        var eventArgs = e as CarItemSelectedEventArgs;
+        if (eventArgs.DataType == CarUIItemSelectedDataType.Choosed)
         {
             if (eventArgs.IdValue != -1 && eventArgs.IdValue != currentVehicleId)
             {
@@ -65,6 +65,13 @@ public partial class MainMenu : UIFormBase
             case "HistoryModification":
                 OpenSubUIForm(UIViews.SettingDialog);
                 break;
+            case "ExitGame":
+                var exit_time = DateTime.UtcNow.ToString();
+                GF.Setting.SetString(ConstBuiltin.Setting.QuitAppTime, exit_time);
+                GF.Setting.Save();
+                Log.Info("Application Quit:{0}", exit_time);
+                GF.Event.Fire(this, GFEventArgs.Create(GFEventType.ApplicationQuit));
+                break;
         }
     }
 
@@ -73,7 +80,11 @@ public partial class MainMenu : UIFormBase
         base.OnButtonClick(sender, btSelf);
         if (btSelf == varGameStart)
         {
-            procedure.EnterGame();
+            UIParams modifyParams = UIParams.Create();
+            modifyParams.Set<VarGameObject>(Const.RAW_IMAGE, varCarModel);
+            GameFrameworkAction<GameObject> gameFrameworkAction = SetRawImage;
+            modifyParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);
+            GF.UI.OpenUIForm(UIViews.ModifyGame, modifyParams);
         }
         if (btSelf == varDropdownButtonObj.GetComponent<Button>())
         {
@@ -83,6 +94,7 @@ public partial class MainMenu : UIFormBase
             chooseVehicleParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);
             OpenSubUIForm(UIViews.ChooseVehicle, 1, chooseVehicleParams);
         }
+        
     }
 
     private void SetRawImage(GameObject RowIamge)

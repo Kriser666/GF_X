@@ -4,6 +4,7 @@
 //---------------------------------
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public partial class ChooseVehicle
 {
 	[Space(10)]
@@ -11,4 +12,7 @@ public partial class ChooseVehicle
 	[SerializeField] private TMP_InputField varInputText = null;
 	[SerializeField] private GameObject varContent = null;
 	[SerializeField] private GameObject varMiddle = null;
+	[SerializeField] private TextMeshProUGUI varCarNameText = null;
+	[SerializeField] private TextMeshProUGUI varCarDesc = null;
+	[SerializeField] private Image varCarLogo = null;
 }

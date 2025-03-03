@@ -1,0 +1,5 @@
+﻿#	VehiclePartTable								
+#	ID		PartName	PartType	VehicleId	Cost	Performance	PrefebName	PartImage
+#	int		string	enum	int	int	int	string	string
+#		备注	部件名称	部件类型	对应的汽车ID	价格	性能	预制体名称	缩略图名称
+	0		PART_NAME.BEI_NAI_LI	VehiclePartTypeEnum.LunGu	0	999	999	Entity/BeiNaiLi	Part/BeiNaiLi.png
