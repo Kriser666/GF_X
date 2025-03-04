@@ -1,6 +1,7 @@
 using GameFramework.Event;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
@@ -55,9 +56,9 @@ public class LevelEntity : EntityBase
         CameraController.Instance.SetFollowTarget(m_PlayerEntity.CachedTransform);*/
         
         var carParams = EntityParams.Create(carSpawnPoint.position, carSpawnPoint.eulerAngles);
+        var carDataTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
+        carParams.Set<VarInt32>(Const.VEHICLE_ID, carDataTable.ElementAt(0).Id);
         m_CarEntity = await GF.Entity.ShowEntityAwait<CarEntity>("Car", Const.EntityGroup.Vehicle, carParams) as CarEntity;
-        CameraController.Instance.SetFollowTarget(m_CarEntity.CachedTransform);
-        CameraController.Instance.SetCameraView(10);
         IsAllReady = true;
 
         GF.BuiltinView.HideLoadingProgress();

@@ -4,7 +4,8 @@ using GameFramework;
 public enum CarUIItemSelectedDataType
 {
     Changed = 0,
-    Choosed
+    Choosed,
+    Saved
 }
 
 public class CarItemSelectedEventArgs : GameEventArgs

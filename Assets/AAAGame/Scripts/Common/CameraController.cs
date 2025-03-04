@@ -3,6 +3,7 @@ using DG.Tweening;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
 using Cysharp.Threading.Tasks;
+using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class CameraController : MonoBehaviour
         var camRow = camTb.GetDataRow(viewId);
         initOffset = camRow.FollowOffset;
         SwitchCameraView(camRow.FollowOffset, camRow.AimOffset, smooth);
+        AddOffset(camRow.Offset, smooth);
     }
     internal void ShakeCamera(float power = 1f)
     {
@@ -90,5 +92,36 @@ public class CameraController : MonoBehaviour
         aimCom.m_HorizontalDamping = aimCom.m_VerticalDamping = smooth ? 0.5f : 0f;
         transposer.m_FollowOffset = offset;
         aimCom.m_TrackedObjectOffset = aimOffset;
+    }
+
+    internal void AddOffset(Vector3 offset, bool smoth = true)
+    {
+        if (followerVCamera.TryGetComponent<CinemachineCameraOffset>(out CinemachineCameraOffset offsetCam))
+        {
+            if (smoth)
+            {
+                StartCoroutine(SmothOffset(offset, offsetCam));
+            }
+            else
+            {
+                offsetCam.m_Offset = offset;
+            }
+        }
+    }
+    internal IEnumerator SmothOffset(Vector3 offset, CinemachineCameraOffset offsetCam)
+    {
+        Vector3 startPos = offsetCam.m_Offset;
+        float duration = 1f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            offsetCam.m_Offset = Vector3.Lerp(startPos, offset, elapsed / duration);
+            yield return null;
+        }
+
+        offsetCam.m_Offset = offset; // 确保精确到达终点
+        yield return null;
     }
 }

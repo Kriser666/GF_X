@@ -4,6 +4,7 @@ using GameFramework.Fsm;
 using GameFramework.Procedure;
 using GameFramework.Resource;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 public class MenuProcedure : ProcedureBase
@@ -170,7 +171,8 @@ public class MenuProcedure : ProcedureBase
             GF.BuiltinView.SetLoadingProgress(progress);
             --loadingObjCount;
             MainMenu mainMenu = eventArgs.UIForm.Logic as MainMenu;
-            ShowCar(mainMenu.RawImageGo); // 加载汽车
+            
+            ShowCar(mainMenu.RawImageGo, vehicleInfoTable.ElementAt(0).Id); // 加载汽车
         }
     }
 
@@ -190,10 +192,11 @@ public class MenuProcedure : ProcedureBase
 
     private void ShowCar(GameObject rawImageGo, int i = 0)
     {
-        //动态创建关卡，默认读取ID为0的车
+        //动态创建关卡，默认读取第一个车
         var lvRow = vehicleInfoTable.GetDataRow(i);
         var carParams = EntityParams.Create(Vector3.zero, Vector3.zero, Vector3.one);
         carParams.Set<VarGameObject>(Const.RAW_IMAGE, rawImageGo);
+        carParams.Set<VarInt32>(Const.VEHICLE_ID, i);
         carEntityId = GF.Entity.ShowEntity<CarEntity>(lvRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
         ++loadingObjCount;
     }
@@ -258,5 +261,23 @@ public class MenuProcedure : ProcedureBase
     {
         var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
         car.ResetPart(vehiclePartTypeEnum, partIdx);
+    }
+
+    public bool CarHasBeenModified()
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        return car.Modified();
+    }
+
+    public List<int> CurrentPartIdList()
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        return car.CurrentPartIdList();
+    }
+    public void SaveModify()
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        car.SaveModify();
+        GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Saved, carEntityId));
     }
 }

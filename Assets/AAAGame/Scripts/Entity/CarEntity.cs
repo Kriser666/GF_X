@@ -22,6 +22,7 @@ public class CarEntity : EntityBase
     [SerializeField]
     private float smoothFactor = 10f;   // 平滑系数
 
+    private int carId;
     private GameObject carModel;
     [SerializeField]
     private List<ModifyParams> originalTypeWithParts; // 默认的哪种类型的部件的索引
@@ -35,6 +36,7 @@ public class CarEntity : EntityBase
     public GameObject RawImage { get { return rawImage; } }
     [SerializeField]
     private GameObject originalPartList; // 替换掉原始部件后暂存的父节点
+
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
@@ -87,6 +89,7 @@ public class CarEntity : EntityBase
             var oldParts = oldTypeWithPart.parts;
             for (int i = 0; i < oldParts.Count; ++i)
             {
+                bool haveOriginalPart = false;
                 if (modifyParams.parts[i] != null)
                 {
                     var oldPart = oldParts[i];
@@ -98,7 +101,18 @@ public class CarEntity : EntityBase
                     ChangeObj.tag = oldPart.tag;
                     ChangeObj.transform.SetSiblingIndex(oldPart.transform.GetSiblingIndex());
                     oldParts[i] = ChangeObj;
-                    oldPart.transform.SetParent(originalPartList.transform);
+                    for (int j = 0; j < originalPartList.transform.childCount; ++j)
+                    {
+                        if (originalPartList.transform.GetChild(j).name == oldPart.name)
+                        {
+                            haveOriginalPart = true;
+                            break;
+                        }
+                    }
+                    if (!haveOriginalPart)
+                    {
+                        oldPart.transform.SetParent(originalPartList.transform);
+                    }
                 }
             }
             
@@ -110,6 +124,7 @@ public class CarEntity : EntityBase
     protected override void OnShow(object userData)
     {
         base.OnShow(userData);
+        carId = Params.Get<VarInt32>(Const.VEHICLE_ID);
         CurTypeWithParts ??= new(1);
         originalTypeWithParts ??= new(1);
         if (originalTypeWithParts.Count == 0)
@@ -175,15 +190,15 @@ public class CarEntity : EntityBase
             float mouseX = normalizedOffset.x * m_RotationSpeed * aspectRatio;
             float mouseY = normalizedOffset.y * m_RotationSpeed;*/
             float mouseX = Input.GetAxis("Mouse X") * m_RotationSpeed;
-            float mouseY = Input.GetAxis("Mouse Y") * m_RotationSpeed;
+            // float mouseY = Input.GetAxis("Mouse Y") * m_RotationSpeed;
             // 使用模型摄像机的坐标系进行旋转
             Vector3 worldUp = modelViewCamera.transform.up;
-            Vector3 worldRight = modelViewCamera.transform.right;
+            // Vector3 worldRight = modelViewCamera.transform.right;
 
             Quaternion yRot = Quaternion.AngleAxis(-mouseX, worldUp);
-            Quaternion xRot = Quaternion.AngleAxis(mouseY, worldRight);
-
-            m_TargetRotation = yRot * xRot * m_TargetRotation;
+            // Quaternion xRot = Quaternion.AngleAxis(mouseY, worldRight);
+            m_TargetRotation = yRot * m_TargetRotation;
+            // m_TargetRotation = yRot * xRot * m_TargetRotation;
         }
 
         // 应用旋转
@@ -251,45 +266,106 @@ public class CarEntity : EntityBase
     /// <param name="partIdx">该类型部件下的部件索引</param>
     public void ResetPart(VehiclePartTypeEnum vehiclePartTypeEnum, int partIdx = -1)
     {
-        var curParts = CurTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
-        var originalParts = originalTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
-        if (partIdx == -1)
+        if (Modified())
         {
-            for (int i = 0; i < curParts.Count; i++)
+            var curParts = CurTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
+            var originalParts = originalTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
+            if (partIdx == -1)
             {
-                var curPart = curParts[i];
+                for (int i = 0; i < curParts.Count; i++)
+                {
+                    var curPart = curParts[i];
+                    curPart.SetActive(false);
+                    GameObject originalObj;
+                    if (originalParts[i] == null)
+                    {
+                        originalObj = Instantiate(originalParts[i]);
+                    }
+                    else
+                    {
+                        originalObj = originalParts[i];
+                    }
+                    originalObj.transform.SetParent(carModel.transform);
+                    originalObj.transform.SetPositionAndRotation(curPart.transform.position, curPart.transform.rotation);
+                    originalObj.name = curPart.name;
+                    originalObj.transform.SetSiblingIndex(curPart.transform.GetSiblingIndex());
+                    originalObj.SetActive(true);
+                    curParts[i] = originalObj;
+                    Destroy(curPart);
+                }
+            }
+            else
+            {
+                var curPart = curParts[partIdx];
                 curPart.SetActive(false);
-                GameObject originalObj;
-                if (originalParts[i] == null)
-                {
-                    originalObj = Instantiate(originalParts[i]);
-                }
-                else
-                {
-                    originalObj = originalParts[i];
-                }
+                GameObject originalObj = Instantiate(originalParts[partIdx]);
                 originalObj.transform.SetParent(carModel.transform);
                 originalObj.transform.SetPositionAndRotation(curPart.transform.position, curPart.transform.rotation);
                 originalObj.name = curPart.name;
+                originalObj.tag = curPart.tag;
                 originalObj.transform.SetSiblingIndex(curPart.transform.GetSiblingIndex());
-                originalObj.SetActive(true);
-                curParts[i] = originalObj;
+                curParts[partIdx] = originalObj;
                 Destroy(curPart);
             }
         }
-        else
+        
+    }
+
+    public bool Modified()
+    {
+        return originalPartList.transform.childCount > 0;
+    }
+
+    public List<int> CurrentPartIdList()
+    {
+        List<int> partIds = new();
+        for(int i = 0; i < carModel.transform.childCount; ++i)
         {
-            var curPart = curParts[partIdx];
-            curPart.SetActive(false);
-            GameObject originalObj = Instantiate(originalParts[partIdx]);
-            originalObj.transform.SetParent(carModel.transform);
-            originalObj.transform.SetPositionAndRotation(curPart.transform.position, curPart.transform.rotation);
-            originalObj.name = curPart.name;
-            originalObj.tag = curPart.tag;
-            originalObj.transform.SetSiblingIndex(curPart.transform.GetSiblingIndex());
-            curParts[partIdx] = originalObj;
-            Destroy(curPart);
+            // 如果有VehiclePart部件组件，说明已改装
+            if (carModel.transform.GetChild(i).TryGetComponent<VehiclePart>(out VehiclePart vehiclePart))
+            {
+                partIds.Add(vehiclePart.PartId);
+            }
         }
+        return partIds;
+    }
+
+    public ModifiedParts CurrentPartIdList(VehiclePartTypeEnum partTypeEnum)
+    {
+        ModifiedParts modifiedParts = new()
+        {
+            whichType = partTypeEnum,
+            partsIds = null
+        };
+        List<int> partIds = new();
+        for (int i = 0; i < carModel.transform.childCount; ++i)
+        {
+            // 如果有VehiclePart部件组件，说明已改装
+            if (carModel.transform.GetChild(i).TryGetComponent<VehiclePart>(out VehiclePart vehiclePart))
+            {
+                if (vehiclePart.PartTypeEnum == partTypeEnum)
+                {
+                    partIds.Add(vehiclePart.PartId);
+                }
+            }
+        }
+        modifiedParts.partsIds = partIds;
+        return modifiedParts;
+    }
+
+    public void SaveModify()
+    {
+        var dataModel = GF.DataModel.GetOrCreate<CarDataModel>();
+        dataModel.CurCarId = carId;
+        List<ModifiedParts> modifiedPartsList = new();
+        // 先创建ModifiedParts，根据部件类型
+        for (int i = 0; i < (int)VehiclePartTypeEnum.Count; ++i)
+        {
+            VehiclePartTypeEnum partTypeEnum = (VehiclePartTypeEnum)i;
+            ModifiedParts modifiedParts = CurrentPartIdList(partTypeEnum);
+            modifiedPartsList.Add(modifiedParts);
+        }
+        dataModel.PartsIds = modifiedPartsList;
     }
 
 }

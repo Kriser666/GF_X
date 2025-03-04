@@ -57,7 +57,7 @@ public class VehiclePartTable : DataRowBase
         /// <summary>
         /// 价格
         /// </summary>
-        public int Cost
+        public float Cost
         {
             get;
             private set;
@@ -66,7 +66,7 @@ public class VehiclePartTable : DataRowBase
         /// <summary>
         /// 性能
         /// </summary>
-        public int Performance
+        public float Performance
         {
             get;
             private set;
@@ -105,8 +105,8 @@ public class VehiclePartTable : DataRowBase
             PartName = columnStrings[index++];
             PartType = DataTableExtension.ParseEnum<VehiclePartTypeEnum>(columnStrings[index++]);
             VehicleId = int.Parse(columnStrings[index++]);
-            Cost = int.Parse(columnStrings[index++]);
-            Performance = int.Parse(columnStrings[index++]);
+            Cost = float.Parse(columnStrings[index++]);
+            Performance = float.Parse(columnStrings[index++]);
             PrefebName = columnStrings[index++];
             PartImage = columnStrings[index++];
 
@@ -123,8 +123,8 @@ public class VehiclePartTable : DataRowBase
                     PartName = binaryReader.ReadString();
                     PartType = binaryReader.ReadEnum<VehiclePartTypeEnum>();
                     VehicleId = binaryReader.Read7BitEncodedInt32();
-                    Cost = binaryReader.Read7BitEncodedInt32();
-                    Performance = binaryReader.Read7BitEncodedInt32();
+                    Cost = binaryReader.ReadSingle();
+                    Performance = binaryReader.ReadSingle();
                     PrefebName = binaryReader.ReadString();
                     PartImage = binaryReader.ReadString();
                 }

@@ -14,5 +14,6 @@ public enum UIViews : int
 	TermsOfServiceDialog = 7,
 	CommonDialog = 8,
 	LanguagesDialog = 9,
+	ModifyPartDetail = 15,
 	ToastTips = 10
 }

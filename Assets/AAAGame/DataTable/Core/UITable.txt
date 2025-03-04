@@ -17,5 +17,6 @@
 	7	服务条款	2	TermsOfServiceDialog	True	2	True
 	8	通用提示对话框	3	CommonDialog	True	2	False
 	9	语言设置	2	LanguagesDialog	False	2	True
+	15	配件详情清单	1	ModifyPartDetail	True	2	True
 #	提示(顶层)						
 	10	吐司提示	1	ToastTips	False	3	False

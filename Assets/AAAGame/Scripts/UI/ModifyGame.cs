@@ -20,6 +20,7 @@ public partial class ModifyGame : UIFormBase
     private MenuProcedure procedure;
     private float curPerformance = 0f;
     private float curCost = 0f;
+    private int vehicleId = 0;
 
 
     protected override void OnInit(object userData)
@@ -33,10 +34,18 @@ public partial class ModifyGame : UIFormBase
         partTypeButtons = new();
     }
 
+    protected override void OnReveal()
+    {
+        base.OnReveal();
+        CameraController.Instance.SetCameraView(11);
+    }
+
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
+        CameraController.Instance.SetCameraView(11);
+        vehicleId = Params.Get<VarInt32>(Const.VEHICLE_ID, 0);
         if (Params.TryGet<VarGameObject>(Const.RAW_IMAGE, out var rawImageObj))
         {
             rawImage = rawImageObj;
@@ -58,9 +67,10 @@ public partial class ModifyGame : UIFormBase
         }
         partTypeTagTemplate.SetActive(false);
         // 生成部件缩略图，默认生成轮胎即btn为0
-        SpawnPartByType(vehiclePartTagTemplate, (VehiclePartTypeEnum)0);
+        SpawnPartByType(vehiclePartTagTemplate, (VehiclePartTypeEnum)0, vehicleId);
 
         GF.Event.Subscribe(PartItemSelectedEventArgs.EventId, ItemSelectedHandler);
+
     }
 
     protected override void OnClose(bool isShutdown, object userData)
@@ -93,8 +103,7 @@ public partial class ModifyGame : UIFormBase
                 curCost -= dataRow.Cost;
             }
         }
-        varCostAndPer.text = curCost + GF.Localization.GetString("MONEY.CURRENCY") + '\n'
-                + GF.Localization.GetString("MG.PERFORMANCE") + '+' + curPerformance;
+        ChangeCostAndPerformanceText(curCost, curPerformance);
     }
 
     protected override void OnButtonClick(object sender, Button btSelf)
@@ -109,17 +118,19 @@ public partial class ModifyGame : UIFormBase
                     Destroy(VehiclePartTagItems[j]);
                 }
                 VehiclePartTagItems.Clear();
-                SpawnPartByType(vehiclePartTagTemplate, (VehiclePartTypeEnum)i);
+                SpawnPartByType(vehiclePartTagTemplate, (VehiclePartTypeEnum)i, vehicleId);
                 break;
             }
         }
     }
 
-    private void SpawnPartByType(GameObject templateToClone, VehiclePartTypeEnum vehiclePartType)
+    private void SpawnPartByType(GameObject templateToClone, VehiclePartTypeEnum vehiclePartType, int carId)
     {
         string namePrefix = templateToClone.name.Split('_')[0];
-        // 根据部件类型筛选
-        var whichPartDatas = vehiclePartTable.Where((vehiclePartRow) => { return vehiclePartRow.PartType == vehiclePartType; });
+        // 根据部件类型和能装的车辆ID筛选
+        var whichPartDatas = vehiclePartTable.Where((vehiclePartRow) => { return vehiclePartRow.PartType == vehiclePartType; })
+            .Where((vehiclePartRow) => { return vehiclePartRow.VehicleId == carId; });
+        
         int i = 0;
         foreach (var part in whichPartDatas)
         {
@@ -146,13 +157,29 @@ public partial class ModifyGame : UIFormBase
                 frameworkAction?.Invoke(rawImage);
                 GF.UI.Close(this.Id);
                 break;
+            case "ModificationDetailBtn":
+                UIParams modifyPartDetailParams = UIParams.Create();
+                modifyPartDetailParams.Set(Const.PART_ID_LIST, procedure.CurrentPartIdList());
+                modifyPartDetailParams.Set<VarInt32>(Const.VEHICLE_ID, vehicleId);
+                OpenSubUIForm(UIViews.ModifyPartDetail, 1, modifyPartDetailParams);
+                break;
             case "OneKeyChange":
                 // 一键改装每个类型的最高性能
+                curPerformance = 0;
+                curCost = 0;
                 for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
                 {
                     int curType = i;
                     var whichPartDatas = vehiclePartTable.Where((vehiclePartRow) => { return vehiclePartRow.PartType == (VehiclePartTypeEnum)curType; });
-                    VehiclePartTable maxPerformance = whichPartDatas.ElementAt(0);
+                    int maxCostIdx = 0;
+                    for(int j = 0; j < whichPartDatas.Count(); ++j)
+                    {
+                        if(whichPartDatas.ElementAt(j).Cost > maxCostIdx)
+                        {
+                            maxCostIdx = j;
+                        }
+                    }
+                    VehiclePartTable maxPerformance = whichPartDatas.ElementAt(maxCostIdx);
                     foreach (var item in whichPartDatas)
                     {
                         if (item.Performance > maxPerformance.Performance)
@@ -160,19 +187,35 @@ public partial class ModifyGame : UIFormBase
                             maxPerformance = item;
                         }
                     }
+                    curPerformance += maxPerformance.Performance;
+                    curCost += maxPerformance.Cost;
                     string prefebName = maxPerformance.PrefebName;
+                    ChangeCostAndPerformanceText(curCost, curPerformance);
                     procedure.ChangeCarPart((VehiclePartTypeEnum)i, prefebName);
                 }
                 break;
             case "OneKeyReset":
-                for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
+                if(procedure.CarHasBeenModified())
                 {
-                    procedure.ResetPart((VehiclePartTypeEnum)i);
+                    for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
+                    {
+                        procedure.ResetPart((VehiclePartTypeEnum)i);
+                    }
+                    curPerformance = 0;
+                    curCost = 0;
+                    ChangeCostAndPerformanceText(curCost, curPerformance);
                 }
                 break;
             case "SelectButton":
-
+                procedure.SaveModify();
                 break;
         }    
+    }
+
+    private void ChangeCostAndPerformanceText(float cost, float performance)
+    {
+
+        varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + '+' + performance + '\n'
+            + GF.Localization.GetString("MG.COST") + cost + GF.Localization.GetString("MONEY.CURRENCY");
     }
 }

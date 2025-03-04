@@ -11,5 +11,8 @@ public enum VehiclePartTypeEnum
 
 public class VehiclePart : EntityBase
 {
-
+    private VehiclePartTypeEnum vehiclePartTypeEnum;
+    private int partId;
+    public int PartId { get { return partId; } set { partId = value; } }
+    public VehiclePartTypeEnum PartTypeEnum { get { return vehiclePartTypeEnum; } set { vehiclePartTypeEnum = value; } }
 }

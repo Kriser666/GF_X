@@ -25,9 +25,17 @@ public partial class MainMenu : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
+
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
         currentVehicleId = 0;
         GF.Event.Subscribe(CarItemSelectedEventArgs.EventId, ItemSelectedHandler);
+    }
+
+    protected override void OnReveal()
+    {
+        base.OnReveal();
+
+        CameraController.Instance.SetCameraView(10);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
@@ -44,6 +52,7 @@ public partial class MainMenu : UIFormBase
             if (eventArgs.IdValue != -1 && eventArgs.IdValue != currentVehicleId)
             {
                 toShowVehicleId = eventArgs.IdValue;
+                currentVehicleId = toShowVehicleId;
                 foreach (var vehicle in vehicleInfoTable)
                 {
                     if (vehicle.Id == toShowVehicleId)
@@ -71,6 +80,7 @@ public partial class MainMenu : UIFormBase
                 GF.Setting.Save();
                 Log.Info("Application Quit:{0}", exit_time);
                 GF.Event.Fire(this, GFEventArgs.Create(GFEventType.ApplicationQuit));
+                GF.Shutdown(ShutdownType.Quit);
                 break;
         }
     }
@@ -81,6 +91,7 @@ public partial class MainMenu : UIFormBase
         if (btSelf == varGameStart)
         {
             UIParams modifyParams = UIParams.Create();
+            modifyParams.Set<VarInt32>(Const.VEHICLE_ID, currentVehicleId);
             modifyParams.Set<VarGameObject>(Const.RAW_IMAGE, varCarModel);
             GameFrameworkAction<GameObject> gameFrameworkAction = SetRawImage;
             modifyParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);

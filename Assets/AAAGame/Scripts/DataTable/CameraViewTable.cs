@@ -28,7 +28,7 @@ public class CameraViewTable : DataRowBase
     }
 
         /// <summary>
-        /// 跟随偏移
+        /// 跟随的偏移
         /// </summary>
         public Vector3 FollowOffset
         {
@@ -37,9 +37,18 @@ public class CameraViewTable : DataRowBase
         }
 
         /// <summary>
-        /// 
+        /// 视角移动偏移
         /// </summary>
         public Vector3 AimOffset
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 视角中心偏移
+        /// </summary>
+        public Vector3 Offset
         {
             get;
             private set;
@@ -59,6 +68,7 @@ public class CameraViewTable : DataRowBase
             index++;
             FollowOffset = DataTableExtension.ParseVector3(columnStrings[index++]);
             AimOffset = DataTableExtension.ParseVector3(columnStrings[index++]);
+            Offset = DataTableExtension.ParseVector3(columnStrings[index++]);
 
             return true;
         }
@@ -72,6 +82,7 @@ public class CameraViewTable : DataRowBase
                     m_Id = binaryReader.Read7BitEncodedInt32();
                     FollowOffset = binaryReader.ReadVector3();
                     AimOffset = binaryReader.ReadVector3();
+                    Offset = binaryReader.ReadVector3();
                 }
             }
 
