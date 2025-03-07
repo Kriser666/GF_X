@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityGameFramework.Runtime;
 public class MenuProcedure : ProcedureBase
 {
-    int menuUIFormId;
+    public int menuUIFormId;
     int carEntityId;
     private CarEntity carEntity;
     LoadAssetCallbacks assetCallbacks;
@@ -21,6 +21,7 @@ public class MenuProcedure : ProcedureBase
     IFsm<IProcedureManager> procedure;
     int loadingObjCount;
     float progress;
+    private GameObject RawImageGo;
     public List<Sprite> CarSprites { get { return carSprites; } }
     public List<Sprite> CarLogoSprites { get { return carLogoSprites; } }
     public List<Sprite> PartSprites { get { return partSprites; } }
@@ -34,6 +35,7 @@ public class MenuProcedure : ProcedureBase
         procedure = procedureOwner;
         progress = 0f;
         loadingObjCount = 0;
+        carEntityId = -1;
         GF.BuiltinView.ShowLoadingProgress(progress);
         vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
         carSprites = new(vehicleInfoTable.Count);
@@ -144,9 +146,27 @@ public class MenuProcedure : ProcedureBase
         if (eventArgs.Entity.Id == carEntityId)
         {
             carEntity = eventArgs.Entity.Logic as CarEntity;
-            progress += 0.3f;
-            GF.BuiltinView.SetLoadingProgress(progress);
-            --loadingObjCount;
+
+            int modifyId = carEntity.Params.Get<VarInt32>(Const.MODIFY_ID);
+            // 不想改装
+            if (modifyId == -1)
+            {
+                progress += 0.3f;
+                GF.BuiltinView.SetLoadingProgress(progress);
+                --loadingObjCount;
+            }
+            else
+            {
+                var carData = GF.DataModel.GetDataModel<CarDataModel>();
+                foreach (var item in carData.CarWithModifyIdWithModifyParams[carEntity.CurCarId][modifyId])
+                {
+                    foreach (var partId in item.partsIds)
+                    {
+                        var prefebName = partInfoTable.GetDataRow(partId).PrefebName;
+                        ChangeCarPart(item.whichType, prefebName);
+                    }
+                }
+            }
         }
 
         GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetTexturePath("RenderTextures/CarRendTex.renderTexture"), assetCallbacks);
@@ -171,8 +191,8 @@ public class MenuProcedure : ProcedureBase
             GF.BuiltinView.SetLoadingProgress(progress);
             --loadingObjCount;
             MainMenu mainMenu = eventArgs.UIForm.Logic as MainMenu;
-            
-            ShowCar(mainMenu.RawImageGo, vehicleInfoTable.ElementAt(0).Id); // 加载汽车
+            RawImageGo = mainMenu.RawImageGo;
+            ShowCar(RawImageGo, vehicleInfoTable.ElementAt(0).Id); // 加载汽车
         }
     }
 
@@ -190,13 +210,19 @@ public class MenuProcedure : ProcedureBase
         base.OnLeave(procedureOwner, isShutdown);
     }
 
-    private void ShowCar(GameObject rawImageGo, int i = 0)
+    private void ShowCar(GameObject rawImageGo, int i = 0, int modifyId = -1)
     {
         //动态创建关卡，默认读取第一个车
+        // 先隐藏第一个车
+        if (carEntityId != -1)
+        {
+            GF.Entity.HideEntity(carEntityId);
+        }
         var lvRow = vehicleInfoTable.GetDataRow(i);
         var carParams = EntityParams.Create(Vector3.zero, Vector3.zero, Vector3.one);
         carParams.Set<VarGameObject>(Const.RAW_IMAGE, rawImageGo);
         carParams.Set<VarInt32>(Const.VEHICLE_ID, i);
+        carParams.Set<VarInt32>(Const.MODIFY_ID, modifyId);
         carEntityId = GF.Entity.ShowEntity<CarEntity>(lvRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
         ++loadingObjCount;
     }
@@ -244,6 +270,13 @@ public class MenuProcedure : ProcedureBase
         GF.Entity.HideEntity(carEntityId);
         carEntity = null;
         ShowCar(ui.RawImageGo, i);
+    }
+    public void ShowCarPrefebWithModParts(int vehicleId, int modifyId)
+    {
+        // 从存档读取改装数据
+        // 先显示当前车辆
+        ShowCar(RawImageGo, vehicleId, modifyId);
+        // 再根据存档的modifyId进行改装组件替换，去回调函数里面写
     }
     /// <summary>
     /// 替换部件

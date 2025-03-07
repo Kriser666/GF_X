@@ -23,6 +23,7 @@ public class CarEntity : EntityBase
     private float smoothFactor = 10f;   // 平滑系数
 
     private int carId;
+    public int CurCarId { get { return carId; } }
     private GameObject carModel;
     [SerializeField]
     private List<ModifyParams> originalTypeWithParts; // 默认的哪种类型的部件的索引

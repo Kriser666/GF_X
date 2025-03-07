@@ -12,9 +12,10 @@ public static partial class Const
 
     // 主页面常量
     public static readonly string VEHICLE_ID = "VEHICLE_ID";
+    public static readonly string MODIFY_ID = "MODIFY_ID";
     public static readonly string RAW_IMAGE = "RAW_IMAGE";
     public static readonly string SET_RAW_IMAGE_CALLBACK = "SET_RAW_IMAGE_CALLBACK";
 
-    // 游戏中常亮
+    // 游戏中常量
     public static readonly string PART_ID_LIST = "PART_ID_LIST";
 }

@@ -61,6 +61,7 @@
     <Analyzer Include="D:\unityEngine\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\MH_VehicleTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\GFEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\ModifyPartDetailItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\RefParams.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets\AAAGame\Scripts\Demo\CombatUnitEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\ChangeSceneProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModHistory.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\AIEnemyEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\VehiclePartTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
@@ -128,8 +130,8 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UIGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehiclePartTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\GameProcedure.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\EventArgs\GameplayEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\CarDataModel.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\EventArgs\GameplayEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SoundExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyPartDetail.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\VariablePool\VariablePoolComponent.cs" />
@@ -149,16 +151,19 @@
     <Compile Include="Assets\AAAGame\Scripts\Entity\BillboardMonoBehaviour.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\Core\EntityParams.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\MH_VehicleHistoryItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ModifyPartDetail.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\Const.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\ResourceExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\BillboardEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\CarItemSelectedEventArgs.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\Item\MH_VehicleTagItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UITable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehicleTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SettingExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\LevelEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarFloat.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\MH_VehicleHistoryItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ModifyGame.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\SoundGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\PlayerDataModel.cs" />

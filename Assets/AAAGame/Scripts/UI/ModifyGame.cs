@@ -20,8 +20,9 @@ public partial class ModifyGame : UIFormBase
     private MenuProcedure procedure;
     private float curPerformance = 0f;
     private float curCost = 0f;
-    private int vehicleId = 0;
-
+    private int vehicleId = -1;
+    private int modifyId = -1;
+    private CarDataModel carData;
 
     protected override void OnInit(object userData)
     {
@@ -46,6 +47,25 @@ public partial class ModifyGame : UIFormBase
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
         CameraController.Instance.SetCameraView(11);
         vehicleId = Params.Get<VarInt32>(Const.VEHICLE_ID, 0);
+        modifyId = Params.Get<VarInt32>(Const.MODIFY_ID, -1);
+        if (modifyId != -1)
+        {
+            // 计算当前改装下的总性能和花费
+            float performance = 0f;
+            float cost = 0f;
+            var partsList = carData.CarWithModifyIdWithModifyParams[vehicleId][modifyId];
+            foreach (var item in partsList)
+            {
+                var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
+                foreach (var item1 in vehiclePartRows)
+                {
+                    performance += item1.Performance;
+                    cost += item1.Cost;
+                }
+            }
+
+            ChangeCostAndPerformanceText(cost, performance);
+        }
         if (Params.TryGet<VarGameObject>(Const.RAW_IMAGE, out var rawImageObj))
         {
             rawImage = rawImageObj;

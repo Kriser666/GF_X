@@ -1,17 +1,17 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
+public partial class MH_VehicleTagItem : UIItemBase, IPointerClickHandler
 {
     private Image image;
     private Color originalColor;
-    private Color swapedColor = new (0.5f, 0.5f, 0.5f);
-    public ChooseVehicle ChooseVehicle;
+    private Color swapedColor = new(0.5f, 0.5f, 0.5f);
+    public ModHistory ModifyHistory;
     private int vehicleId;
-    
+    private int modifyId;
     public int VehicleId { get { return vehicleId; } set { vehicleId = value; } }
+    public int ModifyId { get { return modifyId; } set { modifyId = value; } }
     public TextMeshProUGUI VarText_VehicleName { get { return varVehicleName; } set { varVehicleName.text = value.text; } }
     public Image VarCarImage { get { return varCarImage; } set { varCarImage = value; } }
 
@@ -26,19 +26,18 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
         if (originalColor == image.color)
         {
             image.color = swapedColor;
-            foreach (var item in ChooseVehicle.VehicleTagItems)
+            foreach (var item in ModifyHistory.MH_VehicleTagItems)
             {
                 if (item != this)
                 {
                     item.SetOriginalColor();
                 }
             }
-            GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Changed, vehicleId));
+            ModifyHistory.ModifyHistoryCarSelected(vehicleId, modifyId);
         }
         else
         {
             image.color = originalColor;
-            GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Changed, -1));
         }
     }
 
@@ -46,5 +45,4 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
     {
         image.color = originalColor;
     }
-
 }

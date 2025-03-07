@@ -11,6 +11,7 @@ public partial class MainMenu : UIFormBase
     MenuProcedure procedure;
     int toShowVehicleId;
     int currentVehicleId;
+    public int curModifyId = -1;
     IDataTable<VehicleInfoTable> vehicleInfoTable;
     public GameObject RawImageGo { get { return varCarModel; } }
     
@@ -72,7 +73,12 @@ public partial class MainMenu : UIFormBase
         switch(btId)
         {
             case "HistoryModification":
-                OpenSubUIForm(UIViews.SettingDialog);
+                UIParams modifyHisParams = UIParams.Create();
+                modifyHisParams.Set<VarInt32>(Const.VEHICLE_ID, currentVehicleId);
+                modifyHisParams.Set<VarGameObject>(Const.RAW_IMAGE, varCarModel);
+                GameFrameworkAction<GameObject> gameFrameworkAction = SetRawImage;
+                modifyHisParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);
+                GF.UI.OpenUIForm(UIViews.ModHistory, modifyHisParams);
                 break;
             case "ExitGame":
                 var exit_time = DateTime.UtcNow.ToString();
@@ -92,6 +98,7 @@ public partial class MainMenu : UIFormBase
         {
             UIParams modifyParams = UIParams.Create();
             modifyParams.Set<VarInt32>(Const.VEHICLE_ID, currentVehicleId);
+            modifyParams.Set<VarInt32>(Const.MODIFY_ID, curModifyId);
             modifyParams.Set<VarGameObject>(Const.RAW_IMAGE, varCarModel);
             GameFrameworkAction<GameObject> gameFrameworkAction = SetRawImage;
             modifyParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);
