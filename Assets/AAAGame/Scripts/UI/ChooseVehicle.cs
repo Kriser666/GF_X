@@ -32,6 +32,7 @@ public partial class ChooseVehicle : UIFormBase
     {
         base.OnOpen(userData);
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
+        procedure.ChangeBackGroundSprite("BackGroundSprite", "UI/OriginalCarGarage/cheku_beijing@3x.png");
         if (Params.TryGet<VarGameObject>(Const.RAW_IMAGE, out var rawImageObj))
         {
             rawImage = rawImageObj;

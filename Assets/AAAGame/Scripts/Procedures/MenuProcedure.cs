@@ -11,6 +11,7 @@ public class MenuProcedure : ProcedureBase
 {
     public int menuUIFormId;
     int carEntityId;
+    int lvBackGroundId;
     private CarEntity carEntity;
     LoadAssetCallbacks assetCallbacks;
     IDataTable<VehicleInfoTable> vehicleInfoTable;
@@ -92,7 +93,7 @@ public class MenuProcedure : ProcedureBase
             ModelRendererCam.depth = 9;
 
             CameraController.Instance.SetFollowTarget(carEntity.CachedTransform);
-            CameraController.Instance.SetCameraView(10);
+            CameraController.Instance.SetCameraView(10, false);
 
             progress += 0.3f;
             GF.BuiltinView.SetLoadingProgress(progress);
@@ -103,23 +104,36 @@ public class MenuProcedure : ProcedureBase
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             if (sprite != null)
             {
-                // ID对应的图的类型
-                (int, string) spriteType = ((int, string))userData;
 
-                // 汽车缩略图
-                if (spriteType.Item2 == "Car")
+                if (userData is string t)
                 {
-                    carSprites[spriteType.Item1] = sprite;
+                    LevelBackGround levelBackGround = GF.UI.GetUIForm(lvBackGroundId).Logic as LevelBackGround;
+                    if (t == "BackGroundSprite")
+                    {
+                        levelBackGround.ChangeBackGroundSprite(sprite);
+                    }
                 }
-                else if (spriteType.Item2 == "CarLogo")
+                else if (userData is (int, string))
                 {
-                    carLogoSprites[spriteType.Item1] = sprite;
+                    // ID对应的图的类型
+                    (int, string) spriteType = ((int, string))userData;
+
+                    // 汽车缩略图
+                    if (spriteType.Item2 == "Car")
+                    {
+                        carSprites[spriteType.Item1] = sprite;
+                    }
+                    else if (spriteType.Item2 == "CarLogo")
+                    {
+                        carLogoSprites[spriteType.Item1] = sprite;
+                    }
+                    // 部件缩略图
+                    else if (spriteType.Item2 == "Part")
+                    {
+                        partSprites[spriteType.Item1] = sprite;
+                    }
                 }
-                // 部件缩略图
-                else if (spriteType.Item2 == "Part")
-                {
-                    partSprites[spriteType.Item1] = sprite;
-                }
+                
                 --loadingObjCount;
             }
             
@@ -189,11 +203,12 @@ public class MenuProcedure : ProcedureBase
         {
             progress += 0.3f;
             GF.BuiltinView.SetLoadingProgress(progress);
-            --loadingObjCount;
             MainMenu mainMenu = eventArgs.UIForm.Logic as MainMenu;
             RawImageGo = mainMenu.RawImageGo;
             ShowCar(RawImageGo, vehicleInfoTable.ElementAt(0).Id); // 加载汽车
         }
+
+        --loadingObjCount;
     }
 
     protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)
@@ -218,13 +233,16 @@ public class MenuProcedure : ProcedureBase
         {
             GF.Entity.HideEntity(carEntityId);
         }
-        var lvRow = vehicleInfoTable.GetDataRow(i);
+        var carRow = vehicleInfoTable.GetDataRow(i);
         var carParams = EntityParams.Create(Vector3.zero, Vector3.zero, Vector3.one);
         carParams.Set<VarGameObject>(Const.RAW_IMAGE, rawImageGo);
         carParams.Set<VarInt32>(Const.VEHICLE_ID, i);
         carParams.Set<VarInt32>(Const.MODIFY_ID, modifyId);
-        carEntityId = GF.Entity.ShowEntity<CarEntity>(lvRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
+        carEntityId = GF.Entity.ShowEntity<CarEntity>(carRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
         ++loadingObjCount;
+        // 关卡背景
+        var lvParams = UIParams.Create();
+        lvBackGroundId = GF.UI.OpenUIForm(UIViews.GameBackGround, lvParams);
     }
 
     public void ShowMenu()
@@ -312,5 +330,23 @@ public class MenuProcedure : ProcedureBase
         var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
         car.SaveModify();
         GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Saved, carEntityId));
+    }
+
+    public void ChangeBackGroundSprite(string userData, string spritePath = null)
+    {
+        if (userData != "")
+        {
+            GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(spritePath), assetCallbacks, userData);
+            ++loadingObjCount;
+        }
+        else
+        {
+            var levelBackGround = GF.UI.GetUIForm(lvBackGroundId);
+            if (levelBackGround != null)
+            {
+                LevelBackGround backGround = levelBackGround.Logic as LevelBackGround;
+                backGround.ResetBackGround();
+            }
+        }
     }
 }

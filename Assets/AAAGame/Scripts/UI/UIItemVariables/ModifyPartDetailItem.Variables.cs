@@ -1,4 +1,4 @@
-﻿//---------------------------------
+//---------------------------------
 //此文件由工具自动生成,请勿手动修改
 //更新自:BF-202404081501
 //---------------------------------
@@ -10,6 +10,8 @@ public partial class ModifyPartDetailItem
 	[Header("UI Variables:")]
 	[SerializeField] private TextMeshProUGUI varPartName = null;
 	[SerializeField] private TextMeshProUGUI varPartType = null;
-	[SerializeField] private TextMeshProUGUI varPartPerformance = null;
+	[SerializeField] private TextMeshProUGUI varPartPower = null;
 	[SerializeField] private TextMeshProUGUI varPartCost = null;
+	[SerializeField] private TextMeshProUGUI varPartBrake = null;
+	[SerializeField] private TextMeshProUGUI varPartAcceleration = null;
 }

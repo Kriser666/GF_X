@@ -26,7 +26,6 @@ public partial class MainMenu : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
         currentVehicleId = 0;
         GF.Event.Subscribe(CarItemSelectedEventArgs.EventId, ItemSelectedHandler);
@@ -34,9 +33,9 @@ public partial class MainMenu : UIFormBase
 
     protected override void OnReveal()
     {
+        // CameraController.Instance.SetCameraView(10);
+        procedure?.ChangeBackGroundSprite("");
         base.OnReveal();
-
-        CameraController.Instance.SetCameraView(10);
     }
 
     protected override void OnClose(bool isShutdown, object userData)

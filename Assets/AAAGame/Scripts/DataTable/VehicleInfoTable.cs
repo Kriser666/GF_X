@@ -72,6 +72,33 @@ public class VehicleInfoTable : DataRowBase
             private set;
         }
 
+        /// <summary>
+        /// 车辆初始动力
+        /// </summary>
+        public float Power
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 车辆初始制动
+        /// </summary>
+        public float Brake
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 车辆初始加速度
+        /// </summary>
+        public float Acceleration
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -89,7 +116,9 @@ public class VehicleInfoTable : DataRowBase
             CarImageAssetName = columnStrings[index++];
             CarDesc = columnStrings[index++];
             CarLogo = columnStrings[index++];
-            index++;
+            Power = float.Parse(columnStrings[index++]);
+            Brake = float.Parse(columnStrings[index++]);
+            Acceleration = float.Parse(columnStrings[index++]);
 
             return true;
         }
@@ -106,6 +135,9 @@ public class VehicleInfoTable : DataRowBase
                     CarImageAssetName = binaryReader.ReadString();
                     CarDesc = binaryReader.ReadString();
                     CarLogo = binaryReader.ReadString();
+                    Power = binaryReader.ReadSingle();
+                    Brake = binaryReader.ReadSingle();
+                    Acceleration = binaryReader.ReadSingle();
                 }
             }
 

@@ -9,11 +9,14 @@ public enum UIViews : int
 	ChooseVehicle = 12,
 	ModHistory = 13,
 	ModifyGame = 14,
+	GameBackGround = 18,
 	SettingDialog = 5,
 	RatingDialog = 6,
 	TermsOfServiceDialog = 7,
 	CommonDialog = 8,
 	LanguagesDialog = 9,
 	ModifyPartDetail = 15,
+	ModifyPartComp = 16,
+	ModifySaved = 17,
 	ToastTips = 10
 }

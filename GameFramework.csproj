@@ -304,9 +304,9 @@
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Resource\LoadSceneSuccessCallback.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Sound\SoundManager.SoundAgent.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Sound\ISoundAgent.cs" />
-    <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Download\DownloadManager.DownloadAgent.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Resource\LoadSceneCallbacks.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Utility\Utility.Assembly.cs" />
+    <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Download\DownloadManager.DownloadAgent.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Download\DownloadManager.DownloadCounter.cs" />
     <Compile Include="Assets\Plugins\UnityGameFramework\GameFramework\Base\TaskPool\ITaskAgent.cs" />

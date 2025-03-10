@@ -81,10 +81,12 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ToastTips.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\BulletEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DOTweenExtension.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\ModifyPartComp.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\WebRequestResult.cs" />
     <Compile Include="Assets\AAAGame\Scripts\HotfixEntry.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\LanguagesTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Demo\CombatUnitEntity.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyPartComp.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\ChangeSceneProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModHistory.Variables.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIFormBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelStorageBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CameraViewTable.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\ModifySaved.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\CarEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ModHistory.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\LevelTable.cs" />
@@ -145,9 +148,11 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\LanguagesDialog.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\RawImageZoneChecker.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifySaved.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyGame.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIItemBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\MenuProcedure.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\LevelBackGround.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\BillboardMonoBehaviour.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\Core\EntityParams.cs" />

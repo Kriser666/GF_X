@@ -64,15 +64,6 @@ public class VehiclePartTable : DataRowBase
         }
 
         /// <summary>
-        /// 性能
-        /// </summary>
-        public float Performance
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 预制体名称
         /// </summary>
         public string PrefebName
@@ -85,6 +76,33 @@ public class VehiclePartTable : DataRowBase
         /// 缩略图名称
         /// </summary>
         public string PartImage
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 动力
+        /// </summary>
+        public float Power
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 制动
+        /// </summary>
+        public float Brake
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 加速度
+        /// </summary>
+        public float Acceleration
         {
             get;
             private set;
@@ -106,9 +124,11 @@ public class VehiclePartTable : DataRowBase
             PartType = DataTableExtension.ParseEnum<VehiclePartTypeEnum>(columnStrings[index++]);
             VehicleId = int.Parse(columnStrings[index++]);
             Cost = float.Parse(columnStrings[index++]);
-            Performance = float.Parse(columnStrings[index++]);
             PrefebName = columnStrings[index++];
             PartImage = columnStrings[index++];
+            Power = float.Parse(columnStrings[index++]);
+            Brake = float.Parse(columnStrings[index++]);
+            Acceleration = float.Parse(columnStrings[index++]);
 
             return true;
         }
@@ -124,9 +144,11 @@ public class VehiclePartTable : DataRowBase
                     PartType = binaryReader.ReadEnum<VehiclePartTypeEnum>();
                     VehicleId = binaryReader.Read7BitEncodedInt32();
                     Cost = binaryReader.ReadSingle();
-                    Performance = binaryReader.ReadSingle();
                     PrefebName = binaryReader.ReadString();
                     PartImage = binaryReader.ReadString();
+                    Power = binaryReader.ReadSingle();
+                    Brake = binaryReader.ReadSingle();
+                    Acceleration = binaryReader.ReadSingle();
                 }
             }
 

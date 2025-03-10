@@ -2,7 +2,6 @@
 using GameFramework.DataTable;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
 public partial class ModHistory : UIFormBase
@@ -45,15 +44,18 @@ public partial class ModHistory : UIFormBase
         int i = 0;
         string namePrefix = varCarHisModTpl.name.Split('_')[0];
         // 读取存档中的数据
-        foreach (var vehicle in carData.CarWithModifyIdWithModifyParams)
+        if (carData.CarWithModifyIdWithModifyParams[0][0][0].partsIds.Count > 0)
         {
-            var clonedItem = SpawnItem<UIItemObject>(varCarHisModTpl, varCarHisModTpl.transform.parent);
-            var vehicleHisTag = clonedItem.itemLogic as MH_VehicleHistoryItem;
-            vehicleHisTag.VarCarName.text = GF.Localization.GetString(vehicleInfoTable.GetDataRow(vehicle.Key).CarName);
-            vehicleHisTag.name = namePrefix + i;
-            vehicleHisTag.CurCarId = vehicle.Key;
-            MH_VehicleHistoryItems.Add(vehicleHisTag);
-            ++i;
+            foreach (var vehicle in carData.CarWithModifyIdWithModifyParams)
+            {
+                var clonedItem = SpawnItem<UIItemObject>(varCarHisModTpl, varCarHisModTpl.transform.parent);
+                var vehicleHisTag = clonedItem.itemLogic as MH_VehicleHistoryItem;
+                vehicleHisTag.VarCarName.text = GF.Localization.GetString(vehicleInfoTable.GetDataRow(vehicle.Key).CarName);
+                vehicleHisTag.name = namePrefix + i;
+                vehicleHisTag.CurCarId = vehicle.Key;
+                MH_VehicleHistoryItems.Add(vehicleHisTag);
+                ++i;
+            }
         }
         varCarHisModTpl.SetActive(false);
         // 初始化底部改装的车辆，默认是显示第一个车的改装信息
@@ -116,7 +118,9 @@ public partial class ModHistory : UIFormBase
             var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
             foreach (var item1 in vehiclePartRows)
             {
-                performance += item1.Performance;
+
+                float performance_t = item1.Brake + item1.Acceleration + item1.Power;
+                performance += performance_t;
                 cost += item1.Cost;
             }
         }
@@ -144,5 +148,32 @@ public partial class ModHistory : UIFormBase
         varCarLogo.sprite = procedure.CarLogoSprites[dataRow.Id];
 
         procedure.ShowCarPrefebWithModParts(curVehicleId, curModId);
+    }
+
+    protected override void OnButtonClick(object sender, string btId)
+    {
+        base.OnButtonClick(sender, btId);
+
+        switch(btId)
+        {
+            case "ModDetailBtn":
+                UIParams modifyPartDetailParams = UIParams.Create();
+                var dm = GF.DataModel.GetOrCreate<CarDataModel>();
+                List<int> modifiedPartIdList = new();
+                foreach (var item in dm.CarWithModifyIdWithModifyParams[selectedVehicleId][curModifyId])
+                {
+                    foreach (var partId in item.partsIds)
+                    {
+                        modifiedPartIdList.Add(partId);
+                    }
+                }
+                modifyPartDetailParams.Set(Const.PART_ID_LIST, modifiedPartIdList);
+                modifyPartDetailParams.Set<VarInt32>(Const.VEHICLE_ID, selectedVehicleId);
+                OpenSubUIForm(UIViews.ModifyPartDetail, 1, modifyPartDetailParams);
+                break;
+            case "SelectButton":
+                OnClickClose();
+                break;
+        }
     }
 }
