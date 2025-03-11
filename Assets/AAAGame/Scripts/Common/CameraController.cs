@@ -126,4 +126,9 @@ public class CameraController : MonoBehaviour
         offsetCam.m_Offset = offset; // 确保精确到达终点
         yield return null;
     }
+
+    public void SetModelRendererCameraTarget(GameObject target)
+    {
+        modelRendererCamera.GetComponent<ModelRendererCamera>().CarModel = target;
+    }
 }

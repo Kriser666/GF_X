@@ -11,7 +11,6 @@ public class MenuProcedure : ProcedureBase
 {
     public int menuUIFormId;
     int carEntityId;
-    int lvBackGroundId;
     private CarEntity carEntity;
     LoadAssetCallbacks assetCallbacks;
     IDataTable<VehicleInfoTable> vehicleInfoTable;
@@ -21,8 +20,10 @@ public class MenuProcedure : ProcedureBase
     List<Sprite> partSprites;
     IFsm<IProcedureManager> procedure;
     int loadingObjCount;
+    int totalObjCount;
     float progress;
     private GameObject RawImageGo;
+    private GameObject gameBackGround = null;
     public List<Sprite> CarSprites { get { return carSprites; } }
     public List<Sprite> CarLogoSprites { get { return carLogoSprites; } }
     public List<Sprite> PartSprites { get { return partSprites; } }
@@ -36,6 +37,7 @@ public class MenuProcedure : ProcedureBase
         procedure = procedureOwner;
         progress = 0f;
         loadingObjCount = 0;
+        totalObjCount = 0;
         carEntityId = -1;
         GF.BuiltinView.ShowLoadingProgress(progress);
         vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
@@ -56,7 +58,7 @@ public class MenuProcedure : ProcedureBase
         ShowMenu();// 加载菜单
         assetCallbacks = new(LoadAssetSucceed, LoadAssetFailed);
         ++loadingObjCount;
-
+        totalObjCount = 5;
         LoadCarImages();
         LoadPartImages();
 
@@ -92,14 +94,21 @@ public class MenuProcedure : ProcedureBase
             ModelRendererCam.cullingMask = 1 << carEntity.gameObject.layer;
             ModelRendererCam.depth = 9;
 
-            CameraController.Instance.SetFollowTarget(carEntity.CachedTransform);
+            // CameraController.Instance.SetFollowTarget(carEntity.CachedTransform);
             CameraController.Instance.SetCameraView(10, false);
 
-            progress += 0.3f;
+            progress += 1.0f / totalObjCount;
             GF.BuiltinView.SetLoadingProgress(progress);
             --loadingObjCount;
         }
-        else if (asset is Texture2D texture)
+        else if (asset is GameObject go) // 加载的背景预制体
+        {
+            GameObject gameObject = Object.Instantiate(go);
+            gameObject.name = "GameBackGround";
+            gameBackGround = gameObject;
+            --loadingObjCount;
+        }
+        else if (asset is Texture2D texture) // 背景的贴图
         {
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             if (sprite != null)
@@ -107,7 +116,7 @@ public class MenuProcedure : ProcedureBase
 
                 if (userData is string t)
                 {
-                    LevelBackGround levelBackGround = GF.UI.GetUIForm(lvBackGroundId).Logic as LevelBackGround;
+                    LevelBackGround levelBackGround = gameBackGround.GetComponent<LevelBackGround>();
                     if (t == "BackGroundSprite")
                     {
                         levelBackGround.ChangeBackGroundSprite(sprite);
@@ -138,7 +147,7 @@ public class MenuProcedure : ProcedureBase
             }
             
         }
-            
+
         if (loadingObjCount == 0)
         {
             GF.BuiltinView.HideLoadingProgress();
@@ -160,12 +169,13 @@ public class MenuProcedure : ProcedureBase
         if (eventArgs.Entity.Id == carEntityId)
         {
             carEntity = eventArgs.Entity.Logic as CarEntity;
-
+            // 回调里面设置汽车模型相机的目标
+            CameraController.Instance.SetModelRendererCameraTarget(carEntity.gameObject);
             int modifyId = carEntity.Params.Get<VarInt32>(Const.MODIFY_ID);
             // 不想改装
             if (modifyId == -1)
             {
-                progress += 0.3f;
+                progress += 1.0f / totalObjCount;
                 GF.BuiltinView.SetLoadingProgress(progress);
                 --loadingObjCount;
             }
@@ -201,13 +211,12 @@ public class MenuProcedure : ProcedureBase
         var eventArgs = e as OpenUIFormSuccessEventArgs;
         if (eventArgs.UIForm.SerialId == menuUIFormId)
         {
-            progress += 0.3f;
-            GF.BuiltinView.SetLoadingProgress(progress);
             MainMenu mainMenu = eventArgs.UIForm.Logic as MainMenu;
             RawImageGo = mainMenu.RawImageGo;
             ShowCar(RawImageGo, vehicleInfoTable.ElementAt(0).Id); // 加载汽车
         }
-
+        progress += 1.0f / totalObjCount;
+        GF.BuiltinView.SetLoadingProgress(progress);
         --loadingObjCount;
     }
 
@@ -240,9 +249,12 @@ public class MenuProcedure : ProcedureBase
         carParams.Set<VarInt32>(Const.MODIFY_ID, modifyId);
         carEntityId = GF.Entity.ShowEntity<CarEntity>(carRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
         ++loadingObjCount;
+        ++totalObjCount;
+
         // 关卡背景
-        var lvParams = UIParams.Create();
-        lvBackGroundId = GF.UI.OpenUIForm(UIViews.GameBackGround, lvParams);
+        GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetPrefab("BackGroundGame/GameBackGround"), assetCallbacks);
+        ++loadingObjCount;
+        ++totalObjCount;
     }
 
     public void ShowMenu()
@@ -260,6 +272,7 @@ public class MenuProcedure : ProcedureBase
         //异步打开主菜单UI
         menuUIFormId = GF.UI.OpenUIForm(UIViews.MainMenu);
         ++loadingObjCount;
+        ++totalObjCount;
     }
     private void LoadCarImages()
     {
@@ -268,9 +281,11 @@ public class MenuProcedure : ProcedureBase
             var userData = (i, "Car");
             GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(vehicleInfoTable[i].CarImageAssetName), assetCallbacks, userData);
             ++loadingObjCount;
+            ++totalObjCount;
             var userData2 = (i, "CarLogo");
             GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(vehicleInfoTable[i].CarLogo), assetCallbacks, userData2);
             ++loadingObjCount;
+            ++totalObjCount;
         }
     }
     private void LoadPartImages()
@@ -280,6 +295,7 @@ public class MenuProcedure : ProcedureBase
             var userData = (i, "Part");
             GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(partInfoTable[i].PartImage), assetCallbacks, userData);
             ++loadingObjCount;
+            ++totalObjCount;
         }
     }
     public void ChangeVehiclePrefeb(int i)
@@ -338,13 +354,13 @@ public class MenuProcedure : ProcedureBase
         {
             GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetSpritesPath(spritePath), assetCallbacks, userData);
             ++loadingObjCount;
+            ++totalObjCount;
         }
         else
         {
-            var levelBackGround = GF.UI.GetUIForm(lvBackGroundId);
-            if (levelBackGround != null)
+            if (gameBackGround != null)
             {
-                LevelBackGround backGround = levelBackGround.Logic as LevelBackGround;
+                LevelBackGround backGround = gameBackGround.GetComponent<LevelBackGround>();
                 backGround.ResetBackGround();
             }
         }

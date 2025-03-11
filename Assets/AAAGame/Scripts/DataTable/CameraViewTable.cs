@@ -54,6 +54,15 @@ public class CameraViewTable : DataRowBase
             private set;
         }
 
+        /// <summary>
+        /// 视角范围
+        /// </summary>
+        public float FOV
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(string dataRowString, object userData)
         {
             string[] columnStrings = dataRowString.Split(DataTableExtension.DataSplitSeparators);
@@ -69,6 +78,7 @@ public class CameraViewTable : DataRowBase
             FollowOffset = DataTableExtension.ParseVector3(columnStrings[index++]);
             AimOffset = DataTableExtension.ParseVector3(columnStrings[index++]);
             Offset = DataTableExtension.ParseVector3(columnStrings[index++]);
+            FOV = float.Parse(columnStrings[index++]);
 
             return true;
         }
@@ -83,6 +93,7 @@ public class CameraViewTable : DataRowBase
                     FollowOffset = binaryReader.ReadVector3();
                     AimOffset = binaryReader.ReadVector3();
                     Offset = binaryReader.ReadVector3();
+                    FOV = binaryReader.ReadSingle();
                 }
             }
 

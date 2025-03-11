@@ -86,8 +86,7 @@ GameObject:
   - component: {fileID: 8744056716611626005}
   - component: {fileID: 7236467343079529528}
   - component: {fileID: 8628792158620987873}
-  - component: {fileID: 847826032429574652}
-  - component: {fileID: 6286440794929494066}
+  - component: {fileID: 9033822383927625293}
   m_Layer: 9
   m_Name: GameBackGround
   m_TagString: Untagged
@@ -136,7 +135,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -100
+  m_SortingOrder: -999
   m_TargetDisplay: 0
 --- !u!225 &8628792158620987873
 CanvasGroup:
@@ -150,68 +149,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &847826032429574652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8476396408457570662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caebf9616acfe0942919c4132f38fa2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Sequence:
-  - AddType: 1
-    AnimationType: 21
-    Target: {fileID: 8628792158620987873}
-    ToValue: {x: 1, y: 0, z: 0, w: 0}
-    UseToTarget: 0
-    ToTarget: {fileID: 0}
-    UseFromValue: 1
-    FromValue: {x: 0, y: 0, z: 0, w: 0}
-    SpeedBased: 0
-    DurationOrSpeed: 0.4
-    Delay: 0
-    UpdateType: 0
-    CustomEase: 0
-    EaseCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 0
-      m_PostInfinity: 0
-      m_RotationOrder: 0
-    Ease: 7
-    Loops: 1
-    LoopType: 0
-    Snapping: 0
-    OnPlay:
-      m_PersistentCalls:
-        m_Calls: []
-    OnUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    OnComplete:
-      m_PersistentCalls:
-        m_Calls: []
-  m_PlayOnAwake: 0
-  m_Delay: 0
-  m_Ease: 6
-  m_Loops: 1
-  m_LoopType: 0
-  m_UpdateType: 0
-  m_IgnoreTimeScale: 1
-  m_OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnUpdate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnComplete:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6286440794929494066
+--- !u!114 &9033822383927625293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,11 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8098e3b92b1ed45a23f9e2ae404b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fields: []
-  m_UIAnimationType: 0
-  m_OpenAnimation: {fileID: 847826032429574652}
-  m_CloseAnimation: {fileID: 0}
-  m_OpenAnimationName: 
-  m_CloseAnimationName: 
   backGroundImage: {fileID: 7080737417698610431}
   canvas: {fileID: 7236467343079529528}

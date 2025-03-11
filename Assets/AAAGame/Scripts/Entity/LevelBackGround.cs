@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelBackGround : UIFormBase
+public class LevelBackGround : MonoBehaviour
 {
     [SerializeField]
     private Image backGroundImage;
@@ -10,9 +10,8 @@ public class LevelBackGround : UIFormBase
     private Canvas canvas;
     public Sprite OldSprite { get { return oldSprite; } }
 
-    protected override void OnOpen(object userData)
+    void Start()
     {
-        base.OnOpen(userData);
         if (backGroundImage == null)
         {
             backGroundImage = transform.GetComponentInChildren<Image>();
