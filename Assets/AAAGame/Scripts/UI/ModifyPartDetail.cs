@@ -23,22 +23,37 @@ public partial class ModifyPartDetail : UIFormBase
         }
         if (curPartIdList != null)
         {
-            string namePrefix = varElemTemplate.name.Split('_')[0];
-            int i = 0;
-            foreach (var curPartId in curPartIdList)
+            if (curPartIdList.Count == 0)
             {
-                var curPart = vehiclePartTables.GetDataRow(curPartId);
-                var curElement = SpawnItem<UIItemObject>(varElemTemplate, varElemTemplate.transform.parent);
-                curElement.gameObject.name = namePrefix + i;
-                var itemCom = curElement.itemLogic as ModifyPartDetailItem;
-                itemCom.SetText(curPart);
-                totalPower += itemCom.Power;
-                totalBrake += itemCom.Brake;
-                totalAcceleration += itemCom.Acceleration;
-                ++i;
+                totalPower = 0f;
+                totalBrake = 0f;
+                totalAcceleration = 0f;
             }
-            varElemTemplate.SetActive(false);
+            else
+            {
+                string namePrefix = varElemTemplate.name.Split('_')[0];
+                int i = 0;
+                foreach (var curPartId in curPartIdList)
+                {
+                    var curPart = vehiclePartTables.GetDataRow(curPartId);
+                    var curElement = SpawnItem<UIItemObject>(varElemTemplate, varElemTemplate.transform.parent);
+                    curElement.gameObject.name = namePrefix + i;
+                    var itemCom = curElement.itemLogic as ModifyPartDetailItem;
+                    itemCom.SetText(curPart);
+                    totalPower += itemCom.Power;
+                    totalBrake += itemCom.Brake;
+                    totalAcceleration += itemCom.Acceleration;
+                    ++i;
+                }
+            }
         }
+        else
+        {
+            totalPower = 0f;
+            totalBrake = 0f;
+            totalAcceleration = 0f;
+        }
+        varElemTemplate.SetActive(false);
     }
 
     protected override void OnButtonClick(object sender, string btId)

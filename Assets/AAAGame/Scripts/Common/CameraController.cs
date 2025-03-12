@@ -24,13 +24,13 @@ public class CameraController : MonoBehaviour
     public Camera ModelRendererCamera { get { return modelRendererCamera; } }
     public Camera BackGroundCamera { get { return backGroundCamera; } }
     Vector3 initOffset = Vector3.zero;
-    public Camera mainCam { get; private set; }
+    public Camera MainCam { get; private set; }
 
 
     private void Awake()
     {
         Instance = this;
-        mainCam = Camera.main;
+        MainCam = Camera.main;
     }
     private void OnEnable()
     {
@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
     private void InitURP()
     {
         //var curRenderMode = UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline.GetType().Name;
-        var urpCam = mainCam.GetUniversalAdditionalCameraData();
+        var urpCam = MainCam.GetUniversalAdditionalCameraData();
         if (GFBuiltin.UICamera.GetUniversalAdditionalCameraData().renderType != CameraRenderType.Overlay)
         {
             GFBuiltin.UICamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour
         followerVCamera.gameObject.SetActive(true);
         followerVCamera.LookAt = target;
         followerVCamera.Follow = target;
-        mainCam.orthographic = false;
+        MainCam.orthographic = false;
         SetCameraView(1, false);
     }
 
@@ -130,5 +130,39 @@ public class CameraController : MonoBehaviour
     public void SetModelRendererCameraTarget(GameObject target)
     {
         modelRendererCamera.GetComponent<ModelRendererCamera>().CarModel = target;
+    }
+    public void SetModelRendererCameraOffset(int viewId, bool smooth = true)
+    {
+        var camTb = GF.DataTable.GetDataTable<CameraViewTable>();
+        if (!camTb.HasDataRow(viewId))
+        {
+            return;
+        }
+        var camRow = camTb.GetDataRow(viewId);
+        var offset = camRow.Offset;
+        if (smooth)
+        {
+            StartCoroutine(SmothOffset(offset, modelRendererCamera));
+        }
+        else
+        {
+            modelRendererCamera.GetComponent<ModelRendererCamera>().CameraOffset = offset;
+        }
+    }
+    internal IEnumerator SmothOffset(Vector3 offset, Camera offsetCam)
+    {
+        Vector3 startPos = offsetCam.transform.position;
+        float duration = 1f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            modelRendererCamera.GetComponent<ModelRendererCamera>().CameraOffset = Vector3.Lerp(startPos, offset, elapsed / duration);
+            yield return null;
+        }
+
+        modelRendererCamera.GetComponent<ModelRendererCamera>().CameraOffset = offset; // 确保精确到达终点
+        yield return null;
     }
 }

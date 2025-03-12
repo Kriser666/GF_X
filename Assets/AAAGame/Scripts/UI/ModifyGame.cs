@@ -1,6 +1,7 @@
 ﻿using GameFramework;
 using GameFramework.DataTable;
 using GameFramework.Event;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -23,7 +24,7 @@ public partial class ModifyGame : UIFormBase
     private float curCost = 0f;
     private int vehicleId = -1;
     private int modifyId = -1;
-    private readonly CarDataModel carData;
+    private CarDataModel carData;
 
     protected override void OnInit(object userData)
     {
@@ -40,9 +41,11 @@ public partial class ModifyGame : UIFormBase
     {
         base.OnOpen(userData);
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
-        CameraController.Instance.SetCameraView(11);
+        procedure.ChangeBackGroundSprite("BackGroundSprite", "UI/OriginalCarGarage/cheku_beijing@3x.png");
+        // CameraController.Instance.SetCameraView(11);
         vehicleId = Params.Get<VarInt32>(Const.VEHICLE_ID, 0);
         modifyId = Params.Get<VarInt32>(Const.MODIFY_ID, -1);
+        carData = GF.DataModel.GetOrCreate<CarDataModel>();
         if (modifyId != -1)
         {
             // 计算当前改装下的总性能和花费
@@ -53,12 +56,15 @@ public partial class ModifyGame : UIFormBase
                 var partsList = carData.CarWithModifyIdWithModifyParams[vehicleId][modifyId];
                 foreach (var item in partsList)
                 {
-                    var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
-                    foreach (var item1 in vehiclePartRows)
+                    foreach (var item1 in item.partsIds)
                     {
-                        float perf_t = item1.Brake + item1.Acceleration + item1.Power;
-                        performance += perf_t;
-                        cost += item1.Cost;
+                        var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
+                        foreach (var item2 in vehiclePartRows)
+                        {
+                            float perf_t = item2.Brake + item2.Acceleration + item2.Power;
+                            performance += perf_t;
+                            cost += item2.Cost;
+                        }
                     }
                 }
 
@@ -91,13 +97,15 @@ public partial class ModifyGame : UIFormBase
 
         GF.Event.Subscribe(PartItemSelectedEventArgs.EventId, ItemSelectedHandler);
 
+        CameraController.Instance.SetModelRendererCameraOffset(11, true);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
         GF.Event.Unsubscribe(PartItemSelectedEventArgs.EventId, ItemSelectedHandler);
         frameworkAction?.Invoke(rawImage);
-        CameraController.Instance.SetCameraView(10);
+        CameraController.Instance.SetModelRendererCameraOffset(10, true);
+        // CameraController.Instance.SetCameraView(10);
         base.OnClose(isShutdown, userData);
     }
 
@@ -111,8 +119,14 @@ public partial class ModifyGame : UIFormBase
         {
             // 如果选中其他部件，就更新部件性能、价格和替换模型
             procedure.ChangeCarPart(eventArgs.VehiclePartType, dataRow.PrefebName);
-            curPerformance += performance;
-            curCost += dataRow.Cost;
+            // 寻找当前部件类型下的组件个数
+            var modifyParams = procedure.OriginalModifyParams();
+            int partCount = modifyParams[(int)eventArgs.VehiclePartType].parts.Count;
+            for (int i = 0; i < partCount; ++i)
+            {
+                curPerformance += performance;
+                curCost += dataRow.Cost;
+            }
         }
         // 复原部件
         else if (eventArgs.DataType == PartUIItemSelectedDataType.CancelSelected)
@@ -121,8 +135,14 @@ public partial class ModifyGame : UIFormBase
             if (eventArgs.PartOfIdx == -1)
             {
                 procedure.ResetPart(eventArgs.VehiclePartType);
-                curPerformance -= performance;
-                curCost -= dataRow.Cost;
+                // 寻找当前部件类型下的组件个数
+                var modifyParams = procedure.OriginalModifyParams();
+                int partCount = modifyParams[(int)eventArgs.VehiclePartType].parts.Count;
+                for (int i = 0; i < partCount; ++i)
+                {
+                    curPerformance -= performance;
+                    curCost -= dataRow.Cost;
+                }
             }
         }
         ChangeCostAndPerformanceText(curCost, curPerformance);
@@ -165,6 +185,7 @@ public partial class ModifyGame : UIFormBase
             vehiclePartTag.VarPartImage.sprite = procedure.PartSprites[part.Id];
             vehiclePartTag.VarPartName.text = GF.Localization.GetString(part.PartName);
             vehiclePartTag.name = namePrefix + i;
+            vehiclePartTag.modifyGame = this;
             VehiclePartTagItems.Add(vehiclePartTag);
             ++i;
         }
@@ -194,26 +215,27 @@ public partial class ModifyGame : UIFormBase
                 {
                     int curType = i;
                     var whichPartDatas = vehiclePartTable.Where((vehiclePartRow) => { return vehiclePartRow.PartType == (VehiclePartTypeEnum)curType; });
-                    int maxCostIdx = 0;
+                    int maxPerformanceIdx = 0;
+                    float maxPerformance = 0;
                     for(int j = 0; j < whichPartDatas.Count(); ++j)
                     {
-                        if(whichPartDatas.ElementAt(j).Cost > maxCostIdx)
-                        {
-                            maxCostIdx = j;
-                        }
-                    }
-                    VehiclePartTable maxPerformanceRow = whichPartDatas.ElementAt(maxCostIdx);
-                    float maxPerformance = maxPerformanceRow.Brake + maxPerformanceRow.Acceleration + maxPerformanceRow.Power;
-                    foreach (var item in whichPartDatas)
-                    {
-                        float performance = item.Brake + item.Acceleration + item.Power;
+                        var temp = whichPartDatas.ElementAt(j);
+                        float performance = temp.Brake + temp.Acceleration + temp.Power;
                         if (performance > maxPerformance)
                         {
-                            maxPerformanceRow = item;
+                            maxPerformance = performance;
+                            maxPerformanceIdx = j;
                         }
                     }
-                    curPerformance += maxPerformance;
-                    curCost += maxPerformanceRow.Cost;
+                    VehiclePartTable maxPerformanceRow = whichPartDatas.ElementAt(maxPerformanceIdx);
+                    // 寻找当前部件类型下的组件个数
+                    var modifyParams = procedure.OriginalModifyParams();
+                    int partCount = modifyParams[i].parts.Count;
+                    for (int j = 0; j < partCount; ++j)
+                    {
+                        curPerformance += maxPerformance;
+                        curCost += maxPerformanceRow.Cost;
+                    }
                     string prefebName = maxPerformanceRow.PrefebName;
                     ChangeCostAndPerformanceText(curCost, curPerformance);
                     procedure.ChangeCarPart((VehiclePartTypeEnum)i, prefebName);

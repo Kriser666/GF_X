@@ -95,7 +95,7 @@ public class MenuProcedure : ProcedureBase
             ModelRendererCam.depth = 9;
 
             // CameraController.Instance.SetFollowTarget(carEntity.CachedTransform);
-            CameraController.Instance.SetCameraView(10, false);
+            // CameraController.Instance.SetCameraView(10, false);
 
             progress += 1.0f / totalObjCount;
             GF.BuiltinView.SetLoadingProgress(progress);
@@ -214,6 +214,11 @@ public class MenuProcedure : ProcedureBase
             MainMenu mainMenu = eventArgs.UIForm.Logic as MainMenu;
             RawImageGo = mainMenu.RawImageGo;
             ShowCar(RawImageGo, vehicleInfoTable.ElementAt(0).Id); // 加载汽车
+
+            // 关卡背景
+            GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetPrefab("BackGroundGame/GameBackGround"), assetCallbacks);
+            ++loadingObjCount;
+            ++totalObjCount;
         }
         progress += 1.0f / totalObjCount;
         GF.BuiltinView.SetLoadingProgress(progress);
@@ -243,16 +248,12 @@ public class MenuProcedure : ProcedureBase
             GF.Entity.HideEntity(carEntityId);
         }
         var carRow = vehicleInfoTable.GetDataRow(i);
-        var carParams = EntityParams.Create(Vector3.zero, Vector3.zero, Vector3.one);
+        Vector3 eulerAngle = new(0f, 230f, 0f);
+        var carParams = EntityParams.Create(Vector3.zero, eulerAngle, Vector3.one);
         carParams.Set<VarGameObject>(Const.RAW_IMAGE, rawImageGo);
         carParams.Set<VarInt32>(Const.VEHICLE_ID, i);
         carParams.Set<VarInt32>(Const.MODIFY_ID, modifyId);
         carEntityId = GF.Entity.ShowEntity<CarEntity>(carRow.PrefabName, Const.EntityGroup.Vehicle, carParams);
-        ++loadingObjCount;
-        ++totalObjCount;
-
-        // 关卡背景
-        GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetPrefab("BackGroundGame/GameBackGround"), assetCallbacks);
         ++loadingObjCount;
         ++totalObjCount;
     }
@@ -301,8 +302,6 @@ public class MenuProcedure : ProcedureBase
     public void ChangeVehiclePrefeb(int i)
     {
         var ui = GF.UI.GetUIForm(menuUIFormId).Logic as MainMenu;
-        GF.Entity.HideEntity(carEntityId);
-        carEntity = null;
         ShowCar(ui.RawImageGo, i);
     }
     public void ShowCarPrefebWithModParts(int vehicleId, int modifyId)
@@ -340,6 +339,23 @@ public class MenuProcedure : ProcedureBase
     {
         var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
         return car.CurrentPartIdList();
+    }
+    public ModifiedParts CurrentPartIdList(VehiclePartTypeEnum partTypeEnum)
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        return car.CurrentPartIdList(partTypeEnum);
+    }
+
+    public List<ModifyParams> OriginalModifyParams()
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        return car.OriginalTypeWithParts;
+    }
+
+    public List<ModifyParams> CurrentModifyParams()
+    {
+        var car = GF.Entity.GetEntity(carEntityId).Logic as CarEntity;
+        return car.CurTypeWithParts;
     }
     public void SaveModify()
     {

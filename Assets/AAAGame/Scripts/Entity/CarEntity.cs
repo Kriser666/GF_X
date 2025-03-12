@@ -25,8 +25,7 @@ public class CarEntity : EntityBase
     private int carId;
     public int CurCarId { get { return carId; } }
     private GameObject carModel;
-    [SerializeField]
-    private List<ModifyParams> originalTypeWithParts; // 默认的哪种类型的部件的索引
+    public List<ModifyParams> OriginalTypeWithParts; // 默认的哪种类型的部件的索引
     public List<ModifyParams> CurTypeWithParts; // 当前的哪种类型车体组件
 
     private Quaternion m_TargetRotation;
@@ -127,8 +126,8 @@ public class CarEntity : EntityBase
         base.OnShow(userData);
         carId = Params.Get<VarInt32>(Const.VEHICLE_ID);
         CurTypeWithParts ??= new(1);
-        originalTypeWithParts ??= new(1);
-        if (originalTypeWithParts.Count == 0)
+        OriginalTypeWithParts ??= new(1);
+        if (OriginalTypeWithParts.Count == 0)
         {
             for (int i = 0; i < (int)VehiclePartTypeEnum.Count; ++i)
             {
@@ -138,7 +137,7 @@ public class CarEntity : EntityBase
                     whichType = (VehiclePartTypeEnum)i,
                     parts = new(GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(VehiclePartTypeEnum), i)))
                 };
-                originalTypeWithParts.Add(originalModifyParams);
+                OriginalTypeWithParts.Add(originalModifyParams);
             }
         }
         if (CurTypeWithParts.Count == 0)
@@ -158,11 +157,6 @@ public class CarEntity : EntityBase
         {
             rawImage = rawImageObj;
         }
-
-        // 旋转车辆
-        transform.SetLocalPositionAndRotation(transform.position, Quaternion.identity);
-        Quaternion rotation = Quaternion.Euler(5f, -120f, 0f);
-        transform.SetLocalPositionAndRotation(transform.position, rotation);
     }
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
     {
@@ -270,7 +264,7 @@ public class CarEntity : EntityBase
         if (Modified())
         {
             var curParts = CurTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
-            var originalParts = originalTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
+            var originalParts = OriginalTypeWithParts.Find((typeWithParts) => { return typeWithParts.whichType == vehiclePartTypeEnum; }).parts;
             if (partIdx == -1)
             {
                 for (int i = 0; i < curParts.Count; i++)

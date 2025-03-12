@@ -80,6 +80,10 @@ public partial class ModifyPartComp : UIFormBase
         {
             textMesh.color = Color.red;
         }
+        else
+        {
+            textMesh.color = Color.white;
+        }
     }
 
 }

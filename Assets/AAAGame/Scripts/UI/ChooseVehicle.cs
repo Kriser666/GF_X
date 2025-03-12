@@ -50,6 +50,7 @@ public partial class ChooseVehicle : UIFormBase
             var clonedItem = SpawnItem<UIItemObject>(vehicleTagTemplate, varContent.transform);
             var vehicleTag = clonedItem.itemLogic as VehicleTagItem;
             vehicleTag.VehicleId = vehicle.Id;
+            vehicleTag.VarText_VehicleName.text = GF.Localization.GetString(vehicle.CarName);
             vehicleTag.VarCarImage.sprite = procedure.CarSprites[vehicle.Id];
             vehicleTag.ChooseVehicle = this;
             vehicleTag.name = namePrefix + i;

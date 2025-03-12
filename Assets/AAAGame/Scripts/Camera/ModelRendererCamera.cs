@@ -6,6 +6,7 @@ public class ModelRendererCamera : MonoBehaviour
     private GameObject carModel;
     public GameObject CarModel { get { return carModel; } set { carModel = value; } }
     private Vector3 cameraDistance;
+    public Vector3 CameraOffset { get { return cameraDistance; } set { cameraDistance = value; } }
 
     private void Start()
     {

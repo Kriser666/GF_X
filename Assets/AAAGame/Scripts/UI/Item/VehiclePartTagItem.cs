@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public partial class VehiclePartTagItem : UIItemBase, IPointerClickHandler
 {
-    private Image chooseImage;
-    private Color originalColor;
-    private Color swapedColor = new (0.5f, 0.5f, 0.5f);
     private int partId;
     private VehiclePartTypeEnum whichType;
+    public ModifyGame modifyGame;
     
     public int PartId { get { return partId; } set { partId = value; } }
     public TextMeshProUGUI VarPartName { get { return varPartName; } set { varPartName = value; } }
@@ -20,21 +18,34 @@ public partial class VehiclePartTagItem : UIItemBase, IPointerClickHandler
     protected override void OnInit()
     {
         base.OnInit();
-        chooseImage = GetComponent<Image>();
-        originalColor = chooseImage.color;
+        varBoarder.SetActive(false);
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (originalColor == chooseImage.color)
+        if (!varBoarder.activeSelf)
         {
-            chooseImage.color = swapedColor;
+            varBoarder.SetActive(true);
+            foreach (var item in modifyGame.VehiclePartTagItems)
+            {
+                if (item != this)
+                {
+                    item.ChooseCancel();
+                }
+            }
             GF.Event.Fire(this, PartItemSelectedEventArgs.Create(PartUIItemSelectedDataType.Selected, partId, whichType));
         }
         else
         {
-            chooseImage.color = originalColor;
+            varBoarder.SetActive(false);
             GF.Event.Fire(this, PartItemSelectedEventArgs.Create(PartUIItemSelectedDataType.CancelSelected, partId, whichType));
         }
     }
-
+    public void ChooseCancel()
+    {
+        varBoarder.SetActive(false);
+    }
+    public void Choose()
+    {
+        varBoarder.SetActive(true);
+    }
 }

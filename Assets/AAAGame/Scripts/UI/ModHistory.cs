@@ -37,6 +37,7 @@ public partial class ModHistory : UIFormBase
             frameworkAction = (callback.Value) as GameFrameworkAction<GameObject>;
         }
         procedure = GF.Procedure.CurrentProcedure as MenuProcedure;
+        procedure.ChangeBackGroundSprite("BackGroundSprite", "UI/OriginalCarGarage/cheku_beijing@3x.png");
         carData = GF.DataModel.GetOrCreate<CarDataModel>();
         vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
         vehiclePartTable = GF.DataTable.GetDataTable<VehiclePartTable>();
@@ -115,34 +116,37 @@ public partial class ModHistory : UIFormBase
         var partsList = carData.CarWithModifyIdWithModifyParams[curVehicleId][curModId];
         foreach (var item in partsList)
         {
-            var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
-            foreach (var item1 in vehiclePartRows)
+            foreach (var item1 in item.partsIds)
             {
+                var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
+                foreach (var item2 in vehiclePartRows)
+                {
 
-                float performance_t = item1.Brake + item1.Acceleration + item1.Power;
-                performance += performance_t;
-                cost += item1.Cost;
+                    float performance_t = item2.Brake + item2.Acceleration + item2.Power;
+                    performance += performance_t;
+                    cost += item2.Cost;
+                }
             }
         }
 
         if (performance >= 0f)
         {
-            varPerformanceText.text = "+" + performance.ToString();
+            varPerformanceText.text = GF.Localization.GetString("MG.PERFORMANCE") + Const.ADDITION_SYMBOL + performance.ToString();
             varPerformanceText.color = Color.green;
         }
         else
         {
-            varPerformanceText.text = performance.ToString();
+            varPerformanceText.text = GF.Localization.GetString("MG.PERFORMANCE") + Const.SUBTRACTION_SYMBOL + performance.ToString();
             varPerformanceText.color = Color.red;
         }
         if (cost >= 0f)
         {
-            varCostText.text = "+" + cost.ToString();
+            varCostText.text = GF.Localization.GetString("MG.COST") + Const.ADDITION_SYMBOL + cost.ToString();
             varCostText.color = Color.green;
         }
         else
         {
-            varCostText.text = cost.ToString();
+            varCostText.text = GF.Localization.GetString("MG.COST") + Const.SUBTRACTION_SYMBOL + cost.ToString();
             varCostText.color = Color.red;
         }
         varCarLogo.sprite = procedure.CarLogoSprites[dataRow.Id];
@@ -160,11 +164,14 @@ public partial class ModHistory : UIFormBase
                 UIParams modifyPartDetailParams = UIParams.Create();
                 var dm = GF.DataModel.GetOrCreate<CarDataModel>();
                 List<int> modifiedPartIdList = new();
-                foreach (var item in dm.CarWithModifyIdWithModifyParams[selectedVehicleId][curModifyId])
+                if (curModifyId != -1)
                 {
-                    foreach (var partId in item.partsIds)
+                    foreach (var item in dm.CarWithModifyIdWithModifyParams[selectedVehicleId][curModifyId])
                     {
-                        modifiedPartIdList.Add(partId);
+                        foreach (var partId in item.partsIds)
+                        {
+                            modifiedPartIdList.Add(partId);
+                        }
                     }
                 }
                 modifyPartDetailParams.Set(Const.PART_ID_LIST, modifiedPartIdList);

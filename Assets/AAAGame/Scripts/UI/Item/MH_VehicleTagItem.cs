@@ -1,12 +1,8 @@
 ﻿using TMPro;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public partial class MH_VehicleTagItem : UIItemBase, IPointerClickHandler
 {
-    private Image image;
-    private Color originalColor;
-    private Color swapedColor = new(0.5f, 0.5f, 0.5f);
     public ModHistory ModifyHistory;
     private int vehicleId;
     private int modifyId;
@@ -18,31 +14,30 @@ public partial class MH_VehicleTagItem : UIItemBase, IPointerClickHandler
     protected override void OnInit()
     {
         base.OnInit();
-        image = GetComponent<Image>();
-        originalColor = image.color;
+        varBoarder.SetActive(false);
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (originalColor == image.color)
+        if (!varBoarder.activeSelf)
         {
-            image.color = swapedColor;
+            varBoarder.SetActive(true);
             foreach (var item in ModifyHistory.MH_VehicleTagItems)
             {
                 if (item != this)
                 {
-                    item.SetOriginalColor();
+                    item.ChooseCancel();
                 }
             }
             ModifyHistory.ModifyHistoryCarSelected(vehicleId, modifyId);
         }
         else
         {
-            image.color = originalColor;
+            varBoarder.SetActive(false);
         }
     }
 
-    public void SetOriginalColor()
+    public void ChooseCancel()
     {
-        image.color = originalColor;
+        varBoarder.SetActive(false);
     }
 }

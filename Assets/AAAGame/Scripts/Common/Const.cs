@@ -18,6 +18,9 @@ public static partial class Const
 
     // 游戏中常量
     public static readonly string PART_ID_LIST = "PART_ID_LIST";
+
+    public static readonly string ADDITION_SYMBOL = "+";
+    public static readonly string SUBTRACTION_SYMBOL = "-";
     // 改装详情常量
     public static readonly string CUR_TOTAL_POWER = "CUR_TOTAL_POWER";
     public static readonly string CUR_TOTAL_BRAKE = "CUR_TOTAL_BRAKE";

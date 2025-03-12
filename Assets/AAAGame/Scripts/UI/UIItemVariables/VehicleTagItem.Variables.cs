@@ -11,4 +11,5 @@ public partial class VehicleTagItem
 	[Header("UI Variables:")]
 	[SerializeField] private TextMeshProUGUI varVehicleName = null;
 	[SerializeField] private Image varCarImage = null;
+	[SerializeField] private GameObject varBoarder = null;
 }
