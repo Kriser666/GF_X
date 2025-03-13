@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - LunGu
+  - GameBackGround
+  - CheKe
   layers:
   - Default
   - TransparentFX

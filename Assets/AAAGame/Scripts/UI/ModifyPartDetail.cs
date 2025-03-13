@@ -62,12 +62,15 @@ public partial class ModifyPartDetail : UIFormBase
         switch(btId)
         {
             case "ModifyComp":
-                UIParams compModParams = UIParams.Create(true);
-                compModParams.Set<VarFloat>(Const.CUR_TOTAL_POWER, totalPower);
-                compModParams.Set<VarFloat>(Const.CUR_TOTAL_BRAKE, totalBrake);
-                compModParams.Set<VarFloat>(Const.CUR_TOTAL_ACCELERATION, totalAcceleration);
-                compModParams.Set<VarInt32>(Const.VEHICLE_ID, carId);
-                OpenSubUIForm(UIViews.ModifyPartComp, 1, compModParams);
+                if (curPartIdList != null && curPartIdList.Count != 0)
+                {
+                    UIParams compModParams = UIParams.Create(true);
+                    compModParams.Set<VarFloat>(Const.CUR_TOTAL_POWER, totalPower);
+                    compModParams.Set<VarFloat>(Const.CUR_TOTAL_BRAKE, totalBrake);
+                    compModParams.Set<VarFloat>(Const.CUR_TOTAL_ACCELERATION, totalAcceleration);
+                    compModParams.Set<VarInt32>(Const.VEHICLE_ID, carId);
+                    OpenSubUIForm(UIViews.ModifyPartComp, 1, compModParams);
+                }
                 break;
         }
     }

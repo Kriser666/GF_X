@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3218248896653852376}
   m_Layer: 8
   m_Name: BeiNaiLi
-  m_TagString: Untagged
+  m_TagString: LunGu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

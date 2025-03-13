@@ -15,7 +15,7 @@ public partial class ModifyGame : UIFormBase
     IDataTable<VehiclePartTable> vehiclePartTable;
     GameObject vehiclePartTagTemplate;
     GameObject partTypeTagTemplate;
-    public List<VehiclePartTagItem> VehiclePartTagItems;
+    public Dictionary<VehiclePartTypeEnum, List<VehiclePartTagItem>> VehiclePartTagItems;
     public List<Button> partTypeButtons;
     GameObject rawImage;
     private GameFrameworkAction<GameObject> frameworkAction;
@@ -54,17 +54,14 @@ public partial class ModifyGame : UIFormBase
             if (carData.CarWithModifyIdWithModifyParams[0][0][0].partsIds.Count > 0)
             {
                 var partsList = carData.CarWithModifyIdWithModifyParams[vehicleId][modifyId];
-                foreach (var item in partsList)
+                foreach (var ModifiedPart in partsList)
                 {
-                    foreach (var item1 in item.partsIds)
+                    foreach (var partId in ModifiedPart.partsIds)
                     {
-                        var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
-                        foreach (var item2 in vehiclePartRows)
-                        {
-                            float perf_t = item2.Brake + item2.Acceleration + item2.Power;
-                            performance += perf_t;
-                            cost += item2.Cost;
-                        }
+                        var vehiclePartRow = vehiclePartTable.GetDataRow(partId);
+                        float perf_t = vehiclePartRow.Brake + vehiclePartRow.Acceleration + vehiclePartRow.Power;
+                        performance += perf_t;
+                        cost += vehiclePartRow.Cost;
                     }
                 }
 
@@ -89,7 +86,8 @@ public partial class ModifyGame : UIFormBase
             var clonedItem = SpawnItem<UIItemObject>(partTypeTagTemplate, varPartTypeContent.transform);
             clonedItem.gameObject.name = btnNamePrefix + i;
             clonedItem.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GF.Localization.GetString("PART_TYPE." + i);
-            partTypeButtons.Add(clonedItem.gameObject.GetComponent<Button>());
+            Button button = clonedItem.gameObject.GetComponent<Button>();
+            partTypeButtons.Add(button);
         }
         partTypeTagTemplate.SetActive(false);
         // 生成部件缩略图，默认生成轮胎即btn为0
@@ -106,6 +104,8 @@ public partial class ModifyGame : UIFormBase
         frameworkAction?.Invoke(rawImage);
         CameraController.Instance.SetModelRendererCameraOffset(10, true);
         // CameraController.Instance.SetCameraView(10);
+        partTypeButtons.Clear();
+        VehiclePartTagItems.Clear();
         base.OnClose(isShutdown, userData);
     }
 
@@ -153,15 +153,33 @@ public partial class ModifyGame : UIFormBase
         base.OnButtonClick(sender, btSelf);
         for (int i = 0; i < partTypeButtons.Count; ++i)
         {
-            if(btSelf == partTypeButtons[i])
+            // 当前点击的按钮的类型
+            VehiclePartTypeEnum curLoopTypeEnum = (VehiclePartTypeEnum)i;
+            if (btSelf == partTypeButtons[i])
             {
-                for (int j = 0; j < VehiclePartTagItems.Count; ++j)
+                // 显示当前类型下的所有的部件
+                if (!VehiclePartTagItems.ContainsKey(curLoopTypeEnum))
                 {
-                    Destroy(VehiclePartTagItems[j]);
+                    SpawnPartByType(vehiclePartTagTemplate, curLoopTypeEnum, vehicleId);
                 }
-                VehiclePartTagItems.Clear();
-                SpawnPartByType(vehiclePartTagTemplate, (VehiclePartTypeEnum)i, vehicleId);
-                break;
+                else
+                {
+                    for (int j = 0; j < VehiclePartTagItems[curLoopTypeEnum].Count; ++j)
+                    {
+                        VehiclePartTagItems[curLoopTypeEnum][j].gameObject.SetActive(true);
+                    }
+                }
+            }
+            else
+            {
+                // 隐藏其他的类型下所有的部件
+                if (VehiclePartTagItems.ContainsKey(curLoopTypeEnum))
+                {
+                    foreach (var item in VehiclePartTagItems[curLoopTypeEnum])
+                    {
+                        item.gameObject.SetActive(false);
+                    }
+                }
             }
         }
     }
@@ -173,7 +191,7 @@ public partial class ModifyGame : UIFormBase
         var whichPartDatas = vehiclePartTable.Where((vehiclePartRow) => { return vehiclePartRow.PartType == vehiclePartType; })
             .Where((vehiclePartRow) => { return vehiclePartRow.VehicleId == carId; });
         int i = 0;
-
+        List<VehiclePartTagItem> partItems = new();
         foreach (var part in whichPartDatas)
         {
             var clonedItem = SpawnItem<UIItemObject>(templateToClone, varPartContent.transform);
@@ -181,14 +199,22 @@ public partial class ModifyGame : UIFormBase
             vehiclePartTag.PartId = part.Id;
             vehiclePartTag.WhichType = part.PartType;
             float performance = part.Brake + part.Acceleration + part.Power;
-            vehiclePartTag.VarPerformanceNum.text = "+" + performance;
+            if (performance > 0f)
+            {
+                vehiclePartTag.VarPerformanceNum.text = Const.ADDITION_SYMBOL + performance;
+            }
+            else
+            {
+                vehiclePartTag.VarPerformanceNum.text = performance.ToString();
+            }
             vehiclePartTag.VarPartImage.sprite = procedure.PartSprites[part.Id];
             vehiclePartTag.VarPartName.text = GF.Localization.GetString(part.PartName);
             vehiclePartTag.name = namePrefix + i;
             vehiclePartTag.modifyGame = this;
-            VehiclePartTagItems.Add(vehiclePartTag);
+            partItems.Add(vehiclePartTag);
             ++i;
         }
+        VehiclePartTagItems.Add(vehiclePartType, partItems);
         templateToClone.SetActive(false);
     }
 
@@ -208,50 +234,10 @@ public partial class ModifyGame : UIFormBase
                 OpenSubUIForm(UIViews.ModifyPartDetail, 1, modifyPartDetailParams);
                 break;
             case "OneKeyChange":
-                // 一键改装每个类型的最高性能
-                curPerformance = 0;
-                curCost = 0;
-                for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
-                {
-                    int curType = i;
-                    var whichPartDatas = vehiclePartTable.Where((vehiclePartRow) => { return vehiclePartRow.PartType == (VehiclePartTypeEnum)curType; });
-                    int maxPerformanceIdx = 0;
-                    float maxPerformance = 0;
-                    for(int j = 0; j < whichPartDatas.Count(); ++j)
-                    {
-                        var temp = whichPartDatas.ElementAt(j);
-                        float performance = temp.Brake + temp.Acceleration + temp.Power;
-                        if (performance > maxPerformance)
-                        {
-                            maxPerformance = performance;
-                            maxPerformanceIdx = j;
-                        }
-                    }
-                    VehiclePartTable maxPerformanceRow = whichPartDatas.ElementAt(maxPerformanceIdx);
-                    // 寻找当前部件类型下的组件个数
-                    var modifyParams = procedure.OriginalModifyParams();
-                    int partCount = modifyParams[i].parts.Count;
-                    for (int j = 0; j < partCount; ++j)
-                    {
-                        curPerformance += maxPerformance;
-                        curCost += maxPerformanceRow.Cost;
-                    }
-                    string prefebName = maxPerformanceRow.PrefebName;
-                    ChangeCostAndPerformanceText(curCost, curPerformance);
-                    procedure.ChangeCarPart((VehiclePartTypeEnum)i, prefebName);
-                }
+                OneKeyChange();
                 break;
             case "OneKeyReset":
-                if(procedure.CarHasBeenModified())
-                {
-                    for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
-                    {
-                        procedure.ResetPart((VehiclePartTypeEnum)i);
-                    }
-                    curPerformance = 0;
-                    curCost = 0;
-                    ChangeCostAndPerformanceText(curCost, curPerformance);
-                }
+                OneKeyReset();
                 break;
             case "SelectButton":
                 OpenSubUIForm(UIViews.ModifySaved, 1);
@@ -260,10 +246,91 @@ public partial class ModifyGame : UIFormBase
         }    
     }
 
+    public void OneKeyChange()
+    {
+        // 一键改装每个类型的最高性能
+        curPerformance = 0;
+        curCost = 0;
+        for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
+        {
+            VehiclePartTypeEnum curLoopTypeEnum = (VehiclePartTypeEnum)i;
+            if (!VehiclePartTagItems.ContainsKey(curLoopTypeEnum))
+            {
+                SpawnPartByType(vehiclePartTagTemplate, curLoopTypeEnum, vehicleId);
+                foreach (var item in VehiclePartTagItems[curLoopTypeEnum])
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }
+            var curPartTags = VehiclePartTagItems[curLoopTypeEnum];
+            int maxPerformanceId = 0;
+            float maxPerformance = float.MinValue;
+            int maxPerformanceInTagsIdx = 0;
+            for (int j = 0; j < curPartTags.Count; ++j)
+            {
+                var tableRow = vehiclePartTable.GetDataRow(curPartTags[j].PartId);
+                float performance = tableRow.Brake + tableRow.Acceleration + tableRow.Power;
+                if (performance > maxPerformance)
+                {
+                    maxPerformance = performance;
+                    maxPerformanceId = curPartTags[j].PartId;
+                    maxPerformanceInTagsIdx = j;
+                }
+            }
+            // 选中当前类型下的最大性能的标签
+            curPartTags[maxPerformanceInTagsIdx].Choose();
+            VehiclePartTable maxPerformanceRow = vehiclePartTable.GetDataRow(maxPerformanceId);
+            // 寻找当前部件类型下的组件个数
+            var modifyParams = procedure.OriginalModifyParams();
+            int partCount = modifyParams[i].parts.Count;
+            for (int j = 0; j < partCount; ++j)
+            {
+                curPerformance += maxPerformance;
+                curCost += maxPerformanceRow.Cost;
+            }
+            string prefebName = maxPerformanceRow.PrefebName;
+            ChangeCostAndPerformanceText(curCost, curPerformance);
+            procedure.ChangeCarPart(curLoopTypeEnum, prefebName);
+        }
+    }
+
+    public void OneKeyReset()
+    {
+        if (procedure.CarHasBeenModified())
+        {
+            for (int i = 0; i < (int)VehiclePartTypeEnum.Count; i++)
+            {
+                VehiclePartTypeEnum curLoopTypeEnum = (VehiclePartTypeEnum)i;
+                procedure.ResetPart(curLoopTypeEnum);
+                // 取消选中当前类型下的所有组件
+                if (VehiclePartTagItems.ContainsKey(curLoopTypeEnum))
+                {
+                    foreach (var item in VehiclePartTagItems[curLoopTypeEnum])
+                    {
+                        item.ChooseCancel();
+                    }
+                }
+            }
+            curPerformance = 0;
+            curCost = 0;
+            ChangeCostAndPerformanceText(curCost, curPerformance);
+        }
+    }
+
     private void ChangeCostAndPerformanceText(float cost, float performance)
     {
-
-        varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + '+' + performance + '\n'
-            + GF.Localization.GetString("MG.COST") + cost + GF.Localization.GetString("MONEY.CURRENCY");
+        if (performance > 0)
+        {
+            varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + Const.ADDITION_SYMBOL + performance + '\n';
+        }
+        else if (performance < 0)
+        {
+            varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + performance + '\n';
+        }
+        else
+        {
+            varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + performance + '\n';
+        }
+        varCostAndPer.text = varCostAndPer.text + GF.Localization.GetString("MG.COST") + cost + GF.Localization.GetString("MONEY.CURRENCY");
     }
 }

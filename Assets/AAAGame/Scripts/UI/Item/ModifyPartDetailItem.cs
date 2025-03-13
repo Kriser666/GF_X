@@ -41,7 +41,7 @@ public partial class ModifyPartDetailItem : UIItemBase
         else if (num < 0)
         {
             textMeshProUGUI.color = Color.red;
-            textMeshProUGUI.text = Const.SUBTRACTION_SYMBOL + num.ToString();
+            textMeshProUGUI.text = num.ToString();
         }
         else
         {

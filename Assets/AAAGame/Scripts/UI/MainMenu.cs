@@ -102,6 +102,12 @@ public partial class MainMenu : UIFormBase
             GameFrameworkAction<GameObject> gameFrameworkAction = SetRawImage;
             modifyParams.Set(Const.SET_RAW_IMAGE_CALLBACK, gameFrameworkAction);
             GF.UI.OpenUIForm(UIViews.ModifyGame, modifyParams);
+            // 移动展台
+            /*GameObject gameBackGround = GameObject.FindGameObjectWithTag("GameBackGround");
+            if (gameBackGround != null)
+            {
+                gameBackGround.GetComponent<LevelBackGround>().MoveGround(11, true);
+            }*/
         }
         if (btSelf == varDropdownButtonObj.GetComponent<Button>())
         {

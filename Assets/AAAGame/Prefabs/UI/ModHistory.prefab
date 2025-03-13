@@ -2653,14 +2653,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6840534204938157317}
         m_TargetAssemblyTypeName: UIFormBase, Hotfix
-        m_MethodName: OnClickClose
-        m_Mode: 1
+        m_MethodName: ClickUIButton
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: CloseButton
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &375561150782770937
@@ -3889,9 +3889,9 @@ RectTransform:
   - {fileID: 386910616357614574}
   m_Father: {fileID: 2244427128149220717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 195, y: -120}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2039897961831977069

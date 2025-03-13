@@ -685,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7742780737561719692, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_TagString
+      value: CheKe
+      objectReference: {fileID: 0}
     - target: {fileID: 7761158025586264563, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
       value: YouHouMenBaShou

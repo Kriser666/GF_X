@@ -11,15 +11,19 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
     public TextMeshProUGUI VarText_VehicleName { get { return varVehicleName; } set { varVehicleName.text = value.text; } }
     public Image VarCarImage { get { return varCarImage; } set { varCarImage = value; } }
 
+    private bool selected;
+
     protected override void OnInit()
     {
         base.OnInit();
         varBoarder.SetActive(false);
+        selected = false;
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!varBoarder.activeSelf)
+        if (!selected)
         {
+            selected = true;
             varBoarder.SetActive(true);
             foreach (var item in ChooseVehicle.VehicleTagItems)
             {
@@ -32,6 +36,7 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
         }
         else
         {
+            selected = false;
             varBoarder.SetActive(false);
             GF.Event.Fire(this, CarItemSelectedEventArgs.Create(CarUIItemSelectedDataType.Changed, -1));
         }
@@ -39,6 +44,7 @@ public partial class VehicleTagItem : UIItemBase, IPointerClickHandler
 
     public void ChooseCancel()
     {
+        selected = false;
         varBoarder.SetActive(false);
     }
 

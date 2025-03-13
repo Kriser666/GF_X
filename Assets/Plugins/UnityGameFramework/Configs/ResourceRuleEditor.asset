@@ -103,3 +103,93 @@ MonoBehaviour:
     packed: 0
     filterType: 0
     searchPatterns: '*.asset'
+  - valid: 1
+    name: Materials
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Materials
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Models
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Models
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Shader
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Shader
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: SharedMaterials
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/SharedMaterials
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Sprites
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Sprites
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Textures
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Textures
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: BackGroundGame
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Prefabs/BackGroundGame
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Audio
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Audio
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'
+  - valid: 1
+    name: Font
+    variant: 
+    fileSystem: 
+    groups: 
+    assetsDirectoryPath: Assets/AAAGame/Font
+    loadType: 2
+    packed: 0
+    filterType: 0
+    searchPatterns: '*.*'

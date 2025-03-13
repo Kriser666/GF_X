@@ -381,4 +381,16 @@ public class MenuProcedure : ProcedureBase
             }
         }
     }
+
+    public void ResetAllParts()
+    {
+        if (CarHasBeenModified())
+        {
+            for (int i = 0; i < (int)VehiclePartTypeEnum.Count; ++i)
+            {
+                VehiclePartTypeEnum curLoopTypeEnum = (VehiclePartTypeEnum)i;
+                ResetPart(curLoopTypeEnum);
+            }
+        }
+    }
 }

@@ -2,4 +2,5 @@
 #	ID		PartName	PartType	VehicleId	Cost	PrefebName	PartImage	Power	Brake	Acceleration
 #	int		string	enum	int	float	string	string	float	float	float
 #		备注	部件名称	部件类型	对应的汽车ID	价格	预制体名称	缩略图名称	动力	制动	加速度
-	0		PART_NAME.BEI_NAI_LI	VehiclePartTypeEnum.LunGu	0	999	Entity/BeiNaiLi	Part/BeiNaiLi.png	28	28	28
+	0	倍耐力轮胎	PART_NAME.BEI_NAI_LI	VehiclePartTypeEnum.LunGu	0	999	Entity/VehicleParts/0/BeiNaiLi	Parts/0/BeiNaiLi.png	28	28	28
+	1	车壳	PART_NAME.CHE_KE	VehiclePartTypeEnum.CheKe	0	1999	Entity/VehicleParts/0/CheKe1	Parts/0/CheKe1.png	-10	-10	-10

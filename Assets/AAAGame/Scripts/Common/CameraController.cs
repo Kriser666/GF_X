@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour
     internal void SetCameraView(int viewId, bool smooth = true)
     {
         var camTb = GF.DataTable.GetDataTable<CameraViewTable>();
-        if (!camTb.HasDataRow(viewId))
+        if (camTb == null || !camTb.HasDataRow(viewId))
         {
             return;
         }
@@ -134,7 +134,7 @@ public class CameraController : MonoBehaviour
     public void SetModelRendererCameraOffset(int viewId, bool smooth = true)
     {
         var camTb = GF.DataTable.GetDataTable<CameraViewTable>();
-        if (!camTb.HasDataRow(viewId))
+        if (camTb== null || !camTb.HasDataRow(viewId))
         {
             return;
         }

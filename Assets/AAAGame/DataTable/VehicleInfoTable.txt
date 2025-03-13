@@ -2,4 +2,4 @@
 #	ID		PrefabName	CarName	CarImageAssetName	CarDesc	CarLogo	Power	Brake	Acceleration
 #	int		string	string	string	string	string	float	float	float
 #		备注	预制体资源名称	车辆名称KEY	车辆缩略图资产名称	车辆描述	车辆LOGO资产名称	车辆初始动力	车辆初始制动	车辆初始加速度
-	0	车体初始性能	Car	CAR_NAME.MU_MA_REN_2024	Car/MuMaRenImage.png	CAR_DESC.MU_MA_REN_2024	Car/Logo/MuMaRenLogo.png	999	999	999
+	0	车体初始性能	Car	CAR_NAME.MU_MA_REN_2024	Cars/0/MuMaRenImage.png	CAR_DESC.MU_MA_REN_2024	CarLogos/0/MuMaRenLogo.png	999	999	999

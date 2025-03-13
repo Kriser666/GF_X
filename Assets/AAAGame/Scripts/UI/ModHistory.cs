@@ -45,9 +45,26 @@ public partial class ModHistory : UIFormBase
         int i = 0;
         string namePrefix = varCarHisModTpl.name.Split('_')[0];
         // 读取存档中的数据
-        if (carData.CarWithModifyIdWithModifyParams[0][0][0].partsIds.Count > 0)
+        foreach (var vehicle in carData.CarWithModifyIdWithModifyParams)
         {
-            foreach (var vehicle in carData.CarWithModifyIdWithModifyParams)
+            bool modified = false;
+            // 先扫描一遍，如果没有一个部件改装过，那就不生成了
+            foreach (var modifyIdWithParts in vehicle.Value)
+            {
+                if (modified)
+                {
+                    break;
+                }
+                foreach (var parts in modifyIdWithParts.Value)
+                {
+                    if (parts.partsIds.Count > 0)
+                    {
+                        modified = true;
+                        break;
+                    }
+                }
+            }
+            if (modified)
             {
                 var clonedItem = SpawnItem<UIItemObject>(varCarHisModTpl, varCarHisModTpl.transform.parent);
                 var vehicleHisTag = clonedItem.itemLogic as MH_VehicleHistoryItem;
@@ -58,6 +75,7 @@ public partial class ModHistory : UIFormBase
                 ++i;
             }
         }
+        
         varCarHisModTpl.SetActive(false);
         // 初始化底部改装的车辆，默认是显示第一个车的改装信息
         // RefreshCarInfoInTail(MH_VehicleHistoryItems[0].curCarId);
@@ -66,10 +84,11 @@ public partial class ModHistory : UIFormBase
     }
     protected override void OnClose(bool isShutdown, object userData)
     {
-
         frameworkAction?.Invoke(rawImage);
         var mainMenu = GF.UI.GetUIForm(procedure.menuUIFormId).Logic as MainMenu;
         mainMenu.curModifyId = curModifyId;
+        MH_VehicleTagItems.Clear();
+        MH_VehicleHistoryItems.Clear();
         base.OnClose(isShutdown, userData);
     }
 
@@ -114,18 +133,14 @@ public partial class ModHistory : UIFormBase
         float performance = 0f;
         float cost = 0f;
         var partsList = carData.CarWithModifyIdWithModifyParams[curVehicleId][curModId];
-        foreach (var item in partsList)
+        foreach (var modifiedPart in partsList)
         {
-            foreach (var item1 in item.partsIds)
+            foreach (var partId in modifiedPart.partsIds)
             {
-                var vehiclePartRows = vehiclePartTable.GetDataRows((vehiclePart) => { return item.partsIds.Contains(vehiclePart.Id); });
-                foreach (var item2 in vehiclePartRows)
-                {
-
-                    float performance_t = item2.Brake + item2.Acceleration + item2.Power;
-                    performance += performance_t;
-                    cost += item2.Cost;
-                }
+                var vehiclePartRow = vehiclePartTable.GetDataRow(partId);
+                float performance_t = vehiclePartRow.Brake + vehiclePartRow.Acceleration + vehiclePartRow.Power;
+                performance += performance_t;
+                cost += vehiclePartRow.Cost;
             }
         }
 
@@ -136,7 +151,7 @@ public partial class ModHistory : UIFormBase
         }
         else
         {
-            varPerformanceText.text = GF.Localization.GetString("MG.PERFORMANCE") + Const.SUBTRACTION_SYMBOL + performance.ToString();
+            varPerformanceText.text = GF.Localization.GetString("MG.PERFORMANCE") + performance.ToString();
             varPerformanceText.color = Color.red;
         }
         if (cost >= 0f)
@@ -146,7 +161,7 @@ public partial class ModHistory : UIFormBase
         }
         else
         {
-            varCostText.text = GF.Localization.GetString("MG.COST") + Const.SUBTRACTION_SYMBOL + cost.ToString();
+            varCostText.text = GF.Localization.GetString("MG.COST") + cost.ToString();
             varCostText.color = Color.red;
         }
         varCarLogo.sprite = procedure.CarLogoSprites[dataRow.Id];
@@ -179,6 +194,11 @@ public partial class ModHistory : UIFormBase
                 OpenSubUIForm(UIViews.ModifyPartDetail, 1, modifyPartDetailParams);
                 break;
             case "SelectButton":
+                OnClickClose();
+                break;
+            case "CloseButton":
+                curModifyId = -1;
+                procedure.ResetAllParts();
                 OnClickClose();
                 break;
         }

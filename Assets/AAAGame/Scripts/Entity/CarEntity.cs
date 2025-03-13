@@ -213,7 +213,7 @@ public class CarEntity : EntityBase
     }
     protected override void OnHide(bool isShutdown, object userData)
     {
-
+        
         base.OnHide(isShutdown, userData);
     }
     /// <summary>
@@ -317,7 +317,8 @@ public class CarEntity : EntityBase
         for(int i = 0; i < carModel.transform.childCount; ++i)
         {
             // 如果有VehiclePart部件组件，说明已改装
-            if (carModel.transform.GetChild(i).TryGetComponent<VehiclePart>(out VehiclePart vehiclePart))
+            var part = carModel.transform.GetChild(i).gameObject;
+            if (part.activeSelf && part.TryGetComponent<VehiclePart>(out VehiclePart vehiclePart))
             {
                 partIds.Add(vehiclePart.PartId);
             }
@@ -336,7 +337,8 @@ public class CarEntity : EntityBase
         for (int i = 0; i < carModel.transform.childCount; ++i)
         {
             // 如果有VehiclePart部件组件，说明已改装
-            if (carModel.transform.GetChild(i).TryGetComponent<VehiclePart>(out VehiclePart vehiclePart))
+            var part = carModel.transform.GetChild(i).gameObject;
+            if (part.activeSelf && part.TryGetComponent<VehiclePart>(out VehiclePart vehiclePart))
             {
                 if (vehiclePart.PartTypeEnum == partTypeEnum)
                 {
