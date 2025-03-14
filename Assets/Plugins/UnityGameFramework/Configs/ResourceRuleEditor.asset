@@ -19,7 +19,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Prefabs/Entity
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -29,7 +29,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Prefabs/Core
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -39,7 +39,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Prefabs/UI
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -49,7 +49,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Config
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -59,7 +59,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/DataTable
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -69,7 +69,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/HotfixDlls
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -79,7 +79,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Language
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -89,7 +89,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Scene
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.unity'
@@ -99,7 +99,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/ScriptableAssets
-    loadType: 0
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.asset'
@@ -109,7 +109,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Materials
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -119,7 +119,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Models
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -129,7 +129,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Shader
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -139,7 +139,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/SharedMaterials
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -149,7 +149,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Sprites
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -159,7 +159,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Textures
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -169,7 +169,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Prefabs/BackGroundGame
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -179,7 +179,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Audio
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'
@@ -189,7 +189,7 @@ MonoBehaviour:
     fileSystem: 
     groups: 
     assetsDirectoryPath: Assets/AAAGame/Font
-    loadType: 2
+    loadType: 1
     packed: 0
     filterType: 0
     searchPatterns: '*.*'

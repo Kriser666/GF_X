@@ -2,22 +2,23 @@
 <UnityGameFramework>
   <ResourceCollection>
     <Resources>
-      <Resource Name="BackGroundGame" LoadType="2" Packed="False" />
-      <Resource Name="Config" LoadType="0" Packed="False" />
-      <Resource Name="Core" LoadType="0" Packed="False" />
-      <Resource Name="DataTable" LoadType="0" Packed="False" />
-      <Resource Name="Entity" LoadType="0" Packed="False" />
-      <Resource Name="Font" LoadType="2" Packed="False" />
-      <Resource Name="HotfixDlls" LoadType="0" Packed="False" />
-      <Resource Name="Language" LoadType="0" Packed="False" />
-      <Resource Name="Materials" LoadType="2" Packed="False" />
-      <Resource Name="Scene" LoadType="0" Packed="False" />
-      <Resource Name="ScriptableAssets" LoadType="0" Packed="False" />
-      <Resource Name="SharedAssets" LoadType="2" Packed="False" />
-      <Resource Name="SharedMaterials" LoadType="2" Packed="False" />
-      <Resource Name="Sprites" LoadType="2" Packed="False" />
-      <Resource Name="Textures" LoadType="2" Packed="False" />
-      <Resource Name="UI" LoadType="0" Packed="False" />
+      <Resource Name="BackGroundGame" LoadType="1" Packed="False" />
+      <Resource Name="Config" LoadType="1" Packed="False" />
+      <Resource Name="Core" LoadType="1" Packed="False" />
+      <Resource Name="DataTable" LoadType="1" Packed="False" />
+      <Resource Name="Entity" LoadType="1" Packed="False" />
+      <Resource Name="Font" LoadType="1" Packed="False" />
+      <Resource Name="HotfixDlls" LoadType="1" Packed="False" />
+      <Resource Name="Language" LoadType="1" Packed="False" />
+      <Resource Name="Materials" LoadType="1" Packed="False" />
+      <Resource Name="Scene" LoadType="1" Packed="False" />
+      <Resource Name="ScriptableAssets" LoadType="1" Packed="False" />
+      <Resource Name="Shader" LoadType="1" Packed="False" />
+      <Resource Name="SharedAssets" LoadType="1" Packed="False" />
+      <Resource Name="SharedMaterials" LoadType="1" Packed="False" />
+      <Resource Name="Sprites" LoadType="1" Packed="False" />
+      <Resource Name="Textures" LoadType="1" Packed="False" />
+      <Resource Name="UI" LoadType="1" Packed="False" />
     </Resources>
     <Assets>
       <Asset Guid="013ba76f202c1ae4eba4bf69e2b69902" ResourceName="DataTable" />
@@ -188,6 +189,7 @@
       <Asset Guid="b07a3483c4b3a184c880b0c94de981c1" ResourceName="SharedAssets" />
       <Asset Guid="b3176e63c9896c748964f48c12371cd5" ResourceName="Sprites" />
       <Asset Guid="b57f925121ffa1246bcf57c69d5cdfd2" ResourceName="BackGroundGame" />
+      <Asset Guid="b729a2582200e9945b12cf21855e3b73" ResourceName="Shader" />
       <Asset Guid="b7553642051b30d4abc9e96d19f42ca0" ResourceName="Textures" />
       <Asset Guid="b8e0cb0ed445e4244a941452e102ecad" ResourceName="SharedAssets" />
       <Asset Guid="b8f790017d833da45a5aec7344ed4f97" ResourceName="SharedAssets" />

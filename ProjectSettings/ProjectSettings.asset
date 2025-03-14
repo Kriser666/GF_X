@@ -705,7 +705,7 @@ PlayerSettings:
     Stadia: DOTWEEN
     Standalone: AMPLIFY_SHADER_EDITOR;ENABLE_LOG;DOTWEEN;DISABLE_HYBRIDCLR
     VisionOS: DOTWEEN
-    WebGL: AMPLIFY_SHADER_EDITOR;ENABLE_LOG;DOTWEEN;DISABLE_HYBRIDCLR
+    WebGL: AMPLIFY_SHADER_EDITOR;ENABLE_LOG;DOTWEEN
     Windows Store Apps: ENABLE_LOG;DOTWEEN
     XboxOne: DOTWEEN
     iPhone: ENABLE_LOG;DOTWEEN
@@ -727,7 +727,7 @@ PlayerSettings:
   useDeterministicCompilation: 1
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
-  gcIncremental: 0
+  gcIncremental: 1
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform:
     Android: 3
@@ -824,6 +824,6 @@ PlayerSettings:
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 0
+  insecureHttpOption: 1
   androidVulkanDenyFilterList: []
   androidVulkanAllowFilterList: []
