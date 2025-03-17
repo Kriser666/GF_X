@@ -22,14 +22,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AwaitExtension.<LoadAssetsAwait>d__28<object>,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AwaitExtension.<LoadDataTableAwait>d__12<object>,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AwaitExtension.<LoadSceneAwait>d__21,byte>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<AwaitExtension.<UnLoadSceneAwait>d__24,byte>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AwaitExtension.<LoadAssetsAwait>d__28<object>,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AwaitExtension.<LoadDataTableAwait>d__12<object>,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AwaitExtension.<LoadSceneAwait>d__21,byte>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<AwaitExtension.<UnLoadSceneAwait>d__24,byte>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<object,byte>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<object,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<object,byte>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<object,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<System.UIntPtr>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>
@@ -1094,15 +1090,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	public void RefMethods()
 	{
 		// object Cinemachine.CinemachineVirtualCamera.GetCinemachineComponent<object>()
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<byte>,AwaitExtension.<LoadSceneAwait>d__21>(Cysharp.Threading.Tasks.UniTask.Awaiter<byte>&,AwaitExtension.<LoadSceneAwait>d__21&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<byte>,AwaitExtension.<UnLoadSceneAwait>d__24>(Cysharp.Threading.Tasks.UniTask.Awaiter<byte>&,AwaitExtension.<UnLoadSceneAwait>d__24&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<byte>,AwaitExtension.<LoadDataTableAwait>d__12<object>>(Cysharp.Threading.Tasks.UniTask.Awaiter<byte>&,AwaitExtension.<LoadDataTableAwait>d__12<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,AwaitExtension.<LoadAssetsAwait>d__28<object>>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,AwaitExtension.<LoadAssetsAwait>d__28<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,AwaitExtension.<LoadDataTableAwait>d__12<object>>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,AwaitExtension.<LoadDataTableAwait>d__12<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>.Start<AwaitExtension.<LoadSceneAwait>d__21>(AwaitExtension.<LoadSceneAwait>d__21&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>.Start<AwaitExtension.<UnLoadSceneAwait>d__24>(AwaitExtension.<UnLoadSceneAwait>d__24&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<AwaitExtension.<LoadAssetsAwait>d__28<object>>(AwaitExtension.<LoadAssetsAwait>d__28<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<AwaitExtension.<LoadDataTableAwait>d__12<object>>(AwaitExtension.<LoadDataTableAwait>d__12<object>&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<byte>,object>(Cysharp.Threading.Tasks.UniTask.Awaiter<byte>&,object&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<byte>,object>(Cysharp.Threading.Tasks.UniTask.Awaiter<byte>&,object&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,object>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,object&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<byte>.Start<object>(object&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<object>(object&)
 		// Cysharp.Threading.Tasks.UniTask<System.UIntPtr> Cysharp.Threading.Tasks.UniTask.FromResult<System.UIntPtr>(System.UIntPtr)
 		// Cysharp.Threading.Tasks.UniTask<object> Cysharp.Threading.Tasks.UniTask.FromResult<object>(object)
 		// Cysharp.Threading.Tasks.UniTask<object[]> Cysharp.Threading.Tasks.UniTask.WhenAll<object>(Cysharp.Threading.Tasks.UniTask<object>[])
@@ -1176,26 +1168,12 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// TypeIdPair[] System.Linq.Enumerable.ToArray<TypeIdPair>(System.Collections.Generic.IEnumerable<TypeIdPair>)
 		// int[] System.Linq.Enumerable.ToArray<int>(System.Collections.Generic.IEnumerable<int>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
-		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,AppConfigs.<GetInstanceSync>d__18>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,AppConfigs.<GetInstanceSync>d__18&)
-		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.Start<AppConfigs.<GetInstanceSync>d__18>(AppConfigs.<GetInstanceSync>d__18&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,PlayerEntity.<SkillAttack>d__50>(Cysharp.Threading.Tasks.UniTask.Awaiter&,PlayerEntity.<SkillAttack>d__50&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,StaticUIComponent.<Start>d__7>(Cysharp.Threading.Tasks.UniTask.Awaiter&,StaticUIComponent.<Start>d__7&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,GameProcedure.<OnEnter>d__3>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,GameProcedure.<OnEnter>d__3&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,LevelEntity.<OnShow>d__15>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,LevelEntity.<OnShow>d__15&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,HotfixEntry.<StartHotfixLogic>d__0>(System.Runtime.CompilerServices.TaskAwaiter<object>&,HotfixEntry.<StartHotfixLogic>d__0&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,LocalizationExtension.<LoadLanguage>d__2>(System.Runtime.CompilerServices.TaskAwaiter<object>&,LocalizationExtension.<LoadLanguage>d__2&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,PreloadProcedure.<InitAndLoadLanguage>d__14>(System.Runtime.CompilerServices.TaskAwaiter<object>&,PreloadProcedure.<InitAndLoadLanguage>d__14&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,PreloadProcedure.<LoadConfigsAndDataTables>d__12>(System.Runtime.CompilerServices.TaskAwaiter<object>&,PreloadProcedure.<LoadConfigsAndDataTables>d__12&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,PreloadProcedure.<PreloadAndInitData>d__11>(System.Runtime.CompilerServices.TaskAwaiter<object>&,PreloadProcedure.<PreloadAndInitData>d__11&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<GameProcedure.<OnEnter>d__3>(GameProcedure.<OnEnter>d__3&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<HotfixEntry.<StartHotfixLogic>d__0>(HotfixEntry.<StartHotfixLogic>d__0&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<LevelEntity.<OnShow>d__15>(LevelEntity.<OnShow>d__15&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<LocalizationExtension.<LoadLanguage>d__2>(LocalizationExtension.<LoadLanguage>d__2&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<PlayerEntity.<SkillAttack>d__50>(PlayerEntity.<SkillAttack>d__50&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<PreloadProcedure.<InitAndLoadLanguage>d__14>(PreloadProcedure.<InitAndLoadLanguage>d__14&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<PreloadProcedure.<LoadConfigsAndDataTables>d__12>(PreloadProcedure.<LoadConfigsAndDataTables>d__12&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<PreloadProcedure.<PreloadAndInitData>d__11>(PreloadProcedure.<PreloadAndInitData>d__11&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<StaticUIComponent.<Start>d__7>(StaticUIComponent.<Start>d__7&)
+		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,object>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,object&)
+		// System.Void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<object>.Start<object>(object&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,object>(Cysharp.Threading.Tasks.UniTask.Awaiter&,object&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,object>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,object&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,object>(System.Runtime.CompilerServices.TaskAwaiter<object>&,object&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<object>(object&)
 		// object& System.Runtime.CompilerServices.Unsafe.As<object,object>(object&)
 		// System.Void* System.Runtime.CompilerServices.Unsafe.AsPointer<object>(object&)
 		// object UnityEngine.Component.GetComponent<object>()

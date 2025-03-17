@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_ResourceCapacity: 16
   m_ResourceExpireTime: 60
   m_ResourcePriority: 0
-  m_UpdatePrefixUri: 
+  m_UpdatePrefixUri: http://localhost:7777/
   m_GenerateReadWriteVersionListLength: 1048576
   m_UpdateRetryCount: 5
   m_InstanceRoot: {fileID: 0}

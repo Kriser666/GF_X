@@ -142,9 +142,6 @@
     <type fullname="UnityEngine.Animator" preserve="all" />
     <type fullname="UnityEngine.AvatarIKGoal" preserve="all" />
   </assembly>
-  <assembly fullname="UnityEngine.AssetBundleModule">
-    <type fullname="UnityEngine.AssetBundle" preserve="all" />
-  </assembly>
   <assembly fullname="UnityEngine.CoreModule">
     <type fullname="Unity.Collections.Allocator" preserve="all" />
     <type fullname="Unity.Collections.NativeArrayOptions" preserve="all" />
@@ -273,14 +270,7 @@
     <type fullname="UnityEngine.CanvasGroup" preserve="all" />
     <type fullname="UnityEngine.RectTransformUtility" preserve="all" />
   </assembly>
-  <assembly fullname="UnityEngine.UnityWebRequestAssetBundleModule">
-    <type fullname="UnityEngine.Networking.DownloadHandlerAssetBundle" preserve="all" />
-    <type fullname="UnityEngine.Networking.UnityWebRequestAssetBundle" preserve="all" />
-  </assembly>
   <assembly fullname="UnityEngine.UnityWebRequestModule">
-    <type fullname="UnityEngine.Networking.UnityWebRequest" preserve="all" />
-    <type fullname="UnityEngine.Networking.UnityWebRequest/Result" preserve="all" />
-    <type fullname="UnityEngine.Networking.UnityWebRequestAsyncOperation" preserve="all" />
     <type fullname="UnityEngine.WWWForm" preserve="all" />
   </assembly>
   <assembly fullname="UnityGameFramework.Runtime">
