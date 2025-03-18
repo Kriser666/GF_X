@@ -142,10 +142,10 @@ public class MenuProcedure : ProcedureBase
                         partSprites[spriteType.Item1] = sprite;
                     }
                 }
-                
+
                 --loadingObjCount;
             }
-            
+
         }
 
         if (loadingObjCount == 0)
@@ -391,6 +391,26 @@ public class MenuProcedure : ProcedureBase
                 VehiclePartTypeEnum curLoopTypeEnum = (VehiclePartTypeEnum)i;
                 ResetPart(curLoopTypeEnum);
             }
+        }
+    }
+
+    // 接收 URL 参数
+    public void OnUrlParamsReceived(string jsonParams)
+    {
+        // 解析 JSON 参数
+        Dictionary<string, string> urlParams = JsonUtility.FromJson<Dictionary<string, string>>(jsonParams);
+
+        // 打印参数
+        foreach (var param in urlParams)
+        {
+            Debug.Log($"Key: {param.Key}, Value: {param.Value}");
+        }
+
+        // 根据参数发送请求到后端
+        if (urlParams.ContainsKey("userId"))
+        {
+            string userId = urlParams["userId"];
+            // StartCoroutine(FetchDataFromBackend(userId));
         }
     }
 }

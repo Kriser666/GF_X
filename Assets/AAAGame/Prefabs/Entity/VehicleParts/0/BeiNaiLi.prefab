@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2755715231796072421}
-  - component: {fileID: 5278713415325724424}
   - component: {fileID: 1643755602410274251}
   - component: {fileID: 8656872936181989476}
   - component: {fileID: 3218248896653852376}
@@ -35,28 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &5278713415325724424
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8456079101245644125}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 9019122969239195568, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
 --- !u!33 &1643755602410274251
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -88,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5988796325442578068, guid: a7f2c7e7f54a2794688ffbe664383112, type: 3}
+  - {fileID: 3836618531524027860, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,3 +99,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa46e6fd894bd04188bdd78bc998e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vehiclePartTypeEnum: 0
+  partId: 0

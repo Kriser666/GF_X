@@ -16,9 +16,6 @@ MonoBehaviour:
   mDataTables:
   - CameraViewTable
   - ColorTable
-  - CombatUnitTable
-  - LevelTable
-  - TestTable
   - VehicleInfoTable
   - VehiclePartTable
   - Core/EntityGroupTable
@@ -36,7 +33,5 @@ MonoBehaviour:
   - Korean
   mProcedures:
   - ChangeSceneProcedure
-  - GameOverProcedure
-  - GameProcedure
   - MenuProcedure
   - PreloadProcedure

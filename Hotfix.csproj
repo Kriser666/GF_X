@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_6000_0_32;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_WEBGL;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;AMPLIFY_SHADER_EDITOR;ENABLE_LOG;DOTWEEN;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_6000_0_32;UNITY_6000_0;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_WEBGL;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;AMPLIFY_SHADER_EDITOR;ENABLE_LOG;DOTWEEN;DISABLE_HYBRIDCLR;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
@@ -73,28 +73,21 @@
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\MainMenu.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ChooseVehicle.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ToastTips.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\EventArgs\PlayerDataChangedEventArgs.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\LanguagesDialog.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIViews.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\MenuUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\PreloadProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ToastTips.Variables.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Entity\BulletEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DOTweenExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ModifyPartComp.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\WebRequestResult.cs" />
     <Compile Include="Assets\AAAGame\Scripts\HotfixEntry.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\LanguagesTable.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Demo\CombatUnitEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyPartComp.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Procedures\ChangeSceneProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\GF.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModHistory.Variables.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Demo\AIEnemyEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\VehiclePartTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\ModifyPartDetailItem.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\GameOverUIForm.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIFormBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelStorageBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CameraViewTable.cs" />
@@ -102,52 +95,36 @@
     <Compile Include="Assets\AAAGame\Scripts\Entity\CarEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ModHistory.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\LevelTable.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\LanguageItem.Variables.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\Item\LanguageItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\ParticleEntity.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameOverUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Camera\ModelRendererCamera.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\ColorTable.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\RatingDialog.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\AwaitParams.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelComponent.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\URLParamsEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\FlowLayoutGroup.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CombatUnitTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\LocalizationTextMesh.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\DOTweenSequence.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\SettingDialog.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataTableExtension.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\CommonDialog.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\GameUIForm.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Demo\Spawnner.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\SettingDialog.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\ScriptableObject\AppConfigs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\AwaitExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\TypeIdPair.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataNodeExtension.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\RatingDialog.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\PartItemSelectedEventArgs.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UITopbar.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\VehiclePartTagItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\MainMenu.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\MenuUIForm.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UIGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehiclePartTagItem.Variables.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Procedures\GameProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\CarDataModel.cs" />
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\GameplayEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SoundExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyPartDetail.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\VariablePool\VariablePoolComponent.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Procedures\GameOverProcedure.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIParams.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIItemObject.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\DownloadResult.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\UtilityEx.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\Core\Const.Groups.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Entity\PlayerEntity.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\GameUIForm.Variables.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\LanguagesDialog.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\RawImageZoneChecker.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifySaved.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\ModifyGame.Variables.cs" />
@@ -167,23 +144,17 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UITable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehicleTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\SettingExtension.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Entity\LevelEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarFloat.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\MH_VehicleHistoryItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ModifyGame.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\SoundGroupTable.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\DataModel\PlayerDataModel.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\UIExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\VehicleInfoTable.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\DataTable\TestTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\Tools\ComponentTool.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\UIVariables\UITopbar.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\VehicleTagItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\TransformExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\Variable\VarVector3Array.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\CameraController.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\UI\ShopUIForm.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Demo\JobsPhysics.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\SampleEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\ChooseVehicle.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Entity\VehiclePart.cs" />
@@ -191,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AAAGame\Scripts\Hotfix.asmdef" />
+    <None Include="Assets\AAAGame\Scripts\link.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

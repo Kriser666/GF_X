@@ -93,7 +93,7 @@ public class CarDataModel : DataModelStorageBase
         var eventArgs = e as GFEventArgs;
         if (eventArgs.EventType == GFEventType.ApplicationQuit)
         {
-            GF.DataModel.ReleaseDataModel<PlayerDataModel>();
+            GF.DataModel.ReleaseDataModel<CarDataModel>();
         }
     }
 

@@ -303,7 +303,6 @@
     <type fullname="UnityGameFramework.Runtime.LoadSceneSuccessEventArgs" preserve="all" />
     <type fullname="UnityGameFramework.Runtime.LoadSceneUpdateEventArgs" preserve="all" />
     <type fullname="UnityGameFramework.Runtime.LocalizationComponent" preserve="all" />
-    <type fullname="UnityGameFramework.Runtime.Log" preserve="all" />
     <type fullname="UnityGameFramework.Runtime.ObjectPoolComponent" preserve="all" />
     <type fullname="UnityGameFramework.Runtime.OpenUIFormFailureEventArgs" preserve="all" />
     <type fullname="UnityGameFramework.Runtime.OpenUIFormSuccessEventArgs" preserve="all" />

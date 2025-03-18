@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8437420380979589876}
   - component: {fileID: 4216842268678561529}
   - component: {fileID: 4795272352538983894}
-  - component: {fileID: 206033392795418313}
   m_Layer: 8
   m_Name: CheKe1
   m_TagString: CheKe
@@ -80,8 +79,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24a06c3ac3193584cb390bc54f83262e, type: 2}
-  - {fileID: 5988796325442578068, guid: a7f2c7e7f54a2794688ffbe664383112, type: 3}
+  - {fileID: 3836618531524027860, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+  - {fileID: -4586085250494992532, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
   - {fileID: -7122844052600959026, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
   - {fileID: 5988796325442578068, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
   - {fileID: -3539787813822367776, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
@@ -106,25 +105,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &206033392795418313
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986864495477717678}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5060444177187149915, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}

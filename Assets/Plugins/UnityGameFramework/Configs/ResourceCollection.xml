@@ -25,24 +25,14 @@
       <Asset Guid="0178fcb869bafef4690d177d31d17db8" ResourceName="Font" />
       <Asset Guid="0218a60a340def847924ae0864896cc9" ResourceName="SharedMaterials" />
       <Asset Guid="0270052d20b603547b304b0ecc0601cf" ResourceName="Language" />
-      <Asset Guid="02cbc534a52481241872d42107e29c57" ResourceName="Entity" />
       <Asset Guid="034b209892546994d8037e72ca910089" ResourceName="Language" />
       <Asset Guid="046891844aa34f5408e8c16c128d1200" ResourceName="SharedAssets" />
       <Asset Guid="073b4cca8bda8cf438ac3dfe7a39a235" ResourceName="DataTable" />
-      <Asset Guid="086257c614c5dfa44bc45d0adfb01a6e" ResourceName="Textures" />
-      <Asset Guid="09045e73e44b1d944bafe57ece728071" ResourceName="UI" />
-      <Asset Guid="0b69b108d75f47940881a60045f21976" ResourceName="UI" />
-      <Asset Guid="0d33a0f4b650e864db32ce42abe2602f" ResourceName="Textures" />
-      <Asset Guid="0d39ed0185ca8e74283374bdb1c95e2b" ResourceName="Entity" />
-      <Asset Guid="0de36460c33ae184a8e278b4a8071ada" ResourceName="Textures" />
       <Asset Guid="124c112a6e8f1a54e8b0870e881b56d8" ResourceName="Font" />
       <Asset Guid="128e987d567d4e2c824d754223b3f3b0" ResourceName="Font" />
       <Asset Guid="137e4e098c035a844801f842998ff220" ResourceName="SharedMaterials" />
       <Asset Guid="13b0b1255d7d6cf44a4d1987723460ef" ResourceName="ScriptableAssets" />
       <Asset Guid="14eb328de4b8eb245bb7cea29e4ac00b" ResourceName="Font" />
-      <Asset Guid="1500c34082283624eb13f288acaccf28" ResourceName="Textures" />
-      <Asset Guid="150aee38b5d848b42b75593618992bb7" ResourceName="SharedAssets" />
-      <Asset Guid="155f67fd8750f8e4e83c8efb1731f3a0" ResourceName="SharedAssets" />
       <Asset Guid="15ab4285c2fbcc34fa322013e426ff78" ResourceName="Entity" />
       <Asset Guid="16c7c99f6cc1d3f44b12735151c877a5" ResourceName="SharedAssets" />
       <Asset Guid="17809c14ab03d914fbb791e882587415" ResourceName="DataTable" />
@@ -50,7 +40,6 @@
       <Asset Guid="17c3f565cf73d4740bfaed4f87e98fa3" ResourceName="Language" />
       <Asset Guid="18868d941a71f02498051516873367ce" ResourceName="Scene" />
       <Asset Guid="18883705d207aec4d82482188aeb45df" ResourceName="SharedAssets" />
-      <Asset Guid="18d313816561eb94f883cc5522c2158b" ResourceName="UI" />
       <Asset Guid="1a26b77d30eeb9244b1237c3038ffa0b" ResourceName="Sprites" />
       <Asset Guid="1b586e20031d8b44a9495620988ad3dc" ResourceName="HotfixDlls" />
       <Asset Guid="1caa4c6fdc3281642b46f7c82c497dc5" ResourceName="Core" />
@@ -62,55 +51,43 @@
       <Asset Guid="215bda50881f9a54581bac5ff23faa2c" ResourceName="SharedAssets" />
       <Asset Guid="230b0c809e3e6a647af26c803aa90467" ResourceName="SharedAssets" />
       <Asset Guid="24759b2706d0cad46af764fce25cdc09" ResourceName="UI" />
-      <Asset Guid="24a06c3ac3193584cb390bc54f83262e" ResourceName="SharedAssets" />
+      <Asset Guid="24a06c3ac3193584cb390bc54f83262e" ResourceName="Textures" />
       <Asset Guid="25ea2c912b5bfbb40833fafde7e57ee4" ResourceName="Entity" />
-      <Asset Guid="28e53c1c03acccb4aa11d703bb2a4b15" ResourceName="Textures" />
       <Asset Guid="2b82d955af97e1547a4af70c531b91d4" ResourceName="SharedAssets" />
       <Asset Guid="2ba9548ac434f40acb9981988076557d" ResourceName="SharedAssets" />
-      <Asset Guid="2c78f416dca004249a1530266216114a" ResourceName="SharedAssets" />
+      <Asset Guid="2c78f416dca004249a1530266216114a" ResourceName="Sprites" />
       <Asset Guid="2cdf1b85fd520ef46b11f580e9443e78" ResourceName="Language" />
       <Asset Guid="2e498d1c8094910479dc3e1b768306a4" ResourceName="Font" />
       <Asset Guid="2e9047e5d41122a42941f2db8472a0c9" ResourceName="DataTable" />
       <Asset Guid="306b1345c09f78c49b773995e3c3ce60" ResourceName="Sprites" />
-      <Asset Guid="30d901f45c86b1e439f7a4058e0024a4" ResourceName="Textures" />
       <Asset Guid="3317809a6d97a0d488f8077c87ef01b8" ResourceName="Sprites" />
       <Asset Guid="34dd35d924ad8dc419aa1ec5edf0966e" ResourceName="SharedAssets" />
       <Asset Guid="359edba797d12fd4aa186f1ed4ffc35f" ResourceName="SharedAssets" />
       <Asset Guid="381dcb09d5029d14897e55f98031fca5" ResourceName="Font" />
-      <Asset Guid="391b45b7834e1d1429519247488a6a4f" ResourceName="Textures" />
       <Asset Guid="3997e2241185407d80309a82f9148466" ResourceName="Font" />
       <Asset Guid="3d6fc5347ef115746af70b4b42a7f119" ResourceName="DataTable" />
       <Asset Guid="3e4042d6aaec3e342930ad6878e9f8f4" ResourceName="SharedAssets" />
       <Asset Guid="3f5b5dff67a942289a9defa416b206f3" ResourceName="Font" />
-      <Asset Guid="3fdcbb5b7d730f341bf585839b5502a5" ResourceName="UI" />
       <Asset Guid="407bc68d299748449bbf7f48ee690f8d" ResourceName="Font" />
       <Asset Guid="42186cf1bd564254b9d30c2d5eac719f" ResourceName="SharedAssets" />
       <Asset Guid="44e1817123fcdec44bca0ef5276aad07" ResourceName="UI" />
       <Asset Guid="452a0d731dabedd4eba7cca5337f4227" ResourceName="SharedAssets" />
       <Asset Guid="466f1258cbbf8be4ab6ec1847ff62ab2" ResourceName="SharedAssets" />
       <Asset Guid="4765e2c910f421e4bb781455dfaba8b9" ResourceName="SharedAssets" />
-      <Asset Guid="47898ae6a0dbd6146949c86694773439" ResourceName="Entity" />
-      <Asset Guid="480882b9d3163104dbd70a79f5f3c81b" ResourceName="Textures" />
       <Asset Guid="48bb5f55d8670e349b6e614913f9d910" ResourceName="Font" />
-      <Asset Guid="4938ad916391e904dbb55c8939ce6de1" ResourceName="SharedAssets" />
       <Asset Guid="4b2fc44f081aee4478606e6da1ddf441" ResourceName="SharedAssets" />
       <Asset Guid="4d9df7336d07eec4a95b89ac70eb06ea" ResourceName="DataTable" />
       <Asset Guid="4dbfc7b17b7deac47bc41de05bb1ffa4" ResourceName="SharedAssets" />
-      <Asset Guid="4eedb0b3a84618342a7a52f3f95cd92f" ResourceName="Textures" />
       <Asset Guid="51b07d3c55b95d349809ba5506364b61" ResourceName="UI" />
-      <Asset Guid="52b158c013da40a4bb079787b8483318" ResourceName="Textures" />
       <Asset Guid="53b9781b792f33841a6a088ec392fbd8" ResourceName="SharedAssets" />
       <Asset Guid="587466d76b832b24883e5b64a9e9bff1" ResourceName="DataTable" />
       <Asset Guid="588ff96c6882fb3448095d7a881bced3" ResourceName="SharedAssets" />
-      <Asset Guid="589f73c955dd3a345a988b0e6797f940" ResourceName="SharedAssets" />
-      <Asset Guid="598c081bd6eaf40bfba9db8c9e2862a9" ResourceName="SharedAssets" />
+      <Asset Guid="598c081bd6eaf40bfba9db8c9e2862a9" ResourceName="Sprites" />
       <Asset Guid="599cf2969426e694a8be10416c6a69ff" ResourceName="SharedAssets" />
       <Asset Guid="5d19fed2387fc3c4ca37fc9bf11e7190" ResourceName="Language" />
       <Asset Guid="5f18584c5bd6cba449a9c337876a9724" ResourceName="SharedAssets" />
       <Asset Guid="60088dd3b0214654ba9150c7fdda1a8d" ResourceName="DataTable" />
-      <Asset Guid="62c476aab3c269544a50a151898308fa" ResourceName="Textures" />
       <Asset Guid="6367ef9a0780b684aacb56b25335e960" ResourceName="SharedAssets" />
-      <Asset Guid="638ccbd792437b74b9d9ed9e8491970f" ResourceName="Textures" />
       <Asset Guid="63c23d139575e7048b4b1ec090998bc7" ResourceName="SharedAssets" />
       <Asset Guid="63f5f6812a8f9724cac670756d524631" ResourceName="DataTable" />
       <Asset Guid="644e314e39b3b47418b39d777532e9eb" ResourceName="SharedAssets" />
@@ -119,9 +96,6 @@
       <Asset Guid="66210d36a4cf7514e8d9e60ae298c2c4" ResourceName="DataTable" />
       <Asset Guid="664bea98873ad2c408019f71022e745b" ResourceName="Entity" />
       <Asset Guid="66e4b7f6475bffe42828faa0c2911ed7" ResourceName="Font" />
-      <Asset Guid="6792e8ab386017841ab27626b9753bec" ResourceName="UI" />
-      <Asset Guid="67e950e3935527449bf4003cc880c14f" ResourceName="Textures" />
-      <Asset Guid="6845c871c1c64e54d9c9b6dfc938d7a7" ResourceName="Materials" />
       <Asset Guid="68e6db2ebdc24f95958faec2be5558d6" ResourceName="SharedAssets" />
       <Asset Guid="694c3a407d19140498a0569b3dd09cc3" ResourceName="SharedMaterials" />
       <Asset Guid="6a4e2eebc9726fd49952a02518d04a6b" ResourceName="UI" />
@@ -130,92 +104,66 @@
       <Asset Guid="6e59c59b81ab47f9b6ec5781fa725d2c" ResourceName="Font" />
       <Asset Guid="708661dd72ccdcd49b17365cbfa1d01a" ResourceName="Font" />
       <Asset Guid="729e9ecc535a241d49cdba534c497af4" ResourceName="SharedAssets" />
-      <Asset Guid="73d761facdd7c4d45a23ca7205da41ca" ResourceName="Textures" />
       <Asset Guid="73d884ecdd851124aaca044feebbe87d" ResourceName="DataTable" />
-      <Asset Guid="743d91e4e5cb9bc478f0ab99fbd8f7d1" ResourceName="UI" />
       <Asset Guid="74b06ad59906133448a2fe06366e4889" ResourceName="Language" />
-      <Asset Guid="7843747c98c4f0c41902af99a8284bd8" ResourceName="Textures" />
       <Asset Guid="79459efec17a4d00a321bdcc27bbc385" ResourceName="Font" />
-      <Asset Guid="7c2918c9b676be14f82110fabc02a35f" ResourceName="Textures" />
       <Asset Guid="7c2ac2c3cbac3544a8edfa9b2075e916" ResourceName="UI" />
-      <Asset Guid="7d8226829a9fde34c89b7eb0e1a4e2bc" ResourceName="Materials" />
-      <Asset Guid="7fa753003c0b5b24faded9b639aabaef" ResourceName="UI" />
       <Asset Guid="805dabdb5924b2549a289a2be8082257" ResourceName="SharedAssets" />
       <Asset Guid="80d521ebcadf93f4593a9ac36619709b" ResourceName="Materials" />
       <Asset Guid="8193e55e460926a4baf09977d8df7773" ResourceName="DataTable" />
       <Asset Guid="81ed03a317f6d6a43aa694d24e6a8f64" ResourceName="DataTable" />
-      <Asset Guid="82897f91c1a5cd041a4b54516ac60412" ResourceName="Entity" />
       <Asset Guid="83bdadb9e1d24a94e8498def13d4804c" ResourceName="Language" />
       <Asset Guid="83cb16cacb31daa4a97bbee73cc416b4" ResourceName="SharedAssets" />
       <Asset Guid="84a6440c0fd8e974e8986ff4df2d489f" ResourceName="Language" />
       <Asset Guid="85187c2149c549c5b33f0cdb02836b17" ResourceName="Font" />
-      <Asset Guid="879016ef1f756e74081c108699b52383" ResourceName="Entity" />
       <Asset Guid="897ce9a79a8623d4bb170b2d5885524b" ResourceName="SharedAssets" />
       <Asset Guid="8a4e2875174034b4aabb43c9ca9028a1" ResourceName="SharedAssets" />
-      <Asset Guid="8ce080d6b39aa264a98b2fb6ddd59b21" ResourceName="SharedAssets" />
-      <Asset Guid="8e978eccab638cf429b4757490af6554" ResourceName="Entity" />
+      <Asset Guid="8ce080d6b39aa264a98b2fb6ddd59b21" ResourceName="Shader" />
       <Asset Guid="8f05276190cf498a8153f6cbe761d4e6" ResourceName="Font" />
       <Asset Guid="8f3b0f75e15e96148a439dfc22b6bfae" ResourceName="SharedAssets" />
       <Asset Guid="8f586378b4e144a9851e7b34d9b748ee" ResourceName="Font" />
       <Asset Guid="900d951c84c121c4896d4ff71fa2f8ab" ResourceName="SharedAssets" />
-      <Asset Guid="92cb04501693359419a839b8d33aace7" ResourceName="UI" />
       <Asset Guid="93e5244c613569f4ca34418e4a2b59b4" ResourceName="DataTable" />
-      <Asset Guid="953c813615820374092fdc8fe9796ded" ResourceName="Textures" />
-      <Asset Guid="9665623cfc557f14996db3e07d52f241" ResourceName="Textures" />
       <Asset Guid="96de908384869cd409c75efa351d5edf" ResourceName="Font" />
       <Asset Guid="97a5fef539f3a814d92d4c8006b5487e" ResourceName="SharedAssets" />
       <Asset Guid="98662c21c0b96bc48a6440a4fe486556" ResourceName="DataTable" />
       <Asset Guid="99c5fd9a48e8cd844a05f151a781d2f1" ResourceName="SharedAssets" />
       <Asset Guid="9acbc6465cea7234d986cec615965aef" ResourceName="DataTable" />
       <Asset Guid="9b88253d4aa870149b7b6a7da5fae9fd" ResourceName="SharedAssets" />
-      <Asset Guid="9d7e07a001ef1434e875b56c8c70e017" ResourceName="SharedAssets" />
       <Asset Guid="9deca69555354744b9e1fbdffb007bd8" ResourceName="SharedAssets" />
-      <Asset Guid="9f3e4c281caf98043a505990d7952f3d" ResourceName="Textures" />
-      <Asset Guid="9fdf2423376c44500a69de40dd83ef49" ResourceName="SharedAssets" />
+      <Asset Guid="9fdf2423376c44500a69de40dd83ef49" ResourceName="Sprites" />
       <Asset Guid="a02a7d8c237544f1962732b55a9aebf1" ResourceName="Font" />
       <Asset Guid="a1f86d33047f244769ac61e2fbffdba8" ResourceName="SharedAssets" />
       <Asset Guid="a29db755b6ae1104a94df297de29cfc8" ResourceName="SharedAssets" />
       <Asset Guid="a3d800b099a06e0478fb790c5e79057a" ResourceName="Font" />
       <Asset Guid="a6c071229b464494e8ba98e4d049c05c" ResourceName="UI" />
       <Asset Guid="a71f52fff8400174f88091d0c591d092" ResourceName="SharedAssets" />
-      <Asset Guid="a7f2c7e7f54a2794688ffbe664383112" ResourceName="SharedAssets" />
-      <Asset Guid="a8043c8d11e46d648bb702e4a3572406" ResourceName="Entity" />
-      <Asset Guid="a846445c7fb127a4799757061ea7901a" ResourceName="Textures" />
       <Asset Guid="a9a850e9fdbfa7c488b5134a36f6c8fa" ResourceName="SharedMaterials" />
-      <Asset Guid="aa1549ffda39ad54ca5afb3ff57a3608" ResourceName="SharedAssets" />
       <Asset Guid="aa1f077a2f997a94898bdf9ac76e7ba4" ResourceName="Materials" />
-      <Asset Guid="ab9321df4ad263e4295e11d38f51d750" ResourceName="Textures" />
       <Asset Guid="ac167aab017a9d245b1c8b92c0c49b16" ResourceName="SharedAssets" />
       <Asset Guid="b07a3483c4b3a184c880b0c94de981c1" ResourceName="SharedAssets" />
       <Asset Guid="b3176e63c9896c748964f48c12371cd5" ResourceName="Sprites" />
       <Asset Guid="b57f925121ffa1246bcf57c69d5cdfd2" ResourceName="BackGroundGame" />
       <Asset Guid="b729a2582200e9945b12cf21855e3b73" ResourceName="Shader" />
-      <Asset Guid="b7553642051b30d4abc9e96d19f42ca0" ResourceName="Textures" />
       <Asset Guid="b8e0cb0ed445e4244a941452e102ecad" ResourceName="SharedAssets" />
       <Asset Guid="b8f790017d833da45a5aec7344ed4f97" ResourceName="SharedAssets" />
-      <Asset Guid="b9b257dbe6e8147fc8a45226e735b6e1" ResourceName="SharedAssets" />
+      <Asset Guid="b9b257dbe6e8147fc8a45226e735b6e1" ResourceName="Sprites" />
       <Asset Guid="bafec7443994f4ca888ddaaf0b29f99b" ResourceName="SharedAssets" />
       <Asset Guid="bc1ede39bf3643ee8e493720e4259791" ResourceName="Font" />
-      <Asset Guid="bd893d368f916be4ab80a4c2a5127c5d" ResourceName="Textures" />
       <Asset Guid="c1bf70ce98a49bd4f8b60847ce98cfa8" ResourceName="Language" />
-      <Asset Guid="c1dfd467e36e5e34591613659b924d33" ResourceName="Textures" />
       <Asset Guid="c334973cef89a9840b0b0c507e0377ab" ResourceName="Font" />
-      <Asset Guid="c41005c129ba4d66911b75229fd70b45" ResourceName="SharedAssets" />
+      <Asset Guid="c41005c129ba4d66911b75229fd70b45" ResourceName="Font" />
       <Asset Guid="c4e839cf3d001e0499336fb7f53c0310" ResourceName="DataTable" />
       <Asset Guid="c5b58fbbeef39d14da3d0728e671db0c" ResourceName="Textures" />
-      <Asset Guid="c7a26b8d1ff63834298841254b2332c4" ResourceName="UI" />
       <Asset Guid="c7c48ed8c12d9154bbbfa9adfe8485d5" ResourceName="SharedAssets" />
       <Asset Guid="c7c500793b6eb7d4ab5a665b01b0763a" ResourceName="SharedAssets" />
-      <Asset Guid="c8cdee888c64a6d43aaef7ff227c0371" ResourceName="Materials" />
       <Asset Guid="c8d12adcee749c344b8117cf7c7eb912" ResourceName="Font" />
       <Asset Guid="ca2ed216f98028c4dae6c5224a952b3c" ResourceName="Font" />
       <Asset Guid="ca4765c7a3113644e9f87e202a7ff91d" ResourceName="Scene" />
-      <Asset Guid="ce8c514bb8f800a4bab1b07b067afffc" ResourceName="Entity" />
-      <Asset Guid="cf81c85f95fe47e1a27f6ae460cf182c" ResourceName="SharedAssets" />
+      <Asset Guid="cf81c85f95fe47e1a27f6ae460cf182c" ResourceName="Font" />
       <Asset Guid="cfa643d9bb51c5440b8d98c4e13d00b9" ResourceName="DataTable" />
       <Asset Guid="d21099ed468b31c448b2db0f73e744b8" ResourceName="UI" />
-      <Asset Guid="d228604ab6373411fac2dbf1e0e215d1" ResourceName="SharedAssets" />
-      <Asset Guid="d6ecbf62a86c5a743be725f48260ac7e" ResourceName="UI" />
+      <Asset Guid="d228604ab6373411fac2dbf1e0e215d1" ResourceName="Sprites" />
       <Asset Guid="d82c1b31c7e74239bff1220585707d2b" ResourceName="Font" />
       <Asset Guid="d930090c0cd643c7b55f19a38538c162" ResourceName="Font" />
       <Asset Guid="d946c3960d3e44847a45f42524ec6aeb" ResourceName="Config" />
@@ -223,39 +171,25 @@
       <Asset Guid="dd49d0e931c6ab4498d652aff8dcdf6b" ResourceName="DataTable" />
       <Asset Guid="dd89cf5b9246416f84610a006f916af7" ResourceName="Font" />
       <Asset Guid="df19663c08a1326418afe1cf06a701c2" ResourceName="SharedAssets" />
-      <Asset Guid="dffef66376be4fa480fb02b19edbe903" ResourceName="SharedAssets" />
-      <Asset Guid="e09d64781b233da4c8e75adde91c9652" ResourceName="Entity" />
+      <Asset Guid="dffef66376be4fa480fb02b19edbe903" ResourceName="Font" />
       <Asset Guid="e1a613ebd6f1d6f4a825d14981f3e88d" ResourceName="DataTable" />
       <Asset Guid="e3265ab4bf004d28a9537516768c1c75" ResourceName="Font" />
       <Asset Guid="e654726d8f557ef4ca2996e321af04e5" ResourceName="DataTable" />
       <Asset Guid="e67df18bacd8cf34d9e51754d6877e0e" ResourceName="Sprites" />
       <Asset Guid="e73a58f6e2794ae7b1b7e50b7fb811b0" ResourceName="Font" />
-      <Asset Guid="e810e60b065f1ac43aa3e978706c74d2" ResourceName="Textures" />
       <Asset Guid="e81571591a3393745a08aee12b114309" ResourceName="HotfixDlls" />
-      <Asset Guid="e83b22901fc3a0143abd3e3bbc2a44e4" ResourceName="SharedAssets" />
+      <Asset Guid="e83b22901fc3a0143abd3e3bbc2a44e4" ResourceName="Textures" />
       <Asset Guid="ea0fc0ce83f910d4fb5d593d16c3020c" ResourceName="SharedAssets" />
       <Asset Guid="ea540d90bf3b2b24786ac7eada08f4de" ResourceName="SharedAssets" />
       <Asset Guid="eaeecdabb574f48e6b92b0234eacc626" ResourceName="SharedAssets" />
-      <Asset Guid="eb42ed25e3be3e54fb8a46d46b3664a1" ResourceName="Textures" />
       <Asset Guid="ebaf53b8ce7536e45b692acd75fc4ab2" ResourceName="SharedAssets" />
-      <Asset Guid="ec2e015368c4fcb4caff4667d134eec5" ResourceName="SharedAssets" />
-      <Asset Guid="ec835c8e8455a4e3eab94be7baf9c04a" ResourceName="UI" />
       <Asset Guid="eced114bdc81344d3bda68be1daa3f7a" ResourceName="SharedAssets" />
-      <Asset Guid="edc31c5ae79d71f42a50cac11982f0dd" ResourceName="Textures" />
-      <Asset Guid="ee935504f42f2264781b09a1ba7a1fd4" ResourceName="Textures" />
-      <Asset Guid="f0092f10ee3c90145aa78d7b2f2fc173" ResourceName="Textures" />
       <Asset Guid="f1a76f95358d94ca080a3e48691f8e5f" ResourceName="SharedAssets" />
-      <Asset Guid="f3452ee04b9e65f42b3f01b16a480d58" ResourceName="Materials" />
-      <Asset Guid="f4e82365bfbcba84f9f6b4fe14cd9c8a" ResourceName="Textures" />
       <Asset Guid="f63d574838ccfb44f84acc05fed0af48" ResourceName="Font" />
       <Asset Guid="f7ada0af4f174f0694ca6a487b8f543d" ResourceName="Font" />
-      <Asset Guid="f952c082cb03451daed3ee968ac6c63e" ResourceName="SharedAssets" />
-      <Asset Guid="fa7f36c71b9e8fa4798df3a931c2fd92" ResourceName="SharedAssets" />
+      <Asset Guid="f952c082cb03451daed3ee968ac6c63e" ResourceName="Font" />
       <Asset Guid="fade42e8bc714b018fac513c043d323b" ResourceName="Font" />
-      <Asset Guid="fb3663d475cbeb74ba97e229b86d2504" ResourceName="Entity" />
-      <Asset Guid="fca0697f771517f41a13845450b0f97a" ResourceName="Entity" />
       <Asset Guid="fd6f9ae5eba339e4f88c00782aadfa70" ResourceName="Language" />
-      <Asset Guid="fe373b03d67713845a3f0b4a83ad081a" ResourceName="SharedAssets" />
       <Asset Guid="fe393ace9b354375a9cb14cdbbc28be4" ResourceName="Font" />
     </Assets>
   </ResourceCollection>
