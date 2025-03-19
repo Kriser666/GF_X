@@ -25,6 +25,8 @@ public static partial class Const
     public static readonly string CUR_TOTAL_POWER = "CUR_TOTAL_POWER";
     public static readonly string CUR_TOTAL_BRAKE = "CUR_TOTAL_BRAKE";
     public static readonly string CUR_TOTAL_ACCELERATION = "CUR_TOTAL_ACCELERATION";
+    // Url参数
+    public static readonly string URL_PARAMS = "URL_PARAMS";
     // 存档的请求地址
     public static readonly string SAVED_GAMES_URL = "{0}";
 }

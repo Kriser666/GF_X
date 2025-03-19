@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using GameFramework;
 using System;
 using GameFramework.Resource;
+using System.Runtime.InteropServices;
 
 public class PreloadProcedure : ProcedureBase
 {
@@ -17,9 +18,22 @@ public class PreloadProcedure : ProcedureBase
     private bool preloadAllCompleted;
     private float progressSmoothSpeed = 10f;
     private int m_DataTablesCount;
+    IFsm<IProcedureManager> procedure;
+#if UNITY_WEBGL
+    // 导入JS函数
+    [DllImport("__Internal")]
+    private static extern IntPtr GetUrlParams();
+
+    [DllImport("__Internal")]
+    private static extern void FreeUrlParams(IntPtr buffer);
+
+    public static string UrlMsg;
+#endif
+
     protected override void OnEnter(IFsm<IProcedureManager> procedureOwner)
     {
         base.OnEnter(procedureOwner);
+        procedure = procedureOwner;
         GF.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
         GF.Event.Subscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
         GF.Event.Subscribe(LoadDataTableSuccessEventArgs.EventId, OnLoadDataTableSuccess);
@@ -31,6 +45,15 @@ public class PreloadProcedure : ProcedureBase
 
         InitAppSettings();
         PreloadAndInitData();
+#if UNITY_WEBGL
+        GetUrlParamsInternal();
+#elif UNITY_EDITOR || UNITY_EDITOR_64 || UNITY_EDITOR_WIN
+        UrlMsg = "?simulate_param=editor_test"; // 编辑器模拟
+#else
+        UrlMsg = "";
+#endif
+
+        procedure.SetData<VarString>(Const.URL_PARAMS, UrlMsg);
     }
 
 
@@ -263,4 +286,28 @@ public class PreloadProcedure : ProcedureBase
 
         GF.LogError($"Load Config Failed:{args.ErrorMessage}");
     }
+
+#if UNITY_WEBGL
+    // 接收 URL 参数
+    public void GetUrlParamsInternal()
+    {
+        UrlMsg = "";
+        IntPtr buffer = IntPtr.Zero;
+        try
+        {
+            buffer = GetUrlParams();
+            UrlMsg = Marshal.PtrToStringUTF8(buffer);
+        }
+        catch (Exception e)
+        {
+            UrlMsg = "[Exception:]" + e.Message;
+        }
+        finally
+        {
+            if (buffer != IntPtr.Zero)
+                FreeUrlParams(buffer);
+        }
+        Log.Debug("====== ====== ====== >" + UrlMsg);
+    }
+#endif
 }

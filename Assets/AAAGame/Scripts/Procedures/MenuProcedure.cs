@@ -27,6 +27,8 @@ public class MenuProcedure : ProcedureBase
     public List<Sprite> CarSprites { get { return carSprites; } }
     public List<Sprite> CarLogoSprites { get { return carLogoSprites; } }
     public List<Sprite> PartSprites { get { return partSprites; } }
+    private string urlMsg;
+    public string UrlMsg { get { return urlMsg; } }
     protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
     {
         base.OnInit(procedureOwner);
@@ -35,6 +37,13 @@ public class MenuProcedure : ProcedureBase
     {
         base.OnEnter(procedureOwner);
         procedure = procedureOwner;
+#if UNITY_WEBGL
+        urlMsg = procedure.GetData<VarString>(Const.URL_PARAMS);
+#elif UNITY_EDITOR || UNITY_EDITOR_64 || UNITY_EDITOR_WIN
+        urlMsg = "?simulate_param=editor_test"; // 编辑器模拟
+#else
+        UrlMsg = "";
+#endif
         progress = 0f;
         loadingObjCount = 0;
         totalObjCount = 0;
@@ -70,6 +79,13 @@ public class MenuProcedure : ProcedureBase
         GF.Event.Subscribe(ShowEntityFailureEventArgs.EventId, EntityOpenedFailed);
     }
 
+    private void CheckAssetsAllLoaded()
+    {
+        if (loadingObjCount == 0)
+        {
+            GF.BuiltinView.HideLoadingProgress();
+        }
+    }
 
     private void LoadAssetFailed(string assetName, LoadResourceStatus status, string errorMessage, object userData)
     {
@@ -97,16 +113,14 @@ public class MenuProcedure : ProcedureBase
             // CameraController.Instance.SetFollowTarget(carEntity.CachedTransform);
             // CameraController.Instance.SetCameraView(10, false);
 
-            progress += 1.0f / totalObjCount;
+            progress += (totalObjCount - loadingObjCount) / (float)totalObjCount;
             GF.BuiltinView.SetLoadingProgress(progress);
-            --loadingObjCount;
         }
         else if (asset is GameObject go) // 加载的背景预制体
         {
             GameObject gameObject = Object.Instantiate(go);
             gameObject.name = "GameBackGround";
             gameBackGround = gameObject;
-            --loadingObjCount;
         }
         else if (asset is Texture2D texture) // 背景的贴图
         {
@@ -143,15 +157,46 @@ public class MenuProcedure : ProcedureBase
                     }
                 }
 
-                --loadingObjCount;
             }
-
         }
-
-        if (loadingObjCount == 0)
+        else if (asset is Sprite sprite) // 背景的贴图
         {
-            GF.BuiltinView.HideLoadingProgress();
+            if (sprite != null)
+            {
+
+                if (userData is string t)
+                {
+                    LevelBackGround levelBackGround = gameBackGround.GetComponent<LevelBackGround>();
+                    if (t == "BackGroundSprite")
+                    {
+                        levelBackGround.ChangeBackGroundSprite(sprite);
+                    }
+                }
+                else if (userData is (int, string))
+                {
+                    // ID对应的图的类型
+                    (int, string) spriteType = ((int, string))userData;
+
+                    // 汽车缩略图
+                    if (spriteType.Item2 == "Car")
+                    {
+                        carSprites[spriteType.Item1] = sprite;
+                    }
+                    else if (spriteType.Item2 == "CarLogo")
+                    {
+                        carLogoSprites[spriteType.Item1] = sprite;
+                    }
+                    // 部件缩略图
+                    else if (spriteType.Item2 == "Part")
+                    {
+                        partSprites[spriteType.Item1] = sprite;
+                    }
+                }
+
+            }
         }
+        --loadingObjCount;
+        CheckAssetsAllLoaded();
     }
 
     private void EntityOpenedFailed(object sender, GameEventArgs e)
@@ -175,9 +220,9 @@ public class MenuProcedure : ProcedureBase
             // 不想改装
             if (modifyId == -1)
             {
-                progress += 1.0f / totalObjCount;
+                progress += (totalObjCount - loadingObjCount) / (float)totalObjCount;
                 GF.BuiltinView.SetLoadingProgress(progress);
-                --loadingObjCount;
+                ;
             }
             else
             {
@@ -192,7 +237,8 @@ public class MenuProcedure : ProcedureBase
                 }
             }
         }
-
+        --loadingObjCount;
+        CheckAssetsAllLoaded();
         GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetTexturePath("RenderTextures/CarRendTex.renderTexture"), assetCallbacks);
 
     }
@@ -220,9 +266,10 @@ public class MenuProcedure : ProcedureBase
             ++loadingObjCount;
             ++totalObjCount;
         }
-        progress += 1.0f / totalObjCount;
+        progress += (totalObjCount - loadingObjCount) / (float)totalObjCount;
         GF.BuiltinView.SetLoadingProgress(progress);
         --loadingObjCount;
+        CheckAssetsAllLoaded();
     }
 
     protected override void OnLeave(IFsm<IProcedureManager> procedureOwner, bool isShutdown)
@@ -394,23 +441,4 @@ public class MenuProcedure : ProcedureBase
         }
     }
 
-    // 接收 URL 参数
-    public void OnUrlParamsReceived(string jsonParams)
-    {
-        // 解析 JSON 参数
-        Dictionary<string, string> urlParams = JsonUtility.FromJson<Dictionary<string, string>>(jsonParams);
-
-        // 打印参数
-        foreach (var param in urlParams)
-        {
-            Debug.Log($"Key: {param.Key}, Value: {param.Value}");
-        }
-
-        // 根据参数发送请求到后端
-        if (urlParams.ContainsKey("userId"))
-        {
-            string userId = urlParams["userId"];
-            // StartCoroutine(FetchDataFromBackend(userId));
-        }
-    }
 }

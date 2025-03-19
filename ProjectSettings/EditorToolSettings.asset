@@ -17,7 +17,8 @@ MonoBehaviour:
   CompressImgToolOutputDir: CompressImageTool\ImgCompressedDir
   CompressImgToolKeys:
   - xxxx
-  CompressImgToolItemList: []
+  CompressImgToolItemList:
+  - {fileID: 102900000, guid: 35134e394ede1344a98da1852815ee12, type: 3}
   CompressImgToolOffline: 1
   CompressImgToolFastLv: 1
   CompressImgToolQualityLv: 80

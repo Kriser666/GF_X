@@ -100,7 +100,6 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\ColorTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\AwaitExtension\AwaitParams.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelComponent.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Entity\URLParamsEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\FlowLayoutGroup.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CombatUnitTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Common\LocalizationTextMesh.cs" />
