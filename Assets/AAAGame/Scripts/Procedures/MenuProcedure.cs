@@ -29,6 +29,8 @@ public class MenuProcedure : ProcedureBase
     public List<Sprite> PartSprites { get { return partSprites; } }
     private string urlMsg;
     public string UrlMsg { get { return urlMsg; } }
+    // 底座的实体ID
+    private int pedestalEntityId;
     protected override void OnInit(IFsm<IProcedureManager> procedureOwner)
     {
         base.OnInit(procedureOwner);
@@ -48,6 +50,7 @@ public class MenuProcedure : ProcedureBase
         loadingObjCount = 0;
         totalObjCount = 0;
         carEntityId = -1;
+        pedestalEntityId = -2;
         GF.BuiltinView.ShowLoadingProgress(progress);
         vehicleInfoTable = GF.DataTable.GetDataTable<VehicleInfoTable>();
         carSprites = new(vehicleInfoTable.Count);
@@ -65,6 +68,7 @@ public class MenuProcedure : ProcedureBase
             partSprites.Add(null);
         }
         ShowMenu();// 加载菜单
+        ShowPedestal(); // 加载底座
         assetCallbacks = new(LoadAssetSucceed, LoadAssetFailed);
         ++loadingObjCount;
         totalObjCount = 5;
@@ -222,7 +226,6 @@ public class MenuProcedure : ProcedureBase
             {
                 progress += (totalObjCount - loadingObjCount) / (float)totalObjCount;
                 GF.BuiltinView.SetLoadingProgress(progress);
-                ;
             }
             else
             {
@@ -236,10 +239,11 @@ public class MenuProcedure : ProcedureBase
                     }
                 }
             }
+
+            GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetTexturePath("RenderTextures/CarRendTex.renderTexture"), assetCallbacks);
         }
         --loadingObjCount;
         CheckAssetsAllLoaded();
-        GF.Resource.LoadAsset(UtilityBuiltin.AssetsPath.GetTexturePath("RenderTextures/CarRendTex.renderTexture"), assetCallbacks);
 
     }
 
@@ -440,5 +444,17 @@ public class MenuProcedure : ProcedureBase
             }
         }
     }
-
+    /// <summary>
+    /// 显示底座
+    /// </summary>
+    public void ShowPedestal()
+    {
+        if (!GF.Entity.HasEntity(pedestalEntityId))
+        {
+            var pedestalParams = EntityParams.Create(new(0f, -2.7f, 0f), Vector3.zero, Vector3.one);
+            pedestalEntityId = GF.Entity.ShowEntity<PedestalEntity>(PedestalEntity.PREFAB_NAME, Const.EntityGroup.Vehicle, pedestalParams);
+            ++loadingObjCount;
+            ++totalObjCount;
+        }
+    }
 }

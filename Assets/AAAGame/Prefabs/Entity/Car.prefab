@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 293555179964105881}
-  - component: {fileID: 1303602826507152057}
   m_Layer: 8
   m_Name: Car
   m_TagString: Untagged
@@ -65,22 +64,6 @@ Transform:
   - {fileID: 9034696787984938051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1303602826507152057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384992876694254550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa540eac4a7f0844ad62198dbfdaa3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RotationSpeed: 10
-  smoothRotation: 1
-  smoothFactor: 10
-  originalPartList: {fileID: 1858689332118566046}
 --- !u!1001 &40804472624210185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,11 +94,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.6058546e-23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00000038757324
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_LocalRotation.w

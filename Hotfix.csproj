@@ -112,6 +112,7 @@
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\PartItemSelectedEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\VehiclePartTagItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\MainMenu.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\PedestalEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UIGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehiclePartTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\CarDataModel.cs" />

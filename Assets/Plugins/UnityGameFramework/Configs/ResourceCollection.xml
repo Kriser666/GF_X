@@ -32,7 +32,6 @@
       <Asset Guid="17c3f565cf73d4740bfaed4f87e98fa3" ResourceName="Language" />
       <Asset Guid="18868d941a71f02498051516873367ce" ResourceName="Scene" />
       <Asset Guid="18883705d207aec4d82482188aeb45df" ResourceName="Shader" />
-      <Asset Guid="1a26b77d30eeb9244b1237c3038ffa0b" ResourceName="Sprites" />
       <Asset Guid="1b586e20031d8b44a9495620988ad3dc" ResourceName="HotfixDlls" />
       <Asset Guid="1caa4c6fdc3281642b46f7c82c497dc5" ResourceName="Core" />
       <Asset Guid="1dda1e1d4e0347440853abbd85bf9f3a" ResourceName="Materials" />
@@ -40,11 +39,11 @@
       <Asset Guid="24759b2706d0cad46af764fce25cdc09" ResourceName="UI" />
       <Asset Guid="24a06c3ac3193584cb390bc54f83262e" ResourceName="Textures" />
       <Asset Guid="25ea2c912b5bfbb40833fafde7e57ee4" ResourceName="Entity" />
-      <Asset Guid="2c78f416dca004249a1530266216114a" ResourceName="Sprites" />
       <Asset Guid="2cdf1b85fd520ef46b11f580e9443e78" ResourceName="Language" />
       <Asset Guid="2e9047e5d41122a42941f2db8472a0c9" ResourceName="DataTable" />
       <Asset Guid="306b1345c09f78c49b773995e3c3ce60" ResourceName="Sprites" />
       <Asset Guid="3317809a6d97a0d488f8077c87ef01b8" ResourceName="Sprites" />
+      <Asset Guid="3803934d8f7abc545b74ff7af417aef3" ResourceName="Entity" />
       <Asset Guid="3d6fc5347ef115746af70b4b42a7f119" ResourceName="DataTable" />
       <Asset Guid="44e1817123fcdec44bca0ef5276aad07" ResourceName="UI" />
       <Asset Guid="4d9df7336d07eec4a95b89ac70eb06ea" ResourceName="DataTable" />
@@ -101,7 +100,6 @@
       <Asset Guid="dd49d0e931c6ab4498d652aff8dcdf6b" ResourceName="DataTable" />
       <Asset Guid="e1a613ebd6f1d6f4a825d14981f3e88d" ResourceName="DataTable" />
       <Asset Guid="e654726d8f557ef4ca2996e321af04e5" ResourceName="DataTable" />
-      <Asset Guid="e67df18bacd8cf34d9e51754d6877e0e" ResourceName="Sprites" />
       <Asset Guid="e81571591a3393745a08aee12b114309" ResourceName="HotfixDlls" />
       <Asset Guid="e83b22901fc3a0143abd3e3bbc2a44e4" ResourceName="Textures" />
       <Asset Guid="fd6f9ae5eba339e4f88c00782aadfa70" ResourceName="Language" />
