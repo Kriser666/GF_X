@@ -95,14 +95,21 @@ public partial class ModifyGame : UIFormBase
 
         GF.Event.Subscribe(PartItemSelectedEventArgs.EventId, ItemSelectedHandler);
 
-        CameraController.Instance.SetModelRendererCameraOffset(11, true);
+        CameraController.Instance.SetModelRendererCameraOffset(2, true);
+
+    }
+
+    protected override void OnReveal()
+    {
+        base.OnReveal();
+        CameraController.Instance.SetCameraView(2);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
         GF.Event.Unsubscribe(PartItemSelectedEventArgs.EventId, ItemSelectedHandler);
         frameworkAction?.Invoke(rawImage);
-        CameraController.Instance.SetModelRendererCameraOffset(10, true);
+        CameraController.Instance.SetModelRendererCameraOffset(1, true);
         // CameraController.Instance.SetCameraView(10);
         partTypeButtons.Clear();
         VehiclePartTagItems.Clear();
@@ -319,18 +326,25 @@ public partial class ModifyGame : UIFormBase
 
     private void ChangeCostAndPerformanceText(float cost, float performance)
     {
-        if (performance > 0)
+        if (performance >= 0f)
         {
-            varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + Const.ADDITION_SYMBOL + performance + '\n';
-        }
-        else if (performance < 0)
-        {
-            varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + performance + '\n';
+            varPerfNum.text = Const.ADDITION_SYMBOL + performance.ToString();
+            varPerfNum.color = Const.TEXT_ADD_COLOR;
         }
         else
         {
-            varCostAndPer.text = GF.Localization.GetString("MG.PERFORMANCE") + performance + '\n';
+            varPerfNum.text = performance.ToString();
+            varPerfNum.color = Color.red;
         }
-        varCostAndPer.text = varCostAndPer.text + GF.Localization.GetString("MG.COST") + cost + GF.Localization.GetString("MONEY.CURRENCY");
+        if (cost >= 0f)
+        {
+            varCostNum.text = Const.ADDITION_SYMBOL + cost.ToString();
+            varCostNum.color = Const.TEXT_ADD_COLOR;
+        }
+        else
+        {
+            varCostNum.text = cost.ToString();
+            varCostNum.color = Color.red;
+        }
     }
 }

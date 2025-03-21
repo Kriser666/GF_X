@@ -88,6 +88,7 @@
     <Compile Include="Assets\AAAGame\Scripts\DataTable\VehiclePartTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\LocalizationExtension.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\ModifyPartDetailItem.cs" />
+    <Compile Include="Assets\AAAGame\Scripts\Entity\GarageEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Core\UIFormBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\Extension\DataModel\DataModelStorageBase.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\CameraViewTable.cs" />
@@ -112,7 +113,6 @@
     <Compile Include="Assets\AAAGame\Scripts\EventArgs\PartItemSelectedEventArgs.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\Item\VehiclePartTagItem.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\MainMenu.cs" />
-    <Compile Include="Assets\AAAGame\Scripts\Entity\PedestalEntity.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataTable\Core\UIGroupTable.cs" />
     <Compile Include="Assets\AAAGame\Scripts\UI\UIItemVariables\VehiclePartTagItem.Variables.cs" />
     <Compile Include="Assets\AAAGame\Scripts\DataModel\CarDataModel.cs" />

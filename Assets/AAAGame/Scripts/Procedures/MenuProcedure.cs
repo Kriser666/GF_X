@@ -219,7 +219,8 @@ public class MenuProcedure : ProcedureBase
         {
             carEntity = eventArgs.Entity.Logic as CarEntity;
             // 回调里面设置汽车模型相机的目标
-            CameraController.Instance.SetModelRendererCameraTarget(carEntity.gameObject);
+            // CameraController.Instance.SetModelRendererCameraTarget(carEntity.gameObject);
+            CameraController.Instance.SetFollowTarget(carEntity.transform);
             int modifyId = carEntity.Params.Get<VarInt32>(Const.MODIFY_ID);
             // 不想改装
             if (modifyId == -1)
@@ -300,7 +301,7 @@ public class MenuProcedure : ProcedureBase
         }
         var carRow = vehicleInfoTable.GetDataRow(i);
         Vector3 eulerAngle = new(0f, 230f, 0f);
-        var carParams = EntityParams.Create(Vector3.zero, eulerAngle, Vector3.one);
+        var carParams = EntityParams.Create(new(0f, 0f, 3f), eulerAngle, Vector3.one);
         carParams.Set<VarGameObject>(Const.RAW_IMAGE, rawImageGo);
         carParams.Set<VarInt32>(Const.VEHICLE_ID, i);
         carParams.Set<VarInt32>(Const.MODIFY_ID, modifyId);
@@ -451,8 +452,8 @@ public class MenuProcedure : ProcedureBase
     {
         if (!GF.Entity.HasEntity(pedestalEntityId))
         {
-            var pedestalParams = EntityParams.Create(new(0f, -2.7f, 0f), Vector3.zero, Vector3.one);
-            pedestalEntityId = GF.Entity.ShowEntity<PedestalEntity>(PedestalEntity.PREFAB_NAME, Const.EntityGroup.Vehicle, pedestalParams);
+            var pedestalParams = EntityParams.Create(new(0f, -2.2f, 10f), new(0f, 90f, 0f), new(2f, 2f, 2f));
+            pedestalEntityId = GF.Entity.ShowEntity<GarageEntity>(GarageEntity.PREFAB_NAME, Const.EntityGroup.Vehicle, pedestalParams);
             ++loadingObjCount;
             ++totalObjCount;
         }

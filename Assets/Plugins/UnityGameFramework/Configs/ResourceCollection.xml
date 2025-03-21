@@ -25,6 +25,7 @@
       <Asset Guid="0270052d20b603547b304b0ecc0601cf" ResourceName="Language" />
       <Asset Guid="034b209892546994d8037e72ca910089" ResourceName="Language" />
       <Asset Guid="073b4cca8bda8cf438ac3dfe7a39a235" ResourceName="DataTable" />
+      <Asset Guid="0880c3c9c7bbd9f4d9a36cc53f52a424" ResourceName="Entity" />
       <Asset Guid="137e4e098c035a844801f842998ff220" ResourceName="SharedMaterials" />
       <Asset Guid="13b0b1255d7d6cf44a4d1987723460ef" ResourceName="ScriptableAssets" />
       <Asset Guid="15ab4285c2fbcc34fa322013e426ff78" ResourceName="Entity" />
@@ -43,7 +44,6 @@
       <Asset Guid="2e9047e5d41122a42941f2db8472a0c9" ResourceName="DataTable" />
       <Asset Guid="306b1345c09f78c49b773995e3c3ce60" ResourceName="Sprites" />
       <Asset Guid="3317809a6d97a0d488f8077c87ef01b8" ResourceName="Sprites" />
-      <Asset Guid="3803934d8f7abc545b74ff7af417aef3" ResourceName="Entity" />
       <Asset Guid="3d6fc5347ef115746af70b4b42a7f119" ResourceName="DataTable" />
       <Asset Guid="44e1817123fcdec44bca0ef5276aad07" ResourceName="UI" />
       <Asset Guid="4d9df7336d07eec4a95b89ac70eb06ea" ResourceName="DataTable" />
@@ -53,7 +53,7 @@
       <Asset Guid="588ff96c6882fb3448095d7a881bced3" ResourceName="SharedAssets" />
       <Asset Guid="5d19fed2387fc3c4ca37fc9bf11e7190" ResourceName="Language" />
       <Asset Guid="60088dd3b0214654ba9150c7fdda1a8d" ResourceName="DataTable" />
-      <Asset Guid="6367ef9a0780b684aacb56b25335e960" ResourceName="SharedAssets" />
+      <Asset Guid="6367ef9a0780b684aacb56b25335e960" ResourceName="Textures" />
       <Asset Guid="63f5f6812a8f9724cac670756d524631" ResourceName="DataTable" />
       <Asset Guid="64f13eb4d14d52f45a75c9e741dbbf8e" ResourceName="Textures" />
       <Asset Guid="65286f6b2b857384abd71e30d9309f34" ResourceName="Config" />
@@ -61,7 +61,6 @@
       <Asset Guid="664bea98873ad2c408019f71022e745b" ResourceName="Entity" />
       <Asset Guid="68e6db2ebdc24f95958faec2be5558d6" ResourceName="SharedAssets" />
       <Asset Guid="694c3a407d19140498a0569b3dd09cc3" ResourceName="SharedMaterials" />
-      <Asset Guid="6a4e2eebc9726fd49952a02518d04a6b" ResourceName="UI" />
       <Asset Guid="6be38d7fc85a442489bc513d73291793" ResourceName="HotfixDlls" />
       <Asset Guid="6e049a0e08529b14d999468ef20cdc23" ResourceName="DataTable" />
       <Asset Guid="73d884ecdd851124aaca044feebbe87d" ResourceName="DataTable" />
@@ -78,7 +77,6 @@
       <Asset Guid="98662c21c0b96bc48a6440a4fe486556" ResourceName="DataTable" />
       <Asset Guid="99c5fd9a48e8cd844a05f151a781d2f1" ResourceName="SharedAssets" />
       <Asset Guid="9acbc6465cea7234d986cec615965aef" ResourceName="DataTable" />
-      <Asset Guid="9deca69555354744b9e1fbdffb007bd8" ResourceName="SharedAssets" />
       <Asset Guid="a29db755b6ae1104a94df297de29cfc8" ResourceName="SharedAssets" />
       <Asset Guid="a6c071229b464494e8ba98e4d049c05c" ResourceName="UI" />
       <Asset Guid="a9a850e9fdbfa7c488b5134a36f6c8fa" ResourceName="SharedMaterials" />
@@ -86,12 +84,12 @@
       <Asset Guid="b3176e63c9896c748964f48c12371cd5" ResourceName="Sprites" />
       <Asset Guid="b57f925121ffa1246bcf57c69d5cdfd2" ResourceName="BackGroundGame" />
       <Asset Guid="b729a2582200e9945b12cf21855e3b73" ResourceName="Shader" />
-      <Asset Guid="b8e0cb0ed445e4244a941452e102ecad" ResourceName="SharedAssets" />
+      <Asset Guid="b8e0cb0ed445e4244a941452e102ecad" ResourceName="Sprites" />
       <Asset Guid="b8f790017d833da45a5aec7344ed4f97" ResourceName="SharedAssets" />
       <Asset Guid="c1bf70ce98a49bd4f8b60847ce98cfa8" ResourceName="Language" />
       <Asset Guid="c4e839cf3d001e0499336fb7f53c0310" ResourceName="DataTable" />
       <Asset Guid="c5b58fbbeef39d14da3d0728e671db0c" ResourceName="Textures" />
-      <Asset Guid="c7c500793b6eb7d4ab5a665b01b0763a" ResourceName="SharedAssets" />
+      <Asset Guid="c7c500793b6eb7d4ab5a665b01b0763a" ResourceName="Sprites" />
       <Asset Guid="ca4765c7a3113644e9f87e202a7ff91d" ResourceName="Scene" />
       <Asset Guid="cfa643d9bb51c5440b8d98c4e13d00b9" ResourceName="DataTable" />
       <Asset Guid="d21099ed468b31c448b2db0f73e744b8" ResourceName="UI" />

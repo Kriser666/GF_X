@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 660617190089457435, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8290562788146920898, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
     - target: {fileID: 795742967662620792, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
       value: YouFanGuangJing
@@ -680,6 +684,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7849906705791731655, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 9019122969239195568, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
     - target: {fileID: 8149579270933192039, guid: ebaf53b8ce7536e45b692acd75fc4ab2, type: 3}
       propertyPath: m_Name
       value: ZuoQianMenMaoJieXia

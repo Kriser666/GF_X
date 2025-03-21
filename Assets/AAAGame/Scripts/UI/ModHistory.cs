@@ -143,25 +143,24 @@ public partial class ModHistory : UIFormBase
                 cost += vehiclePartRow.Cost;
             }
         }
-
         if (performance >= 0f)
         {
-            varPerformanceText.text = GF.Localization.GetString("MG.PERFORMANCE") + Const.ADDITION_SYMBOL + performance.ToString();
-            varPerformanceText.color = Color.green;
+            varPerformanceText.text = Const.ADDITION_SYMBOL + performance.ToString();
+            varPerformanceText.color = Const.TEXT_ADD_COLOR;
         }
         else
         {
-            varPerformanceText.text = GF.Localization.GetString("MG.PERFORMANCE") + performance.ToString();
+            varPerformanceText.text = performance.ToString();
             varPerformanceText.color = Color.red;
         }
         if (cost >= 0f)
         {
-            varCostText.text = GF.Localization.GetString("MG.COST") + Const.ADDITION_SYMBOL + cost.ToString();
-            varCostText.color = Color.green;
+            varCostText.text = Const.ADDITION_SYMBOL + cost.ToString();
+            varCostText.color = Const.TEXT_ADD_COLOR;
         }
         else
         {
-            varCostText.text = GF.Localization.GetString("MG.COST") + cost.ToString();
+            varCostText.text = cost.ToString();
             varCostText.color = Color.red;
         }
         varCarLogo.sprite = procedure.CarLogoSprites[dataRow.Id];

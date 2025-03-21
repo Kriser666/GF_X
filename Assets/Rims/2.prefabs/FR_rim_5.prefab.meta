@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 873501c1af48f4c3a95fe27e14b2584b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 123792
+  packageName: Rims
+  packageVersion: 1.0
+  assetPath: Assets/Rims/2.prefabs/FR_rim_5.prefab
+  uploadId: 560402

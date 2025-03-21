@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 /// <summary>
 /// 热更Const
 /// </summary>
@@ -29,4 +31,6 @@ public static partial class Const
     public static readonly string URL_PARAMS = "URL_PARAMS";
     // 存档的请求地址
     public static readonly string SAVED_GAMES_URL = "{0}";
+    // 开始改装、历史改装的字体颜色
+    public static readonly Color TEXT_ADD_COLOR = new(242f / 255f, 132f / 255f, 28f / 255f);
 }

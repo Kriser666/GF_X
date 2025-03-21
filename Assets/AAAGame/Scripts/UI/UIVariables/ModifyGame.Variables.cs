@@ -11,5 +11,6 @@ public partial class ModifyGame
 	[SerializeField] private GameObject varMiddle = null;
 	[SerializeField] private GameObject varPartContent = null;
 	[SerializeField] private GameObject varPartTypeContent = null;
-	[SerializeField] private TextMeshProUGUI varCostAndPer = null;
+	[SerializeField] private TextMeshProUGUI varPerfNum = null;
+	[SerializeField] private TextMeshProUGUI varCostNum = null;
 }

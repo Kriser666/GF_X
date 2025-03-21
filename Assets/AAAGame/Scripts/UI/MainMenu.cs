@@ -33,9 +33,9 @@ public partial class MainMenu : UIFormBase
 
     protected override void OnReveal()
     {
-        // CameraController.Instance.SetCameraView(10);
-        procedure?.ChangeBackGroundSprite("");
         base.OnReveal();
+        CameraController.Instance.SetCameraView(1);
+        procedure?.ChangeBackGroundSprite("");
     }
 
     protected override void OnClose(bool isShutdown, object userData)
